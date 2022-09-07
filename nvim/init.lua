@@ -1,0 +1,7 @@
+require 'plugin'
+require 'plugin.lsp'
+require 'plugin.treesitter'
+require 'keymap'
+require 'autocmd'
+require 'option'
+require 'colorscheme'
