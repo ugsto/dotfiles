@@ -23,6 +23,7 @@ else
     preppend_path "$HOME/miniconda3/bin"
 fi
 
+preppend_path "$HOME/go/bin"
 export PNPM_HOME="$HOME/.local/share/pnpm"
 preppend_path "$HOME/.local/bin"
 preppend_path "$HOME/.cargo/bin"
