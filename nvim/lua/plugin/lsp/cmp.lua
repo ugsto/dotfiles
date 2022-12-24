@@ -13,7 +13,13 @@ local mapping = require('keymap').lsp_cmp
 
 local sources = cmp.config.sources({
   { name = 'nvim_lsp' },
-  { name = 'vsnip' }
+  { name = 'vsnip' },
+  { name = 'cmp-clippy',
+    option = {
+      model = "EleutherAI/gpt-neo-2.7B",
+      key = "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"
+    }
+  }
 })
 
 cmp.setup {

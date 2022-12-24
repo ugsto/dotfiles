@@ -14,8 +14,9 @@ require('plugin.lsp.launcher').setup({
   'clangd',
   'bashls',
   'yamlls',
-  'sqlls',
-  'sqls'
+  'terraformls',
+  'tflint',
+  'cssls'
 })
 require('plugin.lsp.cmp')
 require('plugin.lsp.null-ls')

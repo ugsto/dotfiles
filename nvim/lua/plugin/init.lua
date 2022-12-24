@@ -36,6 +36,10 @@ packer.startup(function()
     'jose-elias-alvarez/null-ls.nvim',
     requires = { 'nvim-lua/plenary.nvim' }
   }
+  use {
+    'vappolinario/cmp-clippy',
+    requires = { 'nvim-lua/plenary.nvim' }
+  }
 
   -- MARKDOWN
   use {
