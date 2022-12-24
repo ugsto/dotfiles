@@ -3,8 +3,6 @@
 [[ $- != *i* ]] && return
 [ "$TERM_PROGRAM" != "tmux" ] && exec tmux
 
-[ -f /etc/bashrc ] && . /etc/bashrc
-
 preppend_path() {
     case ":$PATH:" in
         *:"$1":*)
@@ -14,11 +12,8 @@ preppend_path() {
     esac
 }
 
-__conda_setup=$("$HOME/miniconda3/bin/conda" shell.bash hook 2>/dev/null) &&
-eval "$__conda_setup"
-unset __conda_setup
-if [ -f "/home/kurisu/miniconda3/etc/profile.d/conda.sh" ]; then
-    . "/home/kurisu/miniconda3/etc/profile.d/conda.sh"
+if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+    . "/opt/miniconda3/etc/profile.d/conda.sh"
 else
     preppend_path "$HOME/miniconda3/bin"
 fi
@@ -28,11 +23,17 @@ export PNPM_HOME="$HOME/.local/share/pnpm"
 preppend_path "$HOME/.local/bin"
 preppend_path "$HOME/.cargo/bin"
 preppend_path "$PNPM_HOME"
+for path in "$HOME/.local/share/gem/ruby/"*; do
+    [ -d "$path/bin" ] && preppend_path "$path/bin"
+done
 
 set -o vi
 
 alias ls="exa --color=auto --icons"
-alias cat="bat"
+#alias cat="bat"
+
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
 command -v starship &>/dev/null && . <(starship init bash)
 command -v conda &>/dev/null && conda activate dev

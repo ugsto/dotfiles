@@ -30,5 +30,6 @@ null_ls.setup({
     formatting.beautysh,
     formatting.protolint,
     diagnostics.protolint,
+    --    formatting.prettier
   },
 })
