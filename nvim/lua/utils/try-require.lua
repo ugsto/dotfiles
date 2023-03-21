@@ -1,6 +1,6 @@
 -- @param module_name: string - the name of the module to load
 -- @return any - the loaded module implementation, or nil if the module could not be loaded
-local function try_require(module_name)
+local function require(module_name)
     local success, module_impl = pcall(require, module_name)
 
     if not success then
@@ -19,4 +19,4 @@ local function try_require(module_name)
     return module_impl
 end
 
-return try_require
+return require

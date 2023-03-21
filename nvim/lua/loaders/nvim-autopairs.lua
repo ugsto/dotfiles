@@ -1,7 +1,5 @@
-local try_require = require("utils.try-require")
-
 local function setup()
-    local nvim_autopairs = try_require("nvim-autopairs") or os.exit(1)
+    local nvim_autopairs = require("nvim-autopairs")
 
     nvim_autopairs.setup()
 end

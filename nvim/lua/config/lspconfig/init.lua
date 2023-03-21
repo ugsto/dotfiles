@@ -1,14 +1,12 @@
-local try_require = require("utils.try-require")
-
 local M = {}
 
 local config = {
-    capabilities = try_require("config.lspconfig.capabilities") or os.exit(1),
-    flags = try_require("config.lspconfig.flags") or os.exit(1),
-    on_attach = try_require("config.lspconfig.on_attach") or os.exit(1)
+    capabilities = require("config.lspconfig.capabilities"),
+    flags = require("config.lspconfig.flags"),
+    on_attach = require("config.lspconfig.on_attach"),
 }
 
-local lsp = try_require("config.lspconfig.lsp") or os.exit(1)
+local lsp = require("config.lspconfig.lsp")
 
 M.config = config
 M.lsp = lsp

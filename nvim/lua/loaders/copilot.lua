@@ -1,8 +1,6 @@
-local try_require = require("utils.try-require") or os.exit(1)
-
 local function setup()
-    local keymap_fn = try_require("config.keymap.copilot") or os.exit(1)
-    local config_fn = try_require("config.copilot") or os.exit(1)
+    local keymap_fn = require("config.keymap.copilot")
+    local config_fn = require("config.copilot")
 
     keymap_fn()
     config_fn()
@@ -13,3 +11,4 @@ local function main()
 end
 
 main()
+

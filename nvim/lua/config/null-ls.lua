@@ -13,6 +13,14 @@ local function get_sources(builtins)
         formatting.eslint,
         formatting.prettier,
         code_actions.eslint,
+        diagnostics.flake8,
+        diagnostics.pylama,
+        formatting.black,
+        formatting.isort,
+        formatting.yapf,
+        diagnostics.vulture,
+        formatting.sql_formatter,
+        formatting.sqlfluff,
     }
 end
 

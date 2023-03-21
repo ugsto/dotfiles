@@ -1,7 +1,5 @@
-local try_require = require("utils.try-require") or os.exit(1)
-
 local function setup()
-    local chatgpt = try_require("chatgpt") or os.exit(1)
+    local chatgpt = require("chatgpt")
 
     chatgpt.setup()
 end
@@ -11,4 +9,3 @@ local function main()
 end
 
 main()
-
