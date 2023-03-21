@@ -3,7 +3,9 @@ local lsp = {
     "jedi_language_server",
     "pyright",
     "rust_analyzer",
-    "tsserver"
+    "tsserver",
+    "eslint",
+    "sqlls",
 }
 
 return lsp

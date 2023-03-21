@@ -1,8 +1,6 @@
-local try_require = require("utils.try-require")
-
 local function setup()
-    local lsp_signature = try_require("lsp_signature") or os.exit(1)
-    local config = try_require("config.lsp-signature") or os.exit(1)
+    local lsp_signature = require("lsp_signature")
+    local config = require("config.lsp-signature")
 
     lsp_signature.setup(config)
 end

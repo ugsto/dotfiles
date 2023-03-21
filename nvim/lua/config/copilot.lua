@@ -10,6 +10,7 @@ local function config_filetypes()
         ["go"] = true,
         ["python"] = true,
         ["ruby"] = true,
+        ["rust"] = true,
         ["markdown"] = true,
         ["yaml"] = true,
         ["sh"] = true,

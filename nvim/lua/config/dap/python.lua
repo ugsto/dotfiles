@@ -3,7 +3,7 @@ local M = {}
 local adapters = {
     type = "executable",
     command = "python",
-    args = { "-m", "debugpy.adapter" }
+    args = { "-m", "debugpy.adapter" },
 }
 
 local configurations = {
@@ -14,13 +14,13 @@ local configurations = {
         program = "${file}",
         pythonPath = function()
             return vim.fn.exepath("python")
-        end
-    }
+        end,
+    },
 }
 
 M = {
     adapters = adapters,
-    configurations = configurations
+    configurations = configurations,
 }
 
 return M

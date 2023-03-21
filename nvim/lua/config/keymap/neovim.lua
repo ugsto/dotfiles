@@ -1,7 +1,5 @@
-local try_require = require("utils.try-require") or os.exit(1)
-
 local function config_keymap()
-    local map = try_require("utils.map") or os.exit(1)
+    local map = require("utils.map")
 
     vim.g.mapleader = " "
     map("n", "<leader>q", "<cmd>q<CR>", { silent = true })
