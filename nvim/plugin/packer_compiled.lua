@@ -114,11 +114,6 @@ _G.packer_plugins = {
     path = "/home/kurisu/.local/share/nvim/site/pack/packer/start/copilot.vim",
     url = "https://github.com/github/copilot.vim"
   },
-  ["formatter.nvim"] = {
-    loaded = true,
-    path = "/home/kurisu/.local/share/nvim/site/pack/packer/start/formatter.nvim",
-    url = "https://github.com/mhartington/formatter.nvim"
-  },
   ["lsp_signature.nvim"] = {
     loaded = true,
     path = "/home/kurisu/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
@@ -165,16 +160,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/kurisu/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
-  },
-  ["nvim-dap"] = {
-    loaded = true,
-    path = "/home/kurisu/.local/share/nvim/site/pack/packer/start/nvim-dap",
-    url = "https://github.com/mfussenegger/nvim-dap"
-  },
-  ["nvim-lint"] = {
-    loaded = true,
-    path = "/home/kurisu/.local/share/nvim/site/pack/packer/start/nvim-lint",
-    url = "https://github.com/mfussenegger/nvim-lint"
   },
   ["nvim-lspconfig"] = {
     loaded = true,

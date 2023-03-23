@@ -23,27 +23,9 @@ local function get_packer(use)
             },
         })
         use({
-            "mfussenegger/nvim-dap",
-            requires = {
-                "neovim/nvim-lspconfig",
-            },
-        })
-        use({
             "jose-elias-alvarez/null-ls.nvim",
             requires = {
                 "nvim-lua/plenary.nvim",
-                "neovim/nvim-lspconfig",
-            },
-        })
-        use({
-            "mfussenegger/nvim-lint",
-            requires = {
-                "neovim/nvim-lspconfig",
-            },
-        })
-        use({
-            "mhartington/formatter.nvim",
-            requires = {
                 "neovim/nvim-lspconfig",
             },
         })
