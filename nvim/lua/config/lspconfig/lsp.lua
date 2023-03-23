@@ -4,8 +4,8 @@ local lsp = {
     "pyright",
     "rust_analyzer",
     "tsserver",
-    "eslint",
     "sqlls",
+    "eslint",
 }
 
 return lsp

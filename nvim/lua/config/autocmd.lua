@@ -6,7 +6,7 @@ local config = {
         {
             "*",
         },
-        "lua vim.lsp.buf.format()",
+        "lua vim.lsp.buf.format({async = true})",
     },
 }
 

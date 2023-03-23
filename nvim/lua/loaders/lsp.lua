@@ -1,11 +1,3 @@
-local function dap_setup()
-    local dap = require("dap")
-    local python_dap = require("config.dap.python")
-
-    dap.adapters.python = python_dap.adapters
-    dap.configurations.python = python_dap.configurations
-end
-
 local function null_ls_setup()
     local null_ls = require("null-ls")
     local null_ls_config = require("config.null-ls")
@@ -31,7 +23,6 @@ local function cmp_setup()
         sources = {
             { name = "nvim_lsp" },
             { name = "luasnip" },
-            { name = "buffer" },
         },
     })
 
@@ -52,9 +43,6 @@ local function setup()
 
     -- Setup cmp
     cmp_setup()
-
-    -- Setup dap
-    dap_setup()
 
     -- Setup null-ls
     null_ls_setup()
