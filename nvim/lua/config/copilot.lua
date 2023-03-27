@@ -3,6 +3,7 @@ local function config_filetypes()
         ["*"] = false,
         ["javascript"] = true,
         ["typescript"] = true,
+        ["typescriptreact"] = true,
         ["lua"] = true,
         ["c"] = true,
         ["c#"] = true,
@@ -14,6 +15,10 @@ local function config_filetypes()
         ["markdown"] = true,
         ["yaml"] = true,
         ["sh"] = true,
+        ["css"] = true,
+        ["html"] = true,
+        ["json"] = true,
+        ["jsonc"] = true,
     }
 end
 
