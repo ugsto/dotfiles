@@ -1,11 +1,11 @@
 local lsp = {
     "lua_ls",
     "jedi_language_server",
+    "tsserver",
     "pyright",
     "rust_analyzer",
-    "tsserver",
     "sqlls",
-    "eslint",
+    "jsonls",
 }
 
 return lsp

@@ -51,7 +51,12 @@ local function setup()
     mason_setup()
 
     for _, lsp in ipairs(defaults.lsp) do
-        lspconfig[lsp].setup(defaults.config)
+        local has_own_config, config = pcall(require, "config.lspconfig." .. lsp .. ".setup")
+        if has_own_config then
+            lspconfig[lsp].setup(config)
+        else
+            lspconfig[lsp].setup(defaults.config)
+        end
     end
 end
 
