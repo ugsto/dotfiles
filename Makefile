@@ -1,13 +1,16 @@
 all: config-bashrc config-nvim config-alacritty config-starship
 
+config:
+	mkdir -p ~/.config
+
 config-bashrc:
 	ln -sf "$$PWD/.bashrc" ~/.bashrc
 
-config-nvim:
-	ln -sf "$$PWD/nvim" ~/.config/nvim
+config-nvim: config
+	ln -sf "$$PWD/nvim" ~/.config
 
-config-alacritty:
-	ln -sf "$$PWD/alacritty" ~/.config/alacritty
+config-alacritty: config
+	ln -sf "$$PWD/alacritty" ~/.config
 
-config-starship:
-	ln -sf "$$PWD/starship.toml" ~/.config/starship.toml
+config-starship: config
+	ln -sf "$$PWD/starship.toml" ~/.config
