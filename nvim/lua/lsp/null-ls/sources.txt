@@ -1,0 +1,7 @@
+formatting prettier_d_slim
+diagnostics eslint_d
+formatting eslint_d
+formatting stylua
+formatting black
+formatting isort
+diagnostics pylama

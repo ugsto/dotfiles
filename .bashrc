@@ -42,6 +42,9 @@ preppend_path "$HOME/.cargo/bin"
 ### nodejs
 PNPM_HOME="$HOME/.local/share/pnpm"
 preppend_path "$PNPM_HOME"
+NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ### go
 GOPATH="$HOME/go"
@@ -55,7 +58,6 @@ done
 ## Setup aliases
 
 alias ls="exa --color=auto --icons"
-alias sudo="doas"
 
 ## Setup Desktop variables
 
@@ -64,7 +66,6 @@ XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
 ## Setup completions
 
-command -v doas &>/dev/null && alias sudo="doas" && complete -cf doas
 command -v conda &>/dev/null && conda activate dev
 command -v starship &>/dev/null && . <(starship init bash)
 command -v helm &>/dev/null && . <(helm completion bash)
@@ -80,3 +81,4 @@ export DBUS_SESSION_BUS_ADDRESS
 export XDG_RUNTIME_DIR
 export PNPM_HOME
 export GOPATH
+export NVM_DIR
