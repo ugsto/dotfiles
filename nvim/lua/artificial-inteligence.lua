@@ -23,6 +23,15 @@ local function copilot()
 		["jsonc"] = true,
 		["make"] = true,
 		["jinja2"] = true,
+		["toml"] = true,
+		["scss"] = true,
+		["dockerfile"] = true,
+		["dockerignore"] = true,
+		["gitignore"] = true,
+		["nginx"] = true,
+		["tex"] = true,
+		["dosini"] = true,
+		["hosts"] = true,
 	}
 end
 

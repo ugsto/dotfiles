@@ -5,3 +5,5 @@ formatting stylua
 formatting black
 formatting isort
 diagnostics pylama
+formatting beautysh
+diagnostics checkmake

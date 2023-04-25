@@ -6,10 +6,31 @@ local function setup()
 		end,
 	})
 
-	vim.api.nvim_create_autocmd({ "BufNewFile" }, {
+	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 		pattern = { "*.j2" },
 		callback = function()
 			vim.bo.filetype = "jinja2"
+		end,
+	})
+
+	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+		pattern = { ".dockerignore" },
+		callback = function()
+			vim.bo.filetype = "dockerignore"
+		end,
+	})
+
+	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+		pattern = { ".gitignore" },
+		callback = function()
+			vim.bo.filetype = "gitignore"
+		end,
+	})
+
+	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+		pattern = { "hosts" },
+		callback = function()
+			vim.bo.filetype = "hosts"
 		end,
 	})
 end
