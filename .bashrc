@@ -57,7 +57,15 @@ done
 
 ## Setup aliases
 
-alias ls="exa --color=auto --icons"
+command -v exa &>/dev/null && alias ls="exa --color=auto --icons"
+command -v bat &>/dev/null && alias cat="bat"
+command -v fd &>/dev/null && alias find="fd"
+command -v rg &>/dev/null && alias grep="rg"
+command -v shell-genie &>/dev/null && alias chat="shell-genie ask"
+
+command -v python3 &>/dev/null && randint() {
+    python3 -c "import random; print(random.randint($1, $2))"
+}
 
 ## Setup Desktop variables
 
