@@ -39,6 +39,13 @@ local function setup()
 	map("n", "<leader>ce", function()
 		vim.cmd("ChatGPTEditWithInstructions")
 	end, opts)
+
+	map("n", "<C-w>h", function()
+		vim.cmd("tabprevious")
+	end, opts)
+	map("n", "<C-w>l", function()
+		vim.cmd("tabnext")
+	end, opts)
 end
 
 local function main()
