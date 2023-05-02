@@ -33,6 +33,13 @@ local function setup()
 			vim.bo.filetype = "hosts"
 		end,
 	})
+
+	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+		pattern = { "*.conf" },
+		callback = function()
+			vim.bo.filetype = "conf"
+		end,
+	})
 end
 
 local function main()

@@ -32,6 +32,8 @@ local function copilot()
 		["tex"] = true,
 		["dosini"] = true,
 		["hosts"] = true,
+		["conf"] = true,
+		["text"] = true,
 	}
 end
 
