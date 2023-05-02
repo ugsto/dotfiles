@@ -2,10 +2,13 @@
 
 all:
 
-install: config-bashrc config-nvim config-alacritty config-starship
+install: config-zsh config-bashrc config-nvim config-alacritty config-starship
 
 config:
 	mkdir -p ~/.config
+
+config-zsh:
+	ln -sf "$$PWD/.zshrc" ~/.zshrc
 
 config-bashrc:
 	ln -sf "$$PWD/.bashrc" ~/.bashrc
