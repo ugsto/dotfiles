@@ -33,6 +33,14 @@ else
     preppend_path "$HOME/miniconda3/bin"
 fi
 
+### Global binaries
+preppend_path "/bin"
+preppend_path "/sbin"
+preppend_path "/usr/bin"
+preppend_path "/usr/sbin"
+preppend_path "/usr/local/bin"
+preppend_path "/usr/local/sbin"
+
 ### local binaries
 preppend_path "$HOME/.local/bin"
 
