@@ -1,7 +1,4 @@
 ---
-env:
-  TERM: alacritty
-
 window:
   decorations: none
   opacity: 0.95
@@ -78,23 +75,18 @@ colors:
 
 font:
   normal:
-    family: DejaVu Sans Mono
+    family: GohuFont 14 Nerd Font Mono
     style: Regular
   bold:
-    family: DejaVu Sans Mono
+    family: GohuFont 14 Nerd Font Mono
     style: Bold
   italic:
-    family: DejaVu Sans Mono
+    family: GohuFont 14 Nerd Font Mono
     style: Italic
   bold_italic:
-    family: DejaVu Sans Mono
+    family: GohuFont 14 Nerd Font Mono
     style: Bold Italic
-  size: 11.0
-
-shell:
-  program: /bin/bash
-  args:
-    - --login
+  size: 12.0
 
 key_bindings:
   - key: Paste
