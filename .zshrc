@@ -59,7 +59,7 @@ GOPATH="$HOME/go"
 preppend_path "$GOPATH/bin"
 
 ### ruby
-for RUBY_PATH in "$HOME/.local/share/gem/ruby/"*; do
+[ -d "$HOME/.local/share/gem/ruby/" ] && for RUBY_PATH in "$HOME/.local/share/gem/ruby/"*; do
     [ -d "$RUBY_PATH/bin" ] && preppend_RUBY_PATH "$RUBY_PATH/bin"
 done
 
@@ -98,3 +98,7 @@ export XDG_RUNTIME_DIR
 export PNPM_HOME
 export GOPATH
 export NVM_DIR
+
+## MOTD
+
+clear
