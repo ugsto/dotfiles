@@ -1,6 +1,6 @@
 local logger = require("loaders.logger")
 
-local function copilot()
+local function load_copilot()
 	vim.g.copilot_filetypes = {
 		["*"] = false,
 		["javascript"] = true,
@@ -34,14 +34,15 @@ local function copilot()
 		["hosts"] = true,
 		["conf"] = true,
 		["text"] = true,
+        ["zsh"] = true
 	}
 end
 
-local function chatgpt()
+local function load_chatgpt()
 	local has_chatgpt_loaded, chatgpt = pcall(require, "chatgpt")
 
 	if not has_chatgpt_loaded then
-		logger.warn("ChatGPT.nvim is not installed")
+		logger.warning("ChatGPT.nvim is not installed")
 		return
 	end
 
@@ -64,8 +65,8 @@ local function chatgpt()
 end
 
 local function setup()
-	copilot()
-	chatgpt()
+	load_copilot()
+	load_chatgpt()
 end
 
 local function main()
