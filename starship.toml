@@ -1,5 +1,5 @@
 format = """
-[┌─>](gray) \\[$username@$hostname:$directory\\] $conda $git_branch
+[┌─→](gray) \\[$username@$hostname:$directory\\] $conda $git_branch
 [└─](gray)$character"""
 
 [conda]
