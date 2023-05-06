@@ -21,3 +21,12 @@ ssh_only = false
 [directory]
 format = "[$path]($style)[$read_only]($read_only_style)"
 style = "bold blue"
+
+[character]
+format = "$symbol "
+success_symbol = "[→](bold green)"
+error_symbol = "[→](bold red)"
+vimcmd_symbol = "[→](bold yellow)"
+vimcmd_replace_one_symbol = "[→](bold yellow)"
+vimcmd_replace_symbol = "[→](bold yellow)"
+vimcmd_visual_symbol = "[→](bold yellow)"
