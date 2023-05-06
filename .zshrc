@@ -14,6 +14,11 @@ fi
 
 set -o vi
 
+## Setup search backward
+
+bindkey -v
+bindkey '^R' history-incremental-search-backward
+
 ## Setup PATH variable
 
 preppend_path() {
