@@ -34,6 +34,7 @@ else
 fi
 
 ### Global binaries
+
 preppend_path "/bin"
 preppend_path "/sbin"
 preppend_path "/usr/bin"
@@ -42,12 +43,15 @@ preppend_path "/usr/local/bin"
 preppend_path "/usr/local/sbin"
 
 ### local binaries
+
 preppend_path "$HOME/.local/bin"
 
 ### rust
+
 preppend_path "$HOME/.cargo/bin"
 
 ### nodejs
+
 PNPM_HOME="$HOME/.local/share/pnpm"
 preppend_path "$PNPM_HOME"
 NVM_DIR="$HOME/.nvm"
@@ -55,10 +59,12 @@ NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ### go
+
 GOPATH="$HOME/go"
 preppend_path "$GOPATH/bin"
 
 ### ruby
+
 [ -d "$HOME/.local/share/gem/ruby/" ] && for RUBY_PATH in "$HOME/.local/share/gem/ruby/"*; do
     [ -d "$RUBY_PATH/bin" ] && preppend_RUBY_PATH "$RUBY_PATH/bin"
 done
@@ -101,4 +107,8 @@ export NVM_DIR
 
 ## MOTD
 
+echo -e '\033[0m'
 clear
+fortune
+echo '--'
+pokemon-colorscripts --random 1 $(randint 0 0 &>/dev/null && [ $(randint 1 10) -eq 1 ] && echo --shiny) | head -n -1
