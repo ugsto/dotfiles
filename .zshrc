@@ -32,11 +32,17 @@ preppend_path() {
 
 ### Python
 
-if [ -f "/usr/etc/profile.d/conda.sh" ]; then
-    . "/usr/etc/profile.d/conda.sh"  # commented out by conda initialize
+__conda_setup="$('/home/kurisu/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
 else
-    preppend_path "$HOME/miniconda3/bin"
+    if [ -f "/home/kurisu/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/kurisu/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/kurisu/miniconda3/bin:$PATH"
+    fi
 fi
+unset __conda_setup
 
 ### Global binaries
 
