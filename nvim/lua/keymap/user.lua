@@ -46,6 +46,12 @@ local function setup()
 	map("n", "<C-w>l", function()
 		vim.cmd("tabnext")
 	end, opts)
+	map("n", "<C-w>%", function()
+		vim.cmd("vsplit")
+	end, opts)
+	map("n", '<C-w>"', function()
+		vim.cmd("split")
+	end, opts)
 end
 
 local function main()

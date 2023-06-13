@@ -34,7 +34,10 @@ local function load_copilot()
 		["hosts"] = true,
 		["conf"] = true,
 		["text"] = true,
-        ["zsh"] = true
+		["zsh"] = true,
+		["nearley"] = true,
+		["arduino"] = true,
+		["java"] = true,
 	}
 end
 

@@ -7,3 +7,5 @@ formatting isort
 diagnostics pylama
 formatting beautysh
 diagnostics checkmake
+diagnostics shellcheck
+formatting latexindent
