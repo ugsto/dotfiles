@@ -92,6 +92,9 @@ command -v python3 &>/dev/null && randint() {
     python3 -c "import random; print(random.randint($1, $2))"
 }
 
+[ -f "$HOME/.local/bin/aliases.sh" ] && . "$HOME/.local/bin/aliases.sh"
+[ -f "$HOME/.local/bin/functions.sh" ] && . "$HOME/.local/bin/functions.sh"
+
 ## Setup Desktop variables
 
 DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
