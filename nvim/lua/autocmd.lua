@@ -40,6 +40,22 @@ local function setup()
 			vim.bo.filetype = "conf"
 		end,
 	})
+
+	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+		pattern = { "*.ne" },
+		callback = function()
+			vim.bo.filetype = "nearley"
+		end,
+	})
+
+	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+		pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
+		callback = function()
+			vim.opt.shiftwidth = 2
+			vim.opt.tabstop = 2
+			vim.opt.softtabstop = 2
+		end,
+	})
 end
 
 local function main()

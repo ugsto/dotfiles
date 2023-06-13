@@ -1,12 +1,11 @@
 local function setup()
 	local map = require("utils.map")
 
-	map("n", "<C-e>", vim.diagnostic.open_float)
+	map("n", "<C-m>p", vim.diagnostic.open_float)
 	map("n", "[d", vim.diagnostic.goto_prev)
 	map("n", "]d", vim.diagnostic.goto_next)
-	map("n", "<C-q>", vim.diagnostic.setloclist)
-	map("n", "<C-k>", vim.lsp.buf.hover)
-	map("n", "<C-m>", vim.lsp.buf.signature_help)
+	map("n", "<leader>k", vim.lsp.buf.hover)
+	map("n", "<leader>gd", vim.lsp.buf.definition)
 end
 
 local function main()
