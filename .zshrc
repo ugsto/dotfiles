@@ -82,6 +82,9 @@ done
 
 ## Setup aliases
 
+autoload -Uz compinit
+compinit
+
 command -v exa &>/dev/null && alias ls="exa --color=auto --icons"
 command -v bat &>/dev/null && alias cat="bat"
 command -v fd &>/dev/null && alias find="fd"
