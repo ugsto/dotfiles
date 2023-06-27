@@ -38,6 +38,7 @@ local function load_copilot()
 		["nearley"] = true,
 		["arduino"] = true,
 		["java"] = true,
+        ["prisma"] = true,
 	}
 end
 
