@@ -70,18 +70,18 @@ colors:
 
 font:
   normal:
-    family: GohuFont 14 Nerd Font Mono
+    family: SauceCodePro Nerd Font Propo
     style: Regular
   bold:
-    family: GohuFont 14 Nerd Font Mono
+    family: SauceCodePro Nerd Font Propo
     style: Bold
   italic:
-    family: GohuFont 14 Nerd Font Mono
+    family: SauceCodePro Nerd Font Propo
     style: Italic
   bold_italic:
-    family: GohuFont 14 Nerd Font Mono
+    family: SauceCodePro Nerd Font Propo
     style: Bold Italic
-  size: 12.0
+  size: 10.0
 
 key_bindings:
   - key: Paste
