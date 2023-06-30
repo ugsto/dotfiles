@@ -77,7 +77,7 @@ preppend_path "$GOPATH/bin"
 ### ruby
 
 [ -d "$HOME/.local/share/gem/ruby/" ] && for RUBY_PATH in "$HOME/.local/share/gem/ruby/"*; do
-    [ -d "$RUBY_PATH/bin" ] && preppend_RUBY_PATH "$RUBY_PATH/bin"
+    [ -d "$RUBY_PATH/bin" ] && preppend_path "$RUBY_PATH/bin"
 done
 
 ## Setup aliases
