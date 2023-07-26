@@ -19,6 +19,10 @@ set -o vi
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
+## Z plug
+
+[ -f /usr/share/zsh/scripts/zplug/init.zsh ] && . /usr/share/zsh/scripts/zplug/init.zsh
+
 ## Setup PATH variable
 
 preppend_path() {
@@ -52,6 +56,7 @@ preppend_path "/usr/bin"
 preppend_path "/usr/sbin"
 preppend_path "/usr/local/bin"
 preppend_path "/usr/local/sbin"
+preppend_path "/var/lib/snapd/snap/bin"
 
 ### local binaries
 
@@ -87,9 +92,8 @@ compinit
 
 command -v exa &>/dev/null && alias ls="exa --color=auto --icons"
 command -v bat &>/dev/null && alias cat="bat"
-command -v fd &>/dev/null && alias find="fd"
-command -v rg &>/dev/null && alias grep="rg"
 command -v shell-genie &>/dev/null && alias chat="shell-genie ask"
+command -v kubectl &>/dev/null && alias k="kubectl"
 
 command -v python3 &>/dev/null && randint() {
     python3 -c "import random; print(random.randint($1, $2))"
@@ -109,6 +113,7 @@ command -v conda &>/dev/null && conda activate dev
 command -v starship &>/dev/null && . <(starship init zsh)
 command -v helm &>/dev/null && . <(helm completion zsh)
 command -v kubectl &>/dev/null && . <(kubectl completion zsh)
+command -v doctl &>/dev/null && . <(doctl completion zsh)
 
 ## Load secrets
 
