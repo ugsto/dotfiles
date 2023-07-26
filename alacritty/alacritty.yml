@@ -81,7 +81,7 @@ font:
   bold_italic:
     family: SauceCodePro Nerd Font Propo
     style: Bold Italic
-  size: 10.0
+  size: 9.5
 
 key_bindings:
   - key: Paste
