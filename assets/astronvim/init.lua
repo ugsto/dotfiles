@@ -3,6 +3,7 @@ return {
 
   lsp = {
     formatting = {
+      format_on_save = true,
       disabled = {
         "tsserver"
       }
@@ -27,7 +28,8 @@ return {
           suggestion = { enabled = false },
           panel = { enabled = false },
           filetypes = {
-            ["*"] = true
+            ["*"] = true,
+            make = true,
           }
         }
       end
