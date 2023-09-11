@@ -2,7 +2,7 @@
 
 set -ex
 
-mv ~/.config/nvim ~/.config/nvim.bak-$(date +%s)
+mv ~/.config/nvim ~/.config/nvim.bak-$(date +%s) || true
 mv ~/.local/share/nvim ~/.local/share/nvim.bak-$(date +%s) || true
 mv ~/.local/state/nvim ~/.local/state/nvim.bak-$(date +%s) || true
 mv ~/.cache/nvim ~/.cache/nvim.bak-$(date +%s) || true
