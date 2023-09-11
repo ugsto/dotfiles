@@ -1,59 +1,11 @@
-return {
-  colorscheme = "catppuccin-macchiato",
+local colors = require("user.colors")
+local lsp = require("user.lsp")
+local plugins = require("user.plugins")
 
-  lsp = {
-    formatting = {
-      format_on_save = true,
-      disabled = {
-        "tsserver"
-      }
-    }
-  },
+local M = {}
 
+M.colorscheme = colors.colorscheme
+M.lsp = lsp
+M.plugins = plugins
 
-  plugins = {
-    {
-      "catppuccin/nvim",
-      name = "catppuccin",
-      config = function()
-        require("catppuccin").setup {}
-      end
-    },
-    {
-      "zbirenbaum/copilot.lua",
-      cmd = "Copilot",
-      event = "InsertEnter",
-      config = function()
-        require("copilot").setup {
-          suggestion = { enabled = false },
-          panel = { enabled = false },
-          filetypes = {
-            ["*"] = true,
-            make = true,
-          }
-        }
-      end
-    },
-    {
-      "hrsh7th/nvim-cmp",
-      dependencies = {
-        {
-          "zbirenbaum/copilot-cmp",
-          config = function()
-            require("copilot_cmp").setup()
-          end,
-        }
-      },
-      opts = {
-        sources = {
-          { name = "nvim_lsp", group_index = 2 },
-          { name = "copilot",  group_index = 2 },
-          { name = "luasnip",  group_index = 2 },
-          { name = "buffer",   group_index = 2 },
-          { name = "nvim_lua", group_index = 2 },
-          { name = "path",     group_index = 2 },
-        },
-      },
-    },
-  }
-}
+return M
