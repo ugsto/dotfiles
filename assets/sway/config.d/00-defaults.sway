@@ -1,0 +1,8 @@
+set $mod Mod1
+set $term alacritty
+set $menu pgrep -x 'rofi' || (echo -e "$(dmenu_path)" | rofi -dmenu | xargs swaymsg exec --)
+
+set $color_primary #CD5533
+set $color_secondary #CD5533
+set $color_foreground #282828
+set $color_background #F5F5F5

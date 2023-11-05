@@ -1,5 +1,5 @@
 format = """
-[┌─→](gray) \\[$username@$hostname:$directory\\] $conda $git_branch
+[┌─>](gray) \\[$username@$hostname:$directory\\] $conda $git_branch
 [└─](gray)$character"""
 
 [conda]
@@ -24,9 +24,9 @@ style = "bold blue"
 
 [character]
 format = "$symbol "
-success_symbol = "[→](bold green)"
-error_symbol = "[→](bold red)"
-vimcmd_symbol = "[→](bold yellow)"
-vimcmd_replace_one_symbol = "[→](bold yellow)"
-vimcmd_replace_symbol = "[→](bold yellow)"
-vimcmd_visual_symbol = "[→](bold yellow)"
+success_symbol = "[>](bold green)"
+error_symbol = "[>](bold red)"
+vimcmd_symbol = "[>](bold yellow)"
+vimcmd_replace_one_symbol = "[>](bold yellow)"
+vimcmd_replace_symbol = "[>](bold yellow)"
+vimcmd_visual_symbol = "[>](bold yellow)"

@@ -2,6 +2,11 @@
 
 # zsh setup
 
+
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 [[ $- != *i* ]] && return
 
 ## Set tmux if not set already
@@ -18,6 +23,15 @@ set -o vi
 
 bindkey -v
 bindkey '^R' history-incremental-search-backward
+
+## Clear screen
+
+clear-scrollback-and-screen () {
+  zle clear-screen
+  tmux clear-history
+}
+zle -N clear-scrollback-and-screen
+bindkey -v '^L' clear-scrollback-and-screen
 
 ## Z plug
 
@@ -36,14 +50,14 @@ preppend_path() {
 
 ### Python
 
-__conda_setup="$('/home/kurisu/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/kurisu/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/kurisu/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/kurisu/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/kurisu/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/kurisu/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/kurisu/miniconda3/bin:$PATH"
+        export PATH="/home/kurisu/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -57,6 +71,7 @@ preppend_path "/usr/sbin"
 preppend_path "/usr/local/bin"
 preppend_path "/usr/local/sbin"
 preppend_path "/var/lib/snapd/snap/bin"
+preppend_path "/snap/bin"
 
 ### local binaries
 
@@ -109,11 +124,11 @@ XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
 ## Setup completions
 
-command -v conda &>/dev/null && conda activate dev
 command -v starship &>/dev/null && . <(starship init zsh)
 command -v helm &>/dev/null && . <(helm completion zsh)
 command -v kubectl &>/dev/null && . <(kubectl completion zsh)
 command -v doctl &>/dev/null && . <(doctl completion zsh)
+command -v ng &>/dev/null && . <(ng completion script)
 
 ## Load secrets
 
@@ -129,8 +144,10 @@ export NVM_DIR
 
 ## MOTD
 
-echo -e '\033[0m'
-clear
-fortune
-echo '--'
-pokemon-colorscripts --random 1 $(randint 0 0 &>/dev/null && [ $(randint 1 10) -eq 1 ] && echo --shiny) | head -n -1
+/usr/local/bin/update_motd
+cat /etc/motd
+
+# Powerlevel10k
+
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
