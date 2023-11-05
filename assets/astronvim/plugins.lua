@@ -18,7 +18,6 @@ M = {
     end,
     event = 'BufEnter'
   },
-  { "simrat39/rust-tools.nvim" },
   {
     "hrsh7th/nvim-cmp",
     opts = {
