@@ -1,0 +1,117 @@
+* {
+  color: @dark-white;
+  border: none;
+  border-radius: 0;
+  font-family: "Source Sans Pro";
+  font-size: 1em;
+  box-shadow: none;
+  text-shadow: none;
+  transition-duration: 0s;
+}
+
+@define-color dark-white rgba(245, 245, 245, 0.9);
+@define-color dark-black rgba(40, 40, 40, 0.9);
+@define-color dark-orange rgba(205, 85, 50, 0.9);
+@define-color glassy-black rgba(0, 0, 0, 0.2);
+
+window#waybar {
+  background-color: @dark-black;
+  border-bottom: 1px solid @dark-orange;
+}
+
+window#waybar.solo {
+  background: linear-gradient(
+    90deg,
+    @dark-orange 0%,
+    @dark-orange 2.5%,
+    @dark-black 5%,
+    @dark-black,
+    @dark-black 95%,
+    @dark-orange 97.5%,
+    @dark-orange 100%
+  );
+}
+
+#workspaces {
+  margin: 0 0.25em;
+}
+
+#custom-scratchpad {
+  margin: 0 0.25em;
+  padding: 0 0.25em;
+}
+
+#workspaces button {
+  padding: 0 0.25em;
+  background-color: transparent;
+  border: 1px solid @dark-white;
+  border-radius: 1em;
+  margin: 0.25em 0.25em;
+}
+
+#workspaces button.focused {
+  color: @dark-black;
+  background-color: @glassy-black;
+}
+
+#workspaces button.visible {
+  color: @dark-orange;
+}
+
+#workspaces button.urgent {
+  color: @dark-black;
+  background-color: @dark-white;
+}
+
+#custom-package,
+#mode,
+#battery,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#idle_inhibitor,
+#temperature,
+#custom-layout,
+#backlight,
+#clock,
+#custom-notification {
+  padding: 0 1em 0 0.5em;
+  border-right: 1px solid @dark-orange;
+}
+
+#custom-package {
+  border-left: 1px solid @dark-orange;
+}
+
+#custom-notification {
+  padding-right: 0;
+}
+
+#idle_inhibitor,
+#backlight {
+  padding-right: 0.475em;
+}
+
+#battery.warning {
+  color: @dark-orange;
+}
+
+#battery.critical {
+  color: @dark-black;
+  background-color: @dark-orange;
+}
+
+#battery.charging {
+  background-color: @dark-black;
+}
+
+tooltip {
+  background-color: @dark-black;
+  border: 1px solid @dark-orange;
+}
+
+#window {
+  font-weight: bold;
+  margin: 0 0.5em;
+}
