@@ -2,7 +2,6 @@
 
 # zsh setup
 
-
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -100,6 +99,11 @@ preppend_path "$GOPATH/bin"
     [ -d "$RUBY_PATH/bin" ] && preppend_path "$RUBY_PATH/bin"
 done
 
+### java
+
+JAVA_HOME="/usr/lib/jvm/default"
+preppend_path "$JAVA_HOME/bin"
+
 ## Setup aliases
 
 autoload -Uz compinit
@@ -146,8 +150,6 @@ export NVM_DIR
 
 /usr/local/bin/update_motd
 cat /etc/motd
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
-# Powerlevel10k
-
-source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
