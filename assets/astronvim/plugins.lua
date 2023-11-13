@@ -30,6 +30,23 @@ M = {
       },
     },
   },
+  {
+    "simrat39/rust-tools.nvim",
+    {
+      "williamboman/mason-lspconfig.nvim",
+      opts = {
+        on_initialized = function() print("mason-lspconfig") end
+      }
+    },
+  },
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      auto_open = true,
+      auto_close = true,
+    }
+  }
 }
 
 return M
