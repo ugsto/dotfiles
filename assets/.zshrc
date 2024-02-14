@@ -36,9 +36,13 @@ bindkey -v '^L' clear-scrollback-and-screen
 
 [ -f /usr/share/zsh/scripts/zplug/init.zsh ] && . /usr/share/zsh/scripts/zplug/init.zsh
 
+## Setup default editor
+
+export EDITOR=nvim
+
 ## Setup PATH variable
 
-preppend_path() {
+prepend_path() {
     case ":$PATH:" in
         *:"$1":*)
             ;;
@@ -61,29 +65,32 @@ else
 fi
 unset __conda_setup
 
+# command -v conda &>/dev/null && conda activate default
+
 ### Global binaries
 
-preppend_path "/bin"
-preppend_path "/sbin"
-preppend_path "/usr/bin"
-preppend_path "/usr/sbin"
-preppend_path "/usr/local/bin"
-preppend_path "/usr/local/sbin"
-preppend_path "/var/lib/snapd/snap/bin"
-preppend_path "/snap/bin"
+prepend_path "/bin"
+prepend_path "/sbin"
+prepend_path "/usr/bin"
+prepend_path "/usr/sbin"
+prepend_path "/usr/local/bin"
+prepend_path "/usr/local/sbin"
+prepend_path "/var/lib/snapd/snap/bin"
+prepend_path "/snap/bin"
+prepend_path "$HOME/.surrealdb"
 
 ### local binaries
 
-preppend_path "$HOME/.local/bin"
+prepend_path "$HOME/.local/bin"
 
 ### rust
 
-preppend_path "$HOME/.cargo/bin"
+prepend_path "$HOME/.cargo/bin"
 
 ### nodejs
 
 PNPM_HOME="$HOME/.local/share/pnpm"
-preppend_path "$PNPM_HOME"
+prepend_path "$PNPM_HOME"
 NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -91,18 +98,18 @@ NVM_DIR="$HOME/.nvm"
 ### go
 
 GOPATH="$HOME/go"
-preppend_path "$GOPATH/bin"
+prepend_path "$GOPATH/bin"
 
 ### ruby
 
 [ -d "$HOME/.local/share/gem/ruby/" ] && for RUBY_PATH in "$HOME/.local/share/gem/ruby/"*; do
-    [ -d "$RUBY_PATH/bin" ] && preppend_path "$RUBY_PATH/bin"
+    [ -d "$RUBY_PATH/bin" ] && prepend_path "$RUBY_PATH/bin"
 done
 
 ### java
 
 JAVA_HOME="/usr/lib/jvm/default"
-preppend_path "$JAVA_HOME/bin"
+prepend_path "$JAVA_HOME/bin"
 
 ## Setup aliases
 
@@ -148,8 +155,5 @@ export NVM_DIR
 
 ## MOTD
 
-/usr/local/bin/update_motd
-cat /etc/motd
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source ~/powerlevel10k/powerlevel10k.zsh-theme
