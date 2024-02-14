@@ -1,22 +1,28 @@
-local M = {}
-
-M = {
+return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
     config = function()
-      require("catppuccin").setup {}
-    end
+      require("catppuccin").setup({})
+    end,
   },
   {
-    'Exafunction/codeium.vim',
+    "Exafunction/codeium.vim",
     config = function()
-      vim.keymap.set('i', '<C-g>', function() return vim.fn['codeium#Accept']() end, { expr = true })
-      vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true })
-      vim.keymap.set('i', '<C-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true })
-      vim.keymap.set('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true })
+      vim.keymap.set("i", "<C-g>", function()
+        return vim.fn["codeium#Accept"]()
+      end, { expr = true })
+      vim.keymap.set("i", "<C-;>", function()
+        return vim.fn["codeium#CycleCompletions"](1)
+      end, { expr = true })
+      vim.keymap.set("i", "<C-,>", function()
+        return vim.fn["codeium#CycleCompletions"](-1)
+      end, { expr = true })
+      vim.keymap.set("i", "<C-x>", function()
+        return vim.fn["codeium#Clear"]()
+      end, { expr = true })
     end,
-    event = 'BufEnter'
+    event = "BufEnter",
   },
   {
     "hrsh7th/nvim-cmp",
@@ -35,8 +41,10 @@ M = {
     {
       "williamboman/mason-lspconfig.nvim",
       opts = {
-        on_initialized = function() print("mason-lspconfig") end
-      }
+        on_initialized = function()
+          print("mason-lspconfig")
+        end,
+      },
     },
   },
   {
@@ -45,8 +53,23 @@ M = {
     opts = {
       auto_open = true,
       auto_close = true,
-    }
-  }
+    },
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  },
+  {
+    "mfussenegger/nvim-jdtls",
+    {
+      "williamboman/mason-lspconfig.nvim",
+      opts = {
+        ensure_installed = { "jdtls" },
+      },
+    },
+  },
 }
-
-return M
