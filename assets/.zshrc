@@ -36,6 +36,10 @@ bindkey -v '^L' clear-scrollback-and-screen
 
 [ -f /usr/share/zsh/scripts/zplug/init.zsh ] && . /usr/share/zsh/scripts/zplug/init.zsh
 
+# Gcup
+
+[ -f "/home/kurisu/.ghcup/env" ] && source "/home/kurisu/.ghcup/env"
+
 ## Setup default editor
 
 export EDITOR=nvim
@@ -91,9 +95,15 @@ prepend_path "$HOME/.cargo/bin"
 
 PNPM_HOME="$HOME/.local/share/pnpm"
 prepend_path "$PNPM_HOME"
+
 NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+BUN_INSTALL="$HOME/.bun"
+[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
+prepend_path "$BUN_INSTALL/bin"
+
 
 ### go
 
@@ -105,6 +115,7 @@ prepend_path "$GOPATH/bin"
 [ -d "$HOME/.local/share/gem/ruby/" ] && for RUBY_PATH in "$HOME/.local/share/gem/ruby/"*; do
     [ -d "$RUBY_PATH/bin" ] && prepend_path "$RUBY_PATH/bin"
 done
+prepend_path "$HOME/bin"
 
 ### java
 
@@ -140,6 +151,7 @@ command -v helm &>/dev/null && . <(helm completion zsh)
 command -v kubectl &>/dev/null && . <(kubectl completion zsh)
 command -v doctl &>/dev/null && . <(doctl completion zsh)
 command -v ng &>/dev/null && . <(ng completion script)
+command -v influx &>/dev/null && . <(influx completion zsh)
 
 ## Load secrets
 
@@ -149,6 +161,7 @@ command -v ng &>/dev/null && . <(ng completion script)
 
 export DBUS_SESSION_BUS_ADDRESS
 export XDG_RUNTIME_DIR
+export BUN_INSTALL
 export PNPM_HOME
 export GOPATH
 export NVM_DIR
