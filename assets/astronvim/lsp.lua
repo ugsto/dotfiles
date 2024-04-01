@@ -11,6 +11,19 @@ return {
 				"--offset-encoding=utf-16",
 			},
 		},
+		arduino_language_server = {
+			cmd = {
+				"arduino-language-server",
+				"-cli-config",
+				"~/.arduino15/arduino-cli.yaml",
+				"-cli",
+				"arduino-cli",
+				"-clangd",
+				"clangd",
+				"-fqbn",
+				"arduino:avr:uno",
+			},
+		},
 		jdtls = function()
 			local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
 			local root_dir = require("jdtls.setup").find_root(root_markers)
@@ -78,4 +91,7 @@ return {
 			})
 		end,
 	},
+	on_attach = function(client, _)
+		client.server_capabilities.semanticTokensProvider = nil
+	end,
 }
