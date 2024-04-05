@@ -1,12 +1,11 @@
 local M = {}
 
 table.insert(M, {
-  "folke/tokyonight.nvim",
+  "olimorris/onedarkpro.nvim",
   lazy = false,
   priority = 1000,
   config = function()
-    require("tokyonight").setup()
-    vim.cmd[[colorscheme tokyonight]]
+    vim.cmd [[colorscheme onedark]]
   end,
 })
 
