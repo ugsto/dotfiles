@@ -4,8 +4,8 @@ local merge_tables = require("utils").merge_tables
 local modules = {
   require("plugins.plugin_manifest.00-colorscheme"),
   require("plugins.plugin_manifest.01-lspconfig"),
-  require("plugins.plugin_manifest.02-none-ls"),
-  require("plugins.plugin_manifest.03-mason"),
+  require("plugins.plugin_manifest.02-mason"),
+  require("plugins.plugin_manifest.03-none-ls"),
   require("plugins.plugin_manifest.04-nvim-dap"),
   require("plugins.plugin_manifest.05-codeium"),
   require("plugins.plugin_manifest.05-lualine"),
