@@ -14,6 +14,7 @@ return {
   require("plugins.plugin_manifest.05-nvim-cmp"),
   require("plugins.plugin_manifest.05-nvim-jdtls"),
   require("plugins.plugin_manifest.05-nvim-notify"),
+  require("plugins.plugin_manifest.05-rayso"),
   require("plugins.plugin_manifest.05-rust-tools"),
   require("plugins.plugin_manifest.05-telescope"),
   require("plugins.plugin_manifest.05-tfm"),
