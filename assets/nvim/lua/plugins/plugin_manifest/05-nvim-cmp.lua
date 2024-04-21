@@ -10,15 +10,6 @@ table.insert(M, {
     "hrsh7th/cmp-vsnip",
     "hrsh7th/vim-vsnip",
   },
-  opts = {
-    sources = {
-      { name = "nvim_lsp", group_index = 2 },
-      { name = "luasnip",  group_index = 2 },
-      { name = "buffer",   group_index = 2 },
-      { name = "nvim_lua", group_index = 2 },
-      { name = "path",     group_index = 2 },
-    },
-  },
   config = function()
     local cmp = require("cmp")
 
@@ -48,10 +39,11 @@ table.insert(M, {
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
       }),
       sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'vsnip' },
-      }, {
-        { name = 'buffer' },
+        { name = "nvim_lsp", group_index = 2 },
+        { name = "luasnip",  group_index = 2 },
+        { name = "buffer",   group_index = 2 },
+        { name = "nvim_lua", group_index = 2 },
+        { name = "path",     group_index = 2 },
       })
     })
   end

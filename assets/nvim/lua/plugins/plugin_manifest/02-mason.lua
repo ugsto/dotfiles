@@ -33,12 +33,7 @@ table.insert(M, {
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     require("mason-null-ls").setup({
-      ensure_installed = {
-        "flake8",
-        "mypy",
-        "black",
-        "isort"
-      },
+      ensure_installed = {},
       automatic_installation = false,
       handlers = {},
     })

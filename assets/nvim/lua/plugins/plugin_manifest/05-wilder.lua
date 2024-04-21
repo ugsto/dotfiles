@@ -1,7 +1,5 @@
 local M = {}
 
-table.insert(M, {
-  "gelguy/wilder.nvim"
-})
+table.insert(M, "gelguy/wilder.nvim")
 
 return M

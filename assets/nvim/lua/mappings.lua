@@ -1,6 +1,8 @@
 local mapping = require("utils")
 vim.g.mapleader = " "
 
+mapping.map("n", "<leader>e", "<CMD>lua require('tfm').open()<CR>")
+
 mapping.map("n", "<leader>q", "<CMD>q<CR>")
 mapping.map("n", "<leader>w", "<CMD>w<CR>")
 

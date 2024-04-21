@@ -16,6 +16,7 @@ table.insert(M, {
       }
     }
     telescope.load_extension("ui-select")
+    telescope.load_extension("noice")
   end
 })
 
