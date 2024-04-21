@@ -21,6 +21,7 @@ local modules = {
   require("plugins.plugin_manifest.05-tfm"),
   require("plugins.plugin_manifest.05-treesitter"),
   require("plugins.plugin_manifest.05-trouble"),
+  require("plugins.plugin_manifest.05-vim-illuminate"),
   require("plugins.plugin_manifest.05-which-key"),
   require("plugins.plugin_manifest.05-wilder"),
 }
