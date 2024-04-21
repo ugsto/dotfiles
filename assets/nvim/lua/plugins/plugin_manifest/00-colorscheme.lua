@@ -1,11 +1,10 @@
 local M = {}
 
 table.insert(M, {
-  "navarasu/onedark.nvim",
-  lazy = false,
+  "olimorris/onedarkpro.nvim",
   priority = 1000,
   config = function()
-    require('onedark').load()
+    vim.cmd("colorscheme onedark")
   end,
 })
 
