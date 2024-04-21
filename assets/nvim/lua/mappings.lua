@@ -1,10 +1,13 @@
 local mapping = require("utils")
 vim.g.mapleader = " "
 
-mapping.map("n", "<leader>e", "<CMD>lua require('tfm').open()<CR>")
+mapping.map("n", "<leader>e", require('tfm').open)
 
 mapping.map("n", "<leader>q", "<CMD>q<CR>")
 mapping.map("n", "<leader>w", "<CMD>w<CR>")
+
+mapping.map("n", "[d", vim.diagnostic.goto_prev)
+mapping.map("n", "]d", vim.diagnostic.goto_next)
 
 mapping.map("n", "<leader>ff", "<CMD>Telescope find_files<CR>")
 mapping.map("n", "<leader>fg", "<CMD>Telescope live_grep<CR>")
