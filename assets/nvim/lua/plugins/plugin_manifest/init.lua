@@ -9,6 +9,7 @@ local modules = {
   require("plugins.plugin_manifest.04-nvim-dap"),
   require("plugins.plugin_manifest.05-barbar"),
   require("plugins.plugin_manifest.05-codeium"),
+  require("plugins.plugin_manifest.05-lazygit"),
   require("plugins.plugin_manifest.05-lualine"),
   require("plugins.plugin_manifest.05-markdown-preview"),
   require("plugins.plugin_manifest.05-nvim-autopairs"),
