@@ -11,6 +11,6 @@ end
 
 load_vim_source("options.vim")
 
-load_lua_module("mappings")
 load_lua_module("plugins")
+load_lua_module("mappings")
 load_lua_module("autocommands")

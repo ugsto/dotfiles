@@ -5,14 +5,11 @@ M.map = function(mode, lhs, rhs, opts)
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
-  vim.keymap.set(mode, lhs, rhs, options)
-end
 
-M.merge_tables = function(t1, t2)
-  for i = 1, #t2 do
-    t1[#t1 + 1] = t2[i]
-  end
-  return t1
+  vim.keymap.set(mode, lhs, rhs, options)
+
+  local wk = require("which-key")
+  wk.register({ [lhs] = { name = lhs } }, { mode = mode, silent = true })
 end
 
 return M
