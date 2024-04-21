@@ -11,6 +11,7 @@ local modules = {
   require("plugins.plugin_manifest.05-lazygit"),
   require("plugins.plugin_manifest.05-lualine"),
   require("plugins.plugin_manifest.05-markdown-preview"),
+  require("plugins.plugin_manifest.05-noice"),
   require("plugins.plugin_manifest.05-nvim-autopairs"),
   require("plugins.plugin_manifest.05-nvim-cmp"),
   require("plugins.plugin_manifest.05-nvim-jdtls"),
