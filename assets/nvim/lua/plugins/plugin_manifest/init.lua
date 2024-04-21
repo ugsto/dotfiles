@@ -1,6 +1,4 @@
-local M = {}
-
-local modules = {
+return {
   require("plugins.plugin_manifest.00-colorscheme"),
   require("plugins.plugin_manifest.01-lspconfig"),
   require("plugins.plugin_manifest.02-mason"),
@@ -25,9 +23,3 @@ local modules = {
   require("plugins.plugin_manifest.05-which-key"),
   require("plugins.plugin_manifest.05-wilder"),
 }
-
-for _, module in ipairs(modules) do
-  table.insert(M, module)
-end
-
-return M
