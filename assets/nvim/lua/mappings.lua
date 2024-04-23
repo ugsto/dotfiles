@@ -1,7 +1,7 @@
 local mapping = require("utils")
 vim.g.mapleader = " "
 
-mapping.map("n", "<leader>e", require('tfm').open)
+mapping.map("n", "<leader>e", require("tfm").open)
 
 mapping.map("n", "<leader>q", "<CMD>q<CR>")
 mapping.map("n", "<leader>w", "<CMD>w<CR>")
@@ -35,10 +35,10 @@ mapping.map("n", "<A-p>", "<CMD>BufferPin<CR>")
 
 mapping.map("n", "<A-c>", "<CMD>BufferClose<CR>")
 
-mapping.map('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>')
-mapping.map('n', '<Space>bn', '<Cmd>BufferOrderByName<CR>')
-mapping.map('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>')
-mapping.map('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>')
-mapping.map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>')
+mapping.map("n", "<leader>bb", "<CMD>BufferOrderByBufferNumber<CR>")
+mapping.map("n", "<leader>bn", "<CMD>BufferOrderByName<CR>")
+mapping.map("n", "<leader>bd", "<CMD>BufferOrderByDirectory<CR>")
+mapping.map("n", "<leader>bl", "<CMD>BufferOrderByLanguage<CR>")
+mapping.map("n", "<leader>bw", "<CMD>BufferOrderByWindowNumber<CR>")
 
 mapping.map("n", "<leader>lg", "<CMD>LazyGit<CR>")
