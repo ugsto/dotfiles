@@ -40,3 +40,5 @@ mapping.map('n', '<Space>bn', '<Cmd>BufferOrderByName<CR>')
 mapping.map('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>')
 mapping.map('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>')
 mapping.map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>')
+
+mapping.map("n", "<leader>lg", "<CMD>LazyGit<CR>")
