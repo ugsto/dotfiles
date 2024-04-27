@@ -1,9 +1,0 @@
-exec_always {
-    systemctl --user import-environment
-    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
-    gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
-    gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
-    test -e $SWAYSOCK.wob || mkfifo $SWAYSOCK.wob
-    tail -f $SWAYSOCK.wob | $wob
-    swaync --style /etc/sway/swaync/style.css --config /etc/sway/swaync/config.json
-}
