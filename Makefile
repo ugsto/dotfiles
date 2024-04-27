@@ -4,7 +4,7 @@ SCRIPTS=scripts
 RUNNER=$(SCRIPTS)/runner.sh
 CONFIG=~/.config
 
-MANAGED=alacritty nvim starship zsh
+MANAGED=nvim kitty
 
 .PHONY: all config-all config clean
 

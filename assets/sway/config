@@ -1,3 +1,0 @@
-xwayland force
-
-include $HOME/.config/sway/config.d/*
