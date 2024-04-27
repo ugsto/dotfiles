@@ -69,6 +69,10 @@ else
 fi
 unset __conda_setup
 
+### Haskell
+
+[ -f "/home/kurisu/.ghcup/env" ] && . "/home/kurisu/.ghcup/env" # ghcup-env
+
 ### Global binaries
 
 prepend_path "/bin"
