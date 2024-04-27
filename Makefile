@@ -4,7 +4,7 @@ SCRIPTS=scripts
 RUNNER=$(SCRIPTS)/runner.sh
 CONFIG=~/.config
 
-MANAGED=nvim tmux kitty
+MANAGED=nvim tmux kitty zsh
 
 .PHONY: all config-all config clean
 
