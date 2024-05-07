@@ -1,0 +1,46 @@
+(include "./modules/power.yuck")
+(include "./modules/datetime.yuck")
+(include "./modules/battery.yuck")
+(include "./modules/wifi.yuck")
+(include "./modules/volume.yuck")
+(include "./modules/microphone.yuck")
+(include "./modules/workspaces.yuck")
+
+(defwidget right []
+  (box :space-evenly false
+       :spacing 8
+       :orientation "h"
+       :halign "start"
+       (workspaces)))
+
+(defwidget left []
+  (box :space-evenly false
+       :spacing 8
+       :orientation "h"
+       :halign "end"
+       (microphone)
+       (volume)
+       (wifi)
+       (battery)
+       (datetime)
+       (power)))
+
+(defwidget bar []
+  (centerbox :orientation "h"
+             (right)
+             (box)
+             (left)))
+
+(defwindow bar :monitor 0
+               :windowtype "dock"
+               :stacking "fg"
+               :exclusive true
+               :focusable false
+               :namespace "eww-bar"
+               :geometry (geometry :x 0
+                                   :y "4px"
+                                   :width "95%"
+                                   :anchor "top center")
+               :reserve (struts :side "top"
+                                :distance "0%")
+               (bar))

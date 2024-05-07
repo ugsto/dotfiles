@@ -1,0 +1,25 @@
+$fonts: (
+  material: "Material Icons",
+  monospace: "Terminess Nerd Font Mono",
+  sans: "Open Sans",
+);
+
+$font-sizes: (
+  xs: 12px,
+  sm: 14px,
+  md: 16px,
+  lg: 18px,
+  xl: 20px,
+);
+
+@each $name, $font in $fonts {
+  .font-#{$name} {
+    font-family: $font;
+  }
+}
+
+@each $name, $size in $font-sizes {
+  .font-size-#{$name} {
+    font-size: $size;
+  }
+}

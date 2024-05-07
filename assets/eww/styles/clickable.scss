@@ -1,0 +1,9 @@
+@use "sass:map";
+
+.clickable {
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: map.get($colors, overlay0);
+  }
+}

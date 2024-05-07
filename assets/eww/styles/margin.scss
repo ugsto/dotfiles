@@ -1,0 +1,38 @@
+$margin-sizes: (
+  1: 4px,
+  2: 8px,
+  3: 12px,
+  4: 16px,
+);
+
+@each $name, $margin in $margin-sizes {
+  .m-#{$name} {
+    margin: $margin;
+  }
+
+  .mx-#{$name} {
+    margin-left: $margin;
+    margin-right: $margin;
+  }
+
+  .my-#{$name} {
+    margin-top: $margin;
+    margin-bottom: $margin;
+  }
+
+  .mt-#{$name} {
+    margin-top: $margin;
+  }
+
+  .mb-#{$name} {
+    margin-bottom: $margin;
+  }
+
+  .ml-#{$name} {
+    margin-left: $margin;
+  }
+
+  .mr-#{$name} {
+    margin-right: $margin;
+  }
+}
