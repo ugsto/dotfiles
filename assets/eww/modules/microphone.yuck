@@ -1,0 +1,20 @@
+(deflisten MICROPHONE_DATA :initial "{\"microphone\":1000,\"is_muted\":false}"
+                       "~/.config/eww/scripts/event-driven-microphone.sh")
+
+(defvar microphone-hover false)
+
+(defwidget microphone []
+  (eventbox :onhover "${EWW_CMD} update microphone-hover=true"
+            :onhoverlost "${EWW_CMD} update microphone-hover=false"
+            (eventbox :onscroll "~/.config/eww/scripts/utils-microphone.sh {}"
+                      :onclick "~/.config/eww/scripts/utils-microphone.sh mute"
+                      (box :class "rounded-lg px-2 bg-surface0"
+                           :space-evenly false
+                           (label :class "font-material fg-text"
+                                  :text {jq(MICROPHONE_DATA, ".is_muted")
+                                         ? "mic_off"
+                                         : "mic"})
+                           (revealer :transition "slideleft"
+                                     :reveal microphone-hover
+                                     (label :class "font-sans font-size-xs fg-text ml-1"
+                                            :text "${jq(MICROPHONE_DATA, ".volume")}%"))))))
