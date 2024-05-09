@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 list_workspaces() {
-	hyprctl workspaces -j | jq --raw-output --indent 0 '.[]'
+	hyprctl workspaces -j | jq --raw-output --indent 0 'sort_by(.id) | .[]'
 }
 
 render_button() {
