@@ -10,7 +10,7 @@
                       :onclick "~/.config/eww/scripts/utils-microphone.sh mute"
                       (box :class "rounded-lg px-2 bg-surface0"
                            :space-evenly false
-                           (label :class "font-material fg-text"
+                           (label :class "font-material font-size-sm fg-text"
                                   :text {jq(MICROPHONE_DATA, ".is_muted")
                                          ? "mic_off"
                                          : "mic"})

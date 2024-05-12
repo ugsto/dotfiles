@@ -16,7 +16,7 @@
             :onhoverlost "${EWW_CMD} update wifi-hover=false"
             (box :class "rounded-lg px-2 bg-surface0"
                  :space-evenly false
-                 (label :class "font-material fg-text"
+                 (label :class "font-material font-size-sm fg-text"
                         :text {wifi-icons[round(WIFI_SIGNAL * (arraylength(wifi-icons) - 1) / 100, 0)]})
                  (revealer :transition "slideleft"
                            :reveal wifi-hover

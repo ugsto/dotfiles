@@ -32,7 +32,7 @@ wrap_buttons() {
 		cat <<-EOF
 			(box :class "rounded-lg bg-surface0 px-2"
 			     :space-evenly false
-			     (label :class "font-material fg-text"
+			     (label :class "font-material font-size-sm fg-text"
 			            :text "workspaces")
 			     (box :class "ml-1"
 			          :spacing 4

@@ -5,11 +5,11 @@ $fonts: (
 );
 
 $font-sizes: (
-  xs: 12px,
-  sm: 14px,
-  md: 16px,
-  lg: 18px,
-  xl: 20px,
+  xs: 16px,
+  sm: 18px,
+  md: 20px,
+  lg: 22px,
+  xl: 24px,
 );
 
 @each $name, $font in $fonts {
