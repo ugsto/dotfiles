@@ -57,7 +57,7 @@ prepend_path() {
 
 ### Python
 
-conda activate base
+command -v conda &>/dev/null && conda activate base
 
 ### Haskell
 
@@ -119,7 +119,7 @@ prepend_path "$JAVA_HOME/bin"
 autoload -Uz compinit
 compinit
 
-command -v exa &>/dev/null && alias ls="exa --color=auto --icons"
+command -v exa &>/dev/null && alias ls="exa --color=auto --icons --group-directories-first"
 command -v bat &>/dev/null && alias cat="bat"
 command -v shell-genie &>/dev/null && alias chat="shell-genie ask"
 command -v kubectl &>/dev/null && alias k="kubectl"
@@ -138,7 +138,6 @@ XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
 ## Setup completions
 
-command -v starship &>/dev/null && . <(starship init zsh)
 command -v helm &>/dev/null && . <(helm completion zsh)
 command -v kubectl &>/dev/null && . <(kubectl completion zsh)
 command -v doctl &>/dev/null && . <(doctl completion zsh)
@@ -157,8 +156,7 @@ export BUN_INSTALL
 export PNPM_HOME
 export GOPATH
 export NVM_DIR
-
-## MOTD
-
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
