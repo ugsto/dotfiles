@@ -39,7 +39,7 @@
                :namespace "eww-bar"
                :geometry (geometry :x 0
                                    :y "4px"
-                                   :width "95%"
+                                   :width "99%"
                                    :anchor "bottom center")
                :reserve (struts :side "top"
                                 :distance "0%")
