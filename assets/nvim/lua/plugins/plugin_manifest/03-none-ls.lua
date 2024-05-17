@@ -5,7 +5,7 @@ table.insert(M, {
   dependencies = { "nvim-lua/plenary.nvim" },
   config = function()
     require("null-ls").setup({
-      sources = {}
+      sources = {},
     })
   end,
 })

@@ -1,0 +1,7 @@
+nvim
+kitty
+hyprland hyprland-devel
+wofi
+swaybg
+
+make go automake cmake gcc gcc-c++ kernel-devel glib2-devel gtk3-devel libdbusmenu-devel gtk-layer-shell-devel

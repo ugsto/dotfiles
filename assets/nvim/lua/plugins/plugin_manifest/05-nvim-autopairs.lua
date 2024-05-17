@@ -3,7 +3,7 @@ local M = {}
 table.insert(M, {
   "windwp/nvim-autopairs",
   event = "InsertEnter",
-  config = true
+  config = true,
 })
 
 return M
