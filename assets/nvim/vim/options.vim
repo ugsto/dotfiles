@@ -64,9 +64,7 @@ set autowrite
 
 set undofile
 
-set shortmess+=c
-set shortmess+=S
-set shortmess+=I
+set shortmess=sWIcFS
 
 set completeopt+=menuone
 set completeopt-=preview
