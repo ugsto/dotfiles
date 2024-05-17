@@ -12,6 +12,9 @@ table.insert(M, {
   },
   config = function()
     local cmp = require("cmp")
+    local mapping_loader = require("mappings.nvim-cmp")
+
+    local mapping_manifest = mapping_loader.load(cmp)
 
     cmp.setup({
       snippet = {
@@ -20,33 +23,27 @@ table.insert(M, {
         end,
       },
       window = {
-        completion = cmp.config.window.bordered {
+        completion = cmp.config.window.bordered({
           col_offset = -2,
           side_padding = 0,
           border = "rounded",
           winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-        },
-        documentation = cmp.config.window.bordered {
+        }),
+        documentation = cmp.config.window.bordered({
           border = "rounded",
           winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-        },
+        }),
       },
-      mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-      }),
+      mapping = cmp.mapping.preset.insert(mapping_manifest),
       sources = cmp.config.sources({
         { name = "nvim_lsp", group_index = 2 },
         { name = "luasnip",  group_index = 2 },
         { name = "buffer",   group_index = 2 },
         { name = "nvim_lua", group_index = 2 },
         { name = "path",     group_index = 2 },
-      })
+      }),
     })
-  end
+  end,
 })
 
 return M
