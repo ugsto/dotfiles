@@ -1,6 +1,15 @@
 local M = {}
 
-table.insert(M, "mfussenegger/nvim-dap")
+table.insert(M, {
+	"mfussenegger/nvim-dap",
+	config = function()
+		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "_color_red" })
+		vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "_color_peach" })
+		vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "_color_maroon" })
+		vim.fn.sign_define("DapLogPoint", { text = "", texthl = "_color_blue" })
+		vim.fn.sign_define("DapStopped", { text = "", texthl = "_color_yellow" })
+	end,
+})
 table.insert(M, {
 	"rcarriga/nvim-dap-ui",
 	dependencies = {
