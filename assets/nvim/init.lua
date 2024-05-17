@@ -9,9 +9,11 @@ local function load_lua_module(module_name)
 	require(module_name)
 end
 
+vim.g.mapleader = " "
+
 load_vim_source("options.vim")
 
 load_lua_module("plugins")
 load_lua_module("mappings.user")
-load_lua_module("autocommands")
 load_lua_module("colors")
+load_lua_module("autocommands")
