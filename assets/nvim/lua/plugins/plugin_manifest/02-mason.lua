@@ -41,7 +41,10 @@ table.insert(M, {
 	"jay-babu/mason-nvim-dap.nvim",
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
-		require("mason-nvim-dap").setup()
+		require("mason-nvim-dap").setup({
+			ensure_installed = { "python" },
+			handlers = require("dap-handlers"),
+		})
 	end,
 })
 
