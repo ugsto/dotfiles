@@ -27,6 +27,18 @@ wk.register({
 }, { prefix = "<leader>" })
 
 wk.register({
+	d = {
+		name = "Debugger",
+		t = { "<CMD>DapToggleBreakpoint<CR>", "Toggle breakpoint" },
+		b = { "<CMD>DapToggleRepl<CR>", "Toggle repl" },
+		c = { "<CMD>DapContinue<CR>", "Continue" },
+		n = { "<CMD>DapStepOver<CR>", "Step over" },
+		i = { "<CMD>DapStepInto<CR>", "Step into" },
+		o = { "<CMD>DapStepOut<CR>", "Step out" },
+	},
+}, { prefix = "<leader>" })
+
+wk.register({
 	lg = { "<CMD>LazyGit<CR>", "Open LazyGit" },
 }, { prefix = "<leader>" })
 
