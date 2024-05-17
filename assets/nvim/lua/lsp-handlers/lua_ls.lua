@@ -7,6 +7,9 @@ M.handler = function()
         diagnostics = {
           globals = { "vim" },
         },
+        format = {
+          enable = false,
+        },
       },
     },
   })
