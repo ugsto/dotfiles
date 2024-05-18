@@ -1,14 +1,14 @@
 local M = {}
 
 table.insert(M, {
-	"Exafunction/codeium.vim",
+	"Exafunction/codeium.nvim",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"hrsh7th/nvim-cmp",
+	},
 	config = function()
-		local mapping_setup = require("mappings.codeium")
-		vim.g.codeium_disable_bindings = 1
-
-		mapping_setup.setup()
+		require("codeium").setup({})
 	end,
-	event = "BufEnter",
 })
 
 return M
