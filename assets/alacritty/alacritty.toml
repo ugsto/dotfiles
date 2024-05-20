@@ -1,0 +1,6 @@
+import = [
+  "~/.config/alacritty/alacritty/catppuccin.toml",
+  "~/.config/alacritty/alacritty/window.toml",
+  "~/.config/alacritty/alacritty/font.toml",
+  "~/.config/alacritty/alacritty/scrolling.toml",
+]

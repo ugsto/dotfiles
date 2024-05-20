@@ -9,4 +9,14 @@ M.map = function(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, options)
 end
 
+M.safe_require = function(module)
+	local status, lib = pcall(require, module)
+	if not status then
+		vim.notify("Error requiring module '" .. module .. "': " .. lib, vim.log.levels.ERROR)
+		return nil
+	end
+
+	return lib
+end
+
 return M
