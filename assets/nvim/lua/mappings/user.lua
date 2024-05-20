@@ -1,11 +1,16 @@
+local safe_require = require("utils").safe_require
+
 local M = {}
+
+local tfm = safe_require("tfm")
+local telescope_builtin = safe_require("telescope.builtin")
+local dap = safe_require("dap")
+local neotest = safe_require("neotest")
 
 M.setup = function(wk)
 	wk.register({
 		e = {
-			function()
-				require("tfm").open()
-			end,
+			tfm and tfm.open,
 			"Open TFM",
 		},
 	}, { prefix = "<leader>" })
@@ -18,22 +23,46 @@ M.setup = function(wk)
 	wk.register({
 		f = {
 			name = "File",
-			f = { "<CMD>Telescope find_files<CR>", "Find File" },
-			g = { "<CMD>Telescope live_grep<CR>", "Grep" },
-			b = { "<CMD>Telescope buffers<CR>", "Buffers" },
-			h = { "<CMD>Telescope help_tags<CR>", "Help" },
+			f = {
+				telescope_builtin and telescope_builtin.find_files,
+				"Find File",
+			},
+			g = {
+				telescope_builtin and telescope_builtin.live_grep,
+				"Grep",
+			},
+			b = {
+				telescope_builtin and telescope_builtin.buffers,
+				"Buffers",
+			},
+			h = {
+				telescope_builtin and telescope_builtin.help_tags,
+				"Help",
+			},
 		},
 	}, { prefix = "<leader>" })
 
 	wk.register({
 		d = {
 			name = "Debugger",
-			t = { "<CMD>DapToggleBreakpoint<CR>", "Toggle breakpoint" },
-			b = { "<CMD>DapToggleRepl<CR>", "Toggle repl" },
-			c = { "<CMD>DapContinue<CR>", "Continue" },
-			n = { "<CMD>DapStepOver<CR>", "Step over" },
-			i = { "<CMD>DapStepInto<CR>", "Step into" },
-			o = { "<CMD>DapStepOut<CR>", "Step out" },
+			t = { dap and dap.toggle_breakpoint, "Toggle breakpoint" },
+			b = { dap and dap.toggle_repl, "Toggle repl" },
+			c = { dap and dap.continue, "Continue" },
+			n = { dap and dap.step_over, "Step over" },
+			i = { dap and dap.step_into, "Step into" },
+			o = { dap and dap.step_out, "Step out" },
+		},
+	}, { prefix = "<leader>" })
+
+	wk.register({
+		t = {
+			name = "Test",
+			r = { neotest and neotest.run.run, "Run" },
+			d = { neotest and function()
+				neotest.run.run({ strategy = "dap" })
+			end, "Run in debug mode" },
+			s = { neotest and neotest.run.stop, "Stop" },
+			a = { neotest and neotest.run.attach, "Attach" },
 		},
 	}, { prefix = "<leader>" })
 
@@ -47,11 +76,18 @@ M.setup = function(wk)
 	})
 
 	wk.register({
-		["<A-.>"] = { "<CMD>BufferNext<CR>", "Go to next buffer" },
-		["<A-,>"] = { "<CMD>BufferPrevious<CR>", "Go to previous buffer" },
+		["<C-h>"] = { "<CMD>wincmd h<CR>" },
+		["<C-j>"] = { "<CMD>wincmd j<CR>" },
+		["<C-k>"] = { "<CMD>wincmd k<CR>" },
+		["<C-l>"] = { "<CMD>wincmd l<CR>" },
+	})
 
-		["<A-<>"] = { "<CMD>BufferMovePrevious<CR>", "Move buffer to previous position" },
-		["<A->>"] = { "<CMD>BufferMoveNext<CR>", "Move buffer to next position" },
+	wk.register({
+		["<A-h>"] = { "<CMD>BufferPrevious<CR>", "Go to previous buffer" },
+		["<A-l>"] = { "<CMD>BufferNext<CR>", "Go to next buffer" },
+
+		["<A-S-H>"] = { "<CMD>BufferMovePrevious<CR>", "Move buffer to previous position" },
+		["<A-S-L>"] = { "<CMD>BufferMoveNext<CR>", "Move buffer to next position" },
 
 		["<A-[>"] = { "<CMD>BufferFirst<CR>", "Go to first buffer" },
 		["<A-]>"] = { "<CMD>BufferLast<CR>", "Go to last buffer" },
@@ -76,7 +112,7 @@ M.setup = function(wk)
 					r = { vim.lsp.buf.references, "Go to references" },
 				},
 				K = { vim.lsp.buf.hover, "Show hover" },
-				["<C-k>"] = { vim.lsp.buf.signature_help, "Show signature help" },
+				["<C-S-k>"] = { vim.lsp.buf.signature_help, "Show signature help" },
 			}, opts)
 
 			wk.register({
