@@ -7,9 +7,9 @@ list_workspaces() {
 render_button() {
 	local active_workspace_id="$(hyprctl activeworkspace -j | jq --raw-output '.id')"
 
-	while read workspace; do
-		local id="$(echo $workspace | jq --raw-output '.id')"
-		local name="$(echo $workspace | jq --raw-output '.name')"
+	while IFS= read -r workspace; do
+		local id="$(echo "$workspace" | jq --raw-output '.id')"
+		local name="$(echo "$workspace" | jq --raw-output '.name')"
 
 		if [ "$id" = "$active_workspace_id" ]; then
 			cat <<-EOF
