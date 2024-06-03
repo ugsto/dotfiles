@@ -1,9 +1,9 @@
 CONFIG=~/.config
 MODULES=$$PWD/modules
 
-.PHONY: all nvim alacritty tmux
+.PHONY: all nvim alacritty tmux zsh
 
-all: nvim alacritty tmux
+all: nvim alacritty tmux zsh
 
 nvim:
 	@if [ -L $(CONFIG)/nvim ]; then \
@@ -26,3 +26,10 @@ tmux:
 		exit 0; \
 	fi; \
 	ln -sf "$(MODULES)/tmux/tmux.conf" ~/.tmux.conf
+
+zsh:
+	@if [ -L ~/.zshrc ]; then \
+		echo "zsh is already linked"; \
+		exit 0; \
+	fi; \
+	ln -sf "$(MODULES)/zsh/zshrc" ~/.zshrc
