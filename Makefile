@@ -3,7 +3,7 @@ MODULES=$$PWD/modules
 
 .PHONY: all nvim alacritty tmux
 
-all:
+all: nvim alacritty tmux
 
 nvim:
 	@if [ -L $(CONFIG)/nvim ]; then \
