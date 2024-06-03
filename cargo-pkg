@@ -1,3 +1,0 @@
-cargo install exa bat fd-find ripgrep
-cargo install --locked --git https://github.com/elkowar/eww --no-default-features --features=wayland
-cargo install --locked jaq
