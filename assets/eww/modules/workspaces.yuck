@@ -1,4 +1,0 @@
-(deflisten workspace-payload "~/.config/eww/scripts/event-driven-workspaces.sh")
-
-(defwidget workspaces []
-  (literal :content workspace-payload))
