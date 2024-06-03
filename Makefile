@@ -1,22 +1,28 @@
-EXEC=sh
-
-SCRIPTS=scripts
-RUNNER=$(SCRIPTS)/runner.sh
 CONFIG=~/.config
+MODULES=$$PWD/modules
 
-MANAGED=eww hypr kitty nvim runner tmux wofi zsh
-
-.PHONY: all config-all config clean
+.PHONY: all nvim alacritty tmux
 
 all:
 
-config-all:
-	for program in $(MANAGED); do \
-		make config target="$$program"; \
-	done
+nvim:
+	@if [ -L $(CONFIG)/nvim ]; then \
+		echo "nvim is already linked"; \
+		exit 0; \
+	fi; \
+	ln -sf "$(MODULES)/nvim" "$(CONFIG)/nvim"
 
-config:
-	$(EXEC) $(RUNNER) -t $(target) -p config
+alacritty:
+	@if [ -L $(CONFIG)/alacritty ]; then \
+		echo "alacritty is already linked"; \
+		exit 0; \
+	fi; \
+	ln -sf "$(MODULES)/alacritty" "$(CONFIG)/alacritty"
 
-clean:
-	$(EXEC) $(RUNNER) -t $(target) -p clean
+tmux:
+	@git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 2>/dev/null || true
+	@if [ -L ~/.tmux.conf ]; then \
+		echo "tmux is already linked"; \
+		exit 0; \
+	fi; \
+	ln -sf "$(MODULES)/tmux/tmux.conf" ~/.tmux.conf
