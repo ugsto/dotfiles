@@ -10,14 +10,14 @@ nvim:
 		echo "nvim is already linked"; \
 		exit 0; \
 	fi; \
-	ln -sf "$(MODULES)/nvim" "$(CONFIG)/nvim"
+	ln -sf "$(MODULES)/nvim" $(CONFIG)/nvim
 
 alacritty:
 	@if [ -L $(CONFIG)/alacritty ]; then \
 		echo "alacritty is already linked"; \
 		exit 0; \
 	fi; \
-	ln -sf "$(MODULES)/alacritty" "$(CONFIG)/alacritty"
+	ln -sf "$(MODULES)/alacritty" $(CONFIG)/alacritty
 
 tmux:
 	@git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 2>/dev/null || true
