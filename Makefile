@@ -1,35 +1,32 @@
-CONFIG=~/.config
-MODULES=$$PWD/modules
+CONFIG = $(HOME)/.config
+MODULES = $(PWD)/modules
+TMUX_PLUGIN_DIR = $(HOME)/.tmux/plugins/tpm
 
-.PHONY: all nvim alacritty tmux zsh
+.PHONY: all
 
-all: nvim alacritty tmux zsh
+all: $(CONFIG)/nvim $(CONFIG)/alacritty $(CONFIG)/starship.toml $(HOME)/.tmux.conf $(HOME)/.zshrc
 
-nvim:
-	@if [ -L $(CONFIG)/nvim ]; then \
-		echo "nvim is already linked"; \
-		exit 0; \
-	fi; \
-	ln -sf "$(MODULES)/nvim" $(CONFIG)/nvim
+define LINK_RULE
+	@if [ -L $(1) ]; then \
+		echo "$(1) is already linked"; \
+	else \
+		ln -sf $(2) $(1); \
+		echo "Linked $(1) to $(2)"; \
+	fi
+endef
 
-alacritty:
-	@if [ -L $(CONFIG)/alacritty ]; then \
-		echo "alacritty is already linked"; \
-		exit 0; \
-	fi; \
-	ln -sf "$(MODULES)/alacritty" $(CONFIG)/alacritty
+$(CONFIG)/nvim:
+	$(call LINK_RULE,$@,$(MODULES)/nvim)
 
-tmux:
-	@git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 2>/dev/null || true
-	@if [ -L ~/.tmux.conf ]; then \
-		echo "tmux is already linked"; \
-		exit 0; \
-	fi; \
-	ln -sf "$(MODULES)/tmux/tmux.conf" ~/.tmux.conf
+$(CONFIG)/alacritty:
+	$(call LINK_RULE,$@,$(MODULES)/alacritty)
 
-zsh:
-	@if [ -L ~/.zshrc ]; then \
-		echo "zsh is already linked"; \
-		exit 0; \
-	fi; \
-	ln -sf "$(MODULES)/zsh/zshrc" ~/.zshrc
+$(CONFIG)/starship.toml:
+	$(call LINK_RULE,$@,$(MODULES)/starship/starship.toml)
+
+$(HOME)/.tmux.conf:
+	@git clone https://github.com/tmux-plugins/tpm $(TMUX_PLUGIN_DIR) 2>/dev/null || true
+	$(call LINK_RULE,$@,$(MODULES)/tmux/tmux.conf)
+
+$(HOME)/.zshrc:
+	$(call LINK_RULE,$@,$(MODULES)/zsh/zshrc)
