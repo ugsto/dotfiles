@@ -28,7 +28,7 @@ style = "fg:#cad3f5 bg:#363a4f"
 
 [git_metrics]
 disabled = false
-format = "([ +$added]($added_style))([ -$deleted]($deleted_style))"
+format = "(([ +$added]($added_style))([ -$deleted]($deleted_style))[ ](fg:#cad3f5 bg:#363a4f))"
 added_style = "fg:#a6da95 bg:#363a4f"
 deleted_style = "fg:#ed8796 bg:#363a4f"
 
