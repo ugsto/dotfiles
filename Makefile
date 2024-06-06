@@ -2,7 +2,7 @@ CONFIG = $(HOME)/.config
 MODULES = $(PWD)/modules
 TMUX_PLUGIN_DIR = $(HOME)/.tmux/plugins/tpm
 
-.PHONY: all
+.PHONY: all clean
 
 all: $(CONFIG)/nvim $(CONFIG)/alacritty $(CONFIG)/starship.toml $(HOME)/.tmux.conf $(HOME)/.zshrc
 
@@ -33,3 +33,11 @@ $(HOME)/.tmux.conf: $(CONFIG)
 
 $(HOME)/.zshrc: $(CONFIG)
 	$(call LINK_RULE,$@,$(MODULES)/zsh/zshrc)
+
+clean:
+	@echo -n "Are you sure? [y/N] " && read -n 1 ANSWER && echo; \
+	if [ "$$ANSWER" = "y" ]; then \
+		rm -rf $(CONFIG)/nvim $(CONFIG)/alacritty $(CONFIG)/starship.toml $(HOME)/.tmux.conf $(HOME)/.zshrc; \
+	else \
+		echo "Aborting..."; \
+	fi
