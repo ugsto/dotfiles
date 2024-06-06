@@ -15,18 +15,21 @@ define LINK_RULE
 	fi
 endef
 
-$(CONFIG)/nvim:
+$(CONFIG):
+	 mkdir -p $@
+
+$(CONFIG)/nvim: $(CONFIG)
 	$(call LINK_RULE,$@,$(MODULES)/nvim)
 
-$(CONFIG)/alacritty:
+$(CONFIG)/alacritty: $(CONFIG)
 	$(call LINK_RULE,$@,$(MODULES)/alacritty)
 
-$(CONFIG)/starship.toml:
+$(CONFIG)/starship.toml: $(CONFIG)
 	$(call LINK_RULE,$@,$(MODULES)/starship/starship.toml)
 
-$(HOME)/.tmux.conf:
+$(HOME)/.tmux.conf: $(CONFIG)
 	@git clone https://github.com/tmux-plugins/tpm $(TMUX_PLUGIN_DIR) 2>/dev/null || true
 	$(call LINK_RULE,$@,$(MODULES)/tmux/tmux.conf)
 
-$(HOME)/.zshrc:
+$(HOME)/.zshrc: $(CONFIG)
 	$(call LINK_RULE,$@,$(MODULES)/zsh/zshrc)
