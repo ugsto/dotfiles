@@ -22,16 +22,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				"checkmake",
-				"debugpy",
-				"docker-compose-language-service",
-				"dockerfile-language-server",
-				"harper-ls",
-				"lua-language-server",
-				"prettierd",
-				"stylua",
-				"taplo",
-				"yaml-language-server",
+				ensure_installed = {},
 			})
 			require("mason-lspconfig").setup_handlers(require("lsp-handlers"))
 		end,

@@ -1,6 +1,4 @@
-local M = {}
-
-M.handler = function()
+return function()
 	require("lspconfig").lua_ls.setup({
 		settings = {
 			Lua = {
@@ -14,5 +12,3 @@ M.handler = function()
 		},
 	})
 end
-
-return M

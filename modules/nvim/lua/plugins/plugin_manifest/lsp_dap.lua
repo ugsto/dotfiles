@@ -37,8 +37,8 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("mason-nvim-dap").setup({
-				ensure_installed = { "python" },
-				-- handlers = require("dap-handlers"),
+				ensure_installed = { "python", "delve" },
+				handlers = require("dap-handlers"),
 			})
 		end,
 	},
