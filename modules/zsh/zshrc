@@ -144,6 +144,10 @@ command -v doctl &>/dev/null && . <(doctl completion zsh)
 command -v ng &>/dev/null && . <(ng completion script)
 command -v influx &>/dev/null && . <(influx completion zsh)
 
+## Setup mise
+
+eval "$(mise activate zsh)"
+
 ## Load secrets
 
 [ -f "$HOME/.local/bin/load-secrets.sh" ] && . "$HOME/.local/bin/load-secrets.sh"
