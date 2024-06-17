@@ -6,6 +6,7 @@ local M = {
 	end,
 }
 
-M["lua_ls"] = require("lsp-handlers.lua_ls").handler
+M["lua_ls"] = require("lsp-handlers.lua_ls")
+M["gopls"] = require("lsp-handlers.gopls")
 
 return M
