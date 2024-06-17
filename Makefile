@@ -4,7 +4,7 @@ TMUX_PLUGIN_DIR = $(HOME)/.tmux/plugins/tpm
 
 .PHONY: all clean
 
-all: $(CONFIG)/nvim $(CONFIG)/alacritty $(CONFIG)/starship.toml $(HOME)/.tmux.conf $(HOME)/.zshrc
+all: $(CONFIG)/nvim $(CONFIG)/alacritty $(CONFIG)/hypr $(CONFIG)/mise $(CONFIG)/starship.toml $(HOME)/.tmux.conf $(HOME)/.zshrc
 
 define LINK_RULE
 	@if [ -L $(1) ]; then \
@@ -23,6 +23,12 @@ $(CONFIG)/nvim: $(CONFIG)
 
 $(CONFIG)/alacritty: $(CONFIG)
 	$(call LINK_RULE,$@,$(MODULES)/alacritty)
+
+$(CONFIG)/hypr: $(CONFIG)
+	$(call LINK_RULE,$@,$(MODULES)/hypr)
+
+$(CONFIG)/mise: $(CONFIG)
+	$(call LINK_RULE,$@,$(MODULES)/mise)
 
 $(CONFIG)/starship.toml: $(CONFIG)
 	$(call LINK_RULE,$@,$(MODULES)/starship/starship.toml)
