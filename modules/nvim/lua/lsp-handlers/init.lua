@@ -8,5 +8,6 @@ local M = {
 
 M["lua_ls"] = require("lsp-handlers.lua_ls")
 M["gopls"] = require("lsp-handlers.gopls")
+M["tsserver"] = require("lsp-handlers.tsserver")
 
 return M
