@@ -75,11 +75,6 @@ M.setup = function(wk)
 	}, { prefix = "<leader>" })
 
 	wk.register({
-		["[d"] = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
-		["]d"] = { vim.diagnostic.goto_next, "Go to next diagnostic" },
-	})
-
-	wk.register({
 		["<C-h>"] = { "<CMD>wincmd h<CR>" },
 		["<C-j>"] = { "<CMD>wincmd j<CR>" },
 		["<C-k>"] = { "<CMD>wincmd k<CR>" },
