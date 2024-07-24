@@ -4,7 +4,7 @@ return function()
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end
 
-	require("lspconfig").lua_ls.setup({
+	require("lspconfig").tsserver.setup({
 		on_attach = on_attach,
 		settings = {
 			implicitProjectConfiguration = {
