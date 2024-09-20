@@ -14,4 +14,4 @@ map('n', '<leader>e', ':e .<CR>')
 map('n', '<C-w>h', ':bprevious<CR>')
 map('n', '<C-w>l', ':bnext<CR>')
 
-map('n', '<C-w>d', ':bdelete<CR>')
+map('n', '<A-w>', ':bdelete<CR>')
