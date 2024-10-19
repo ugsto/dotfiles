@@ -5,9 +5,6 @@ return function()
         diagnostics = {
           globals = { "vim" },
         },
-        format = {
-          enable = false,
-        },
       },
     },
   })

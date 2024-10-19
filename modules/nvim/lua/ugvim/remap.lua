@@ -6,12 +6,10 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-map('n', '<leader>q', ':q<CR>')
-map('n', '<leader>w', ':w<CR>')
+map("n", "<leader>q", "<CMD>q<CR>")
+map("n", "<leader>w", "<CMD>w<CR>")
 
-map('n', '<leader>e', ':e .<CR>')
+map("n", "<C-w>h", "<CMD>bprevious<CR>")
+map("n", "<C-w>l", "<CMD>bnext<CR>")
 
-map('n', '<C-w>h', ':bprevious<CR>')
-map('n', '<C-w>l', ':bnext<CR>')
-
-map('n', '<A-w>', ':bdelete<CR>')
+map("n", "<A-w>", "<CMD>bdelete<CR>")

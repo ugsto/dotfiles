@@ -6,8 +6,8 @@ local M = {
   end,
 }
 
--- M["lua_ls"] = require("lsp-handlers.lua_ls")
+M["lua_ls"] = require("ugvim.lsp-handlers.lua_ls")
 -- M["gopls"] = require("lsp-handlers.gopls")
--- M["tsserver"] = require("lsp-handlers.tsserver")
+M["ts_ls"] = require("ugvim.lsp-handlers.ts_ls")
 
 return M

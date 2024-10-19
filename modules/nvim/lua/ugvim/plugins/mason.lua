@@ -3,6 +3,11 @@ return {
   dependencies = {
     "neovim/nvim-lspconfig",
     "williamboman/mason-lspconfig.nvim",
+    "jay-babu/mason-null-ls.nvim",
+    "nvimtools/none-ls.nvim",
+  },
+  cmd = {
+    "Mason"
   },
   opts = {
     ui = {
@@ -20,6 +25,9 @@ return {
     })
     require("mason").setup()
     require("mason-lspconfig").setup_handlers(require("ugvim.lsp-handlers"))
+    require("mason-null-ls").setup({
+      handlers = {},
+    })
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -44,4 +52,6 @@ return {
       end,
     })
   end,
+  lazy = true,
+  event = { "BufReadPre", "BufNewFile" }
 }

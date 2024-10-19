@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/kurisu/.zsh/completions:"* ]]; then export FPATH="/home/kurisu/.zsh/completions:$FPATH"; fi
+
 # zsh setup
 
 [[ $- != *i* ]] && return
@@ -142,6 +145,7 @@ command -v influx &>/dev/null && . <(influx completion zsh)
 command -v arduino-cli &>/dev/null && . <(arduino-cli completion zsh)
 command -v mgc &>/dev/null && . <(mgc completion zsh)
 command -v uv &>/dev/null && . <(uv generate-shell-completion zsh)
+command -v tailscale &>/dev/null && . <(tailscale completion zsh)
 
 ## Setup mise
 
@@ -177,3 +181,4 @@ if [ -f '/home/kurisu/google-cloud-sdk/path.zsh.inc' ]; then . '/home/kurisu/goo
 if [ -f '/home/kurisu/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/kurisu/google-cloud-sdk/completion.zsh.inc'; fi
 
 . "$HOME/.cargo/env"
+. "/home/kurisu/.deno/env"
