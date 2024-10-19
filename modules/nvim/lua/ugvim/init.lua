@@ -1,4 +1,4 @@
-require('ugvim.settings')
-require('ugvim.remap')
-require('ugvim.lazy-bootstrap')
-require('ugvim.autoformat')
+require("ugvim.settings")
+require("ugvim.remap")
+require("ugvim.lazy-bootstrap")
+require("ugvim.autoformat")

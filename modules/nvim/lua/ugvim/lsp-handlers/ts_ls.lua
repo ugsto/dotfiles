@@ -4,10 +4,10 @@ return function()
     client.server_capabilities.documentRangeFormattingProvider = false
   end
 
-  require("lspconfig").tsserver.setup({
+  require("lspconfig").ts_ls.setup({
     on_attach = on_attach,
     settings = {
-      implicitProjectConfiguration = {
+      implicitProjectConfig = {
         checkJs = true,
       },
     },
