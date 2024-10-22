@@ -1,0 +1,63 @@
+#!/usr/bin/env zsh
+
+[[ $- != *i* ]] && return
+
+if [ "$TERM_PROGRAM" != "tmux" ]; then
+    command -v tmux &>/dev/null && exec tmux
+fi
+
+set -o vi
+bindkey -v
+bindkey '^R' history-incremental-search-backward
+
+if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then export FPATH="$HOME/.zsh/completions:$FPATH"; fi
+
+autoload -U compinit
+compinit -C
+
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path ~/.zsh/cache
+
+clear-scrollback-and-screen () {
+  zle clear-screen
+  tmux clear-history
+}
+zle -N clear-scrollback-and-screen
+bindkey -v '^L' clear-scrollback-and-screen
+
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export BUN_INSTALL="$HOME/.bun"
+export EDITOR=nvim
+export GOPATH="$HOME/go"
+
+[[ -f "$HOME/.ghcup/env" ]] && source "$HOME/.ghcup/env"
+[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+[[ -s "$BUN_INSTALL/_bun" ]] && source "$BUN_INSTALL/_bun"
+
+for _path in \
+  "/bin" \
+  "/sbin" \
+  "/usr/bin" \
+  "/usr/sbin" \
+  "/var/lib/snapd/snap/bin" \
+  "/snap/bin" \
+  "$HOME/.surrealdb" \
+  "$HOME/.cargo/bin" \
+  "$HOME/.deno/bin" \
+  "$PNPM_HOME" \
+  "$BUN_INSTALL/bin" \
+  "$GOPATH/bin" \
+  "$JAVA_HOME/bin" \
+  "/usr/local/bin" \
+  "/usr/local/sbin" \
+  "$HOME/.local/bin"; do [[ ":$PATH:" != *":$_path:"* ]] && PATH="$_path:$PATH" done
+
+export PATH
+
+command -v eza &>/dev/null && alias ls="eza --color=auto --icons --group-directories-first"
+command -v bat &>/dev/null && alias cat="bat"
+
+command -v conda &>/dev/null && conda activate base
+command -v starship &>/dev/null && source <(starship init zsh)
