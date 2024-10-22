@@ -133,19 +133,22 @@ XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
 ## Setup completions
 
-command -v helm &>/dev/null && . <(helm completion zsh)
-command -v kubectl &>/dev/null && . <(kubectl completion zsh)
-command -v kind &>/dev/null && . <(kind completion zsh)
-command -v minikube &>/dev/null && . <(minikube completion zsh)
-command -v karmadactl &>/dev/null && . <(karmadactl completion zsh)
-command -v cilium &>/dev/null && . <(cilium completion zsh)
-command -v doctl &>/dev/null && . <(doctl completion zsh)
-command -v ng &>/dev/null && . <(ng completion script)
-command -v influx &>/dev/null && . <(influx completion zsh)
-command -v arduino-cli &>/dev/null && . <(arduino-cli completion zsh)
-command -v mgc &>/dev/null && . <(mgc completion zsh)
-command -v uv &>/dev/null && . <(uv generate-shell-completion zsh)
-command -v tailscale &>/dev/null && . <(tailscale completion zsh)
+. <(
+  command -v helm &>/dev/null && helm completion zsh &
+  command -v kubectl &>/dev/null && kubectl completion zsh &
+  command -v kind &>/dev/null && kind completion zsh &
+  command -v minikube &>/dev/null && minikube completion zsh &
+  command -v karmadactl &>/dev/null && karmadactl completion zsh &
+  command -v cilium &>/dev/null && cilium completion zsh &
+  command -v doctl &>/dev/null && doctl completion zsh &
+  command -v ng &>/dev/null && ng completion script &
+  command -v influx &>/dev/null && influx completion zsh &
+  command -v arduino-cli &>/dev/null && arduino-cli completion zsh &
+  command -v mgc &>/dev/null && mgc completion zsh &
+  command -v uv &>/dev/null && uv generate-shell-completion zsh &
+  command -v tailscale &>/dev/null && tailscale completion zsh &
+  wait
+)
 
 ## Setup mise
 
