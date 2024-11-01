@@ -4,7 +4,8 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-emoji",
-    "hrsh7th/cmp-buffer"
+    "hrsh7th/cmp-buffer",
+    "folke/noice.nvim"
   },
   config = function()
     local has_words_before = function()
@@ -50,6 +51,10 @@ return {
       }, {
         { name = 'buffer' },
       }),
+      -- documentation = {
+      --   border = "rounded",
+      --   winhighlight = "Normal:Normal,FloatBorder:DiagnosticInfo",
+      -- },
     })
   end
 }
