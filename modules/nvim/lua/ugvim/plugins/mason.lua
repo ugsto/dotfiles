@@ -7,7 +7,12 @@ return {
     "nvimtools/none-ls.nvim",
   },
   cmd = {
-    "Mason"
+    "Mason",
+    "MasonInstall",
+    "MasonLog",
+    "MasonUninstall",
+    "MasonUninstallAll",
+    "MasonUpdate",
   },
   opts = {
     ui = {
