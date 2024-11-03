@@ -10,6 +10,11 @@ return function()
       implicitProjectConfig = {
         checkJs = true,
       },
+      javascript = {
+        format = {
+          enable = false
+        }
+      }
     },
   })
 end
