@@ -18,6 +18,25 @@ return {
         },
         {
           filter = {
+            event = "notify",
+            find = "^search hit BOTTOM, continuing at TOP$",
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = {
+            find = "^E486: Pattern not found: ",
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = {
+            find = "^/",
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = {
             event = "msg_show",
             kind = "",
             find = "written",

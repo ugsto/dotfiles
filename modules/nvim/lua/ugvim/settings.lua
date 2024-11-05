@@ -9,6 +9,9 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.fileencoding = "utf-8"
 
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 vim.opt.clipboard = "unnamedplus"
 
-vim.opt.shortmess = "SFCc"
+vim.opt.shortmess = "SFCWcs"
