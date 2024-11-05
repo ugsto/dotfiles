@@ -9,5 +9,6 @@ local M = {
 M["lua_ls"] = require("ugvim.lsp-handlers.lua_ls")
 -- M["gopls"] = require("lsp-handlers.gopls")
 M["ts_ls"] = require("ugvim.lsp-handlers.ts_ls")
+M["svelte"] = require("ugvim.lsp-handlers.svelte")
 
 return M
