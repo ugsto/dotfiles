@@ -3,7 +3,7 @@
 [[ $- != *i* ]] && return
 
 if [ "$TERM_PROGRAM" != "tmux" ]; then
-    command -v tmux &>/dev/null && exec tmux
+    command -v tmux &>/dev/null && exec tmux -u
 fi
 
 set -o vi
@@ -63,3 +63,6 @@ command -v bat &>/dev/null && alias k="kubectl"
 
 command -v conda &>/dev/null && conda activate base
 command -v starship &>/dev/null && source <(starship init zsh)
+
+# bun completions
+[ -s "/home/kurisu/.bun/_bun" ] && source "/home/kurisu/.bun/_bun"
