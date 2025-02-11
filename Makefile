@@ -27,8 +27,12 @@ define CREATE_COMPLETION
 	@if [ -f $(1) ]; then \
 		echo "$(1) already exists"; \
 	else \
-		$(2) > $(1); \
-		echo "Created $(1)"; \
+		if $(2) > $(1) 2>/dev/null; then \
+			echo "Created $(1)"; \
+		else \
+			echo "Failed to create $(1) - command returned an error"; \
+			rm -f $(1); \
+		fi; \
 	fi
 endef
 
