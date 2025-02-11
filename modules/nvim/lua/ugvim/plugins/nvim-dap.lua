@@ -25,5 +25,41 @@ return {
 		dap.listeners.before.event_exited.dapui_config = function()
 			dapui.close()
 		end
+
+		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "CatppuccinRed", linehl = "", numhl = "" })
+		vim.fn.sign_define(
+			"DapBreakpointCondition",
+			{ text = "", texthl = "CatppuccinMaroon", linehl = "", numhl = "" }
+		)
+		vim.fn.sign_define("DapLogPoint", { text = "", texthl = "CatppuccinBlue", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapStopped", { text = "→", texthl = "CatppuccinRed", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "CatppuccinRed", linehl = "", numhl = "" })
 	end,
+	keys = {
+		{ "<leader>d", group = "debugger" },
+		{ "<leader>db", "<cmd>DapToggleBreakpoint<CR>", desc = "Toggle Breakpoint", mode = "n" },
+		{ "<leader>dc", "<cmd>DapContinue<CR>", desc = "Continue", mode = "n" },
+		{ "<leader>di", "<cmd>DapStepInto<CR>", desc = "Step Into", mode = "n" },
+		{ "<leader>do", "<cmd>DapStepOut<CR>", desc = "Step Out", mode = "n" },
+		{ "<leader>dn", "<cmd>DapStepOver<CR>", desc = "Step Over", mode = "n" },
+		{ "<leader>dr", "<cmd>DapRestart<CR>", desc = "Restart", mode = "n" },
+		{ "<leader>dq", "<cmd>DapTerminate<CR>", desc = "Quit/Terminate", mode = "n" },
+		{ "<leader>dl", "<cmd>DapListBreakpoints<CR>", desc = "List Breakpoints", mode = "n" },
+		{
+			"<leader>dut",
+			function()
+				require("dapui").toggle()
+			end,
+			desc = "Toggle UI",
+			mode = "n",
+		},
+		{
+			"<leader>dus",
+			function()
+				require("dapui").setup()
+			end,
+			desc = "Update UI",
+			mode = "n",
+		},
+	},
 }
