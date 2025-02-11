@@ -5,6 +5,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"jay-babu/mason-null-ls.nvim",
 		"nvimtools/none-ls.nvim",
+		"jay-babu/mason-nvim-dap.nvim",
 	},
 	cmd = {
 		"Mason",
@@ -30,7 +31,9 @@ return {
 			ensure_installed = { "lua_ls", "rust_analyzer" },
 		})
 		require("mason-lspconfig").setup_handlers(require("ugvim.lsp-handlers"))
-		require("mason-null-ls").setup({
+		require("mason-null-ls").setup({ handlers = {} })
+		require("mason-nvim-dap").setup({
+			ensure_installed = { "stylua", "jq" },
 			handlers = {},
 		})
 

@@ -33,9 +33,10 @@ return {
 		end
 	end,
 	keys = {
-		{ "<leader>ff", "<CMD>FzfLua files<CR>", desc = "fzf - files" },
-		{ "<leader>fg", "<CMD>FzfLua grep_visual<CR>", desc = "fzf - grep" },
-		{ "<leader>ft", "<CMD>FzfLua tabs<CR>", desc = "fzf - tabs" },
-		{ "<leader>fc", "<CMD>FzfLua colorschemes<CR>", desc = "fzf - colorschemes" },
+		{ "<leader>f", desc = "Fuzzy Finder", group = "Fuzzy Finder" },
+		{ "<leader>ff", "<CMD>FzfLua files<CR>", desc = "files" },
+		{ "<leader>fg", "<CMD>FzfLua grep_visual<CR>", desc = "grep" },
+		{ "<leader>ft", "<CMD>FzfLua tabs<CR>", desc = "tabs" },
+		{ "<leader>fc", "<CMD>FzfLua colorschemes<CR>", desc = "colorschemes" },
 	},
 }

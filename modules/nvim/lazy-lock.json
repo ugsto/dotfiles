@@ -10,6 +10,7 @@
   "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "f75e877f5266e87523eb5a18fcde2081820d087b" },
   "mason-null-ls.nvim": { "branch": "main", "commit": "de19726de7260c68d94691afb057fa73d3cc53e7" },
+  "mason-nvim-dap.nvim": { "branch": "main", "commit": "26ea08fd5c7028ea54a3347ac139fc916baf1aa9" },
   "mason.nvim": { "branch": "main", "commit": "e2f7f9044ec30067bc11800a9e266664b88cda22" },
   "neo-tree.nvim": { "branch": "v3.x", "commit": "5d172e8315444dbc32867d1c7b04d8e7e68ec4e1" },
   "noice.nvim": { "branch": "main", "commit": "dbfc5fbab19ff1c3e29a3268ffa5eda4c09c72ce" },
