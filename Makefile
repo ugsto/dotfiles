@@ -6,6 +6,7 @@ CARGO_INSTALL = cargo install
 GOPATH = $(HOME)/go
 GO_BINS_DIR = $(GOPATH)/bin
 GO_INSTALL = go install
+UV_BIN = $(HOME)/.local/bin/uv
 CONFIG = $(HOME)/.config
 MODULES = $(PWD)/modules
 TMUX_PLUGIN_DIR = $(HOME)/.tmux/plugins/tpm
@@ -100,6 +101,11 @@ $(GO_BINS_DIR)/dlv: $(GOPATH)
 
 $(GO_BINS_DIR)/lazygit: $(GOPATH)
 	$(GO_INSTALL) github.com/jesseduffield/lazygit@latest
+
+install-uv: $(UV_BIN)
+
+$(UV_BIN):
+	curl -LsSf https://astral.sh/uv/install.sh | sh
 
 completions: $(ZSH_COMPLETIONS_DIR)/_helm.zsh $(ZSH_COMPLETIONS_DIR)/_kubectl.zsh $(ZSH_COMPLETIONS_DIR)/_minikube.zsh $(ZSH_COMPLETIONS_DIR)/_kind.zsh $(ZSH_COMPLETIONS_DIR)/_karmadactl.zsh $(ZSH_COMPLETIONS_DIR)/_cilium.zsh $(ZSH_COMPLETIONS_DIR)/_arduino-cli.zsh $(ZSH_COMPLETIONS_DIR)/_mgc.zsh $(ZSH_COMPLETIONS_DIR)/_uv.zsh $(ZSH_COMPLETIONS_DIR)/_tailscale.zsh
 
