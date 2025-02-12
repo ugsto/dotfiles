@@ -1,4 +1,0 @@
-[tools]
-node = "lts"
-python = "3.12"
-go = "1.22"
