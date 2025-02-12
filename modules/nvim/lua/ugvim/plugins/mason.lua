@@ -28,7 +28,7 @@ return {
 	config = function()
 		require("mason").setup()
 		require("mason-lspconfig").setup({
-			ensure_installed = { "lua_ls", "rust_analyzer" },
+			ensure_installed = { "lua_ls" },
 		})
 		require("mason-lspconfig").setup_handlers(require("ugvim.lsp-handlers"))
 		require("mason-null-ls").setup({ handlers = {} })

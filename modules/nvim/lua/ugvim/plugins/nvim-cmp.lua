@@ -5,6 +5,15 @@ return {
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-emoji",
 		"hrsh7th/cmp-buffer",
+		{
+			"zbirenbaum/copilot-cmp",
+			dependencies = {
+				"zbirenbaum/copilot.lua",
+				cmd = "Copilot",
+				event = "InsertEnter",
+				opts = {},
+			},
+		},
 		"folke/noice.nvim",
 	},
 	config = function()
@@ -15,6 +24,7 @@ return {
 		end
 
 		local cmp = require("cmp")
+		require("copilot_cmp").setup()
 
 		cmp.setup({
 			mapping = {
@@ -45,16 +55,13 @@ return {
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
 			},
 			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
-				{ name = "path" },
-				{ name = "emoji" },
+				{ name = "copilot", group_index = 2 },
+				{ name = "nvim_lsp", group_index = 2 },
+				{ name = "path", group_index = 2 },
+				{ name = "emoji", group_index = 2 },
 			}, {
-				{ name = "buffer" },
+				{ name = "buffer", group_index = 2 },
 			}),
-			-- documentation = {
-			--   border = "rounded",
-			--   winhighlight = "Normal:Normal,FloatBorder:DiagnosticInfo",
-			-- },
 		})
 	end,
 }
