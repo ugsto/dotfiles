@@ -12,7 +12,7 @@ CONFIG_FILES = \
 	$(HOME)/.tmux.conf \
 	$(HOME)/.zshrc
 
-.PHONY: all clean completions
+.PHONY: all clean completions install-rust-bins
 
 define LINK_RULE
 	@if [ -L $(1) ]; then \
@@ -59,6 +59,15 @@ $(HOME)/.tmux.conf: $(CONFIG)
 
 $(HOME)/.zshrc: $(CONFIG)
 	$(call LINK_RULE,$@,$(MODULES)/zshrc)
+
+$(HOME)/.cargo:
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
+	rustup toolchain install nightly --allow-downgrade --profile minimal --component clippy rust-analyzer
+
+$(HOME)/.cargo/%: $(HOME)/.cargo
+	cargo install $(notdir $*)
+
+install-rust-bins: $(HOME)/.cargo/du-dust $(HOME)/.cargo/bat $(HOME)/.cargo/ripgrep $(HOME)/.cargo/fd-find $(HOME)/.cargo/starship $(HOME)/.cargo/eza
 
 completions: $(ZSH_COMPLETIONS_DIR)/_helm.zsh $(ZSH_COMPLETIONS_DIR)/_kubectl.zsh $(ZSH_COMPLETIONS_DIR)/_minikube.zsh $(ZSH_COMPLETIONS_DIR)/_kind.zsh $(ZSH_COMPLETIONS_DIR)/_karmadactl.zsh $(ZSH_COMPLETIONS_DIR)/_cilium.zsh $(ZSH_COMPLETIONS_DIR)/_arduino-cli.zsh $(ZSH_COMPLETIONS_DIR)/_mgc.zsh $(ZSH_COMPLETIONS_DIR)/_uv.zsh $(ZSH_COMPLETIONS_DIR)/_tailscale.zsh
 
