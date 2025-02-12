@@ -1,3 +1,11 @@
+SUDO = sudo
+PACKAGE_MANAGER = $(shell command -v apt-get 2>/dev/null || command -v dnf 2>/dev/null || echo "unknown")
+CARGO_HOME = $(HOME)/.cargo
+RUST_BINS_DIR = $(CARGO_HOME)/bin
+CARGO_INSTALL = cargo install
+GOPATH = $(HOME)/go
+GO_BINS_DIR = $(GOPATH)/bin
+GO_INSTALL = go install
 CONFIG = $(HOME)/.config
 MODULES = $(PWD)/modules
 TMUX_PLUGIN_DIR = $(HOME)/.tmux/plugins/tpm
@@ -6,13 +14,11 @@ ZSH_COMPLETIONS_DIR = $(HOME)/.zsh/completions
 CONFIG_FILES = \
 	$(CONFIG)/nvim \
 	$(CONFIG)/alacritty \
-	$(CONFIG)/hypr \
-	$(CONFIG)/mise \
 	$(CONFIG)/starship.toml \
 	$(HOME)/.tmux.conf \
 	$(HOME)/.zshrc
 
-.PHONY: all clean completions install-rust-bins
+.PHONY: all clean completions install-rust-bins install-go-bins
 
 define LINK_RULE
 	@if [ -L $(1) ]; then \
@@ -60,14 +66,40 @@ $(HOME)/.tmux.conf: $(CONFIG)
 $(HOME)/.zshrc: $(CONFIG)
 	$(call LINK_RULE,$@,$(MODULES)/zshrc)
 
-$(HOME)/.cargo:
+$(CARGO_HOME):
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
 	rustup toolchain install nightly --allow-downgrade --profile minimal --component clippy rust-analyzer
 
-$(HOME)/.cargo/%: $(HOME)/.cargo
-	cargo install $(notdir $*)
+install-rust-bins: $(RUST_BINS_DIR)/dust $(RUST_BINS_DIR)/bat $(RUST_BINS_DIR)/rg $(RUST_BINS_DIR)/fd $(RUST_BINS_DIR)/starship $(RUST_BINS_DIR)/eza
 
-install-rust-bins: $(HOME)/.cargo/du-dust $(HOME)/.cargo/bat $(HOME)/.cargo/ripgrep $(HOME)/.cargo/fd-find $(HOME)/.cargo/starship $(HOME)/.cargo/eza
+$(RUST_BINS_DIR)/dust:
+	$(CARGO_INSTALL) du-dust
+
+$(RUST_BINS_DIR)/bat:
+	$(CARGO_INSTALL) bat
+
+$(RUST_BINS_DIR)/rg:
+	$(CARGO_INSTALL) ripgrep
+
+$(RUST_BINS_DIR)/fd:
+	$(CARGO_INSTALL) fd-find
+
+$(RUST_BINS_DIR)/starship:
+	$(CARGO_INSTALL) starship
+
+$(RUST_BINS_DIR)/eza:
+	$(CARGO_INSTALL) eza
+
+$(GOPATH):
+	$(SUDO) $(PACKAGE_MANAGER) install -y golang
+
+install-go-bins: $(GO_BINS_DIR)/dlv $(GO_BINS_DIR)/lazygit
+
+$(GO_BINS_DIR)/dlv: $(GOPATH)
+	$(GO_INSTALL) github.com/go-delve/delve/cmd/dlv@latest
+
+$(GO_BINS_DIR)/lazygit: $(GOPATH)
+	$(GO_INSTALL) github.com/jesseduffield/lazygit@latest
 
 completions: $(ZSH_COMPLETIONS_DIR)/_helm.zsh $(ZSH_COMPLETIONS_DIR)/_kubectl.zsh $(ZSH_COMPLETIONS_DIR)/_minikube.zsh $(ZSH_COMPLETIONS_DIR)/_kind.zsh $(ZSH_COMPLETIONS_DIR)/_karmadactl.zsh $(ZSH_COMPLETIONS_DIR)/_cilium.zsh $(ZSH_COMPLETIONS_DIR)/_arduino-cli.zsh $(ZSH_COMPLETIONS_DIR)/_mgc.zsh $(ZSH_COMPLETIONS_DIR)/_uv.zsh $(ZSH_COMPLETIONS_DIR)/_tailscale.zsh
 
