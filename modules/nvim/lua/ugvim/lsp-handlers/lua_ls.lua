@@ -6,7 +6,7 @@ return function()
 					enable = false,
 				},
 				diagnostics = {
-					globals = { "vim" },
+					globals = { "vim", "Snacks" },
 				},
 			},
 		},
