@@ -7,13 +7,13 @@ return {
 			"folke/which-key.nvim",
 			event = "VeryLazy",
 			opts = {},
-                        keys = {
-                          {"<C-s>", "<cmd>w<cr>", desc = "Save File"},
-                          {"<C-q>", "<cmd>q<cr>", desc = "Quit"},
-                          {"<tab>", "<cmd>bnext<cr>", desc = "Next tab"},
-                          {"<S-tab>", "<cmd>bprevious<cr>", desc = "Next tab"},
-                          {"<leader>bd", "<cmd>bdelete<cr>", desc = "Delete tab"},
-                        }
+			keys = {
+				{ "<C-s>", "<cmd>w<cr>", desc = "Save File" },
+				{ "<C-q>", "<cmd>q<cr>", desc = "Quit" },
+				{ "<tab>", "<cmd>bnext<cr>", desc = "Next tab" },
+				{ "<S-tab>", "<cmd>bprevious<cr>", desc = "Next tab" },
+				{ "<leader>bd", "<cmd>bdelete<cr>", desc = "Delete tab" },
+			},
 		},
 	},
 	opts = {
