@@ -1,4 +1,3 @@
-{ config, pkgs, ... }:
 {
   programs.bash = {
     enable = true;
@@ -7,5 +6,12 @@
       cat = "bat";
       k = "kubectl";
     };
+    initExtra = ''
+      set -o vi
+
+      if command -v tmux >&- && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+        exec tmux
+      fi
+    '';
   };
 }

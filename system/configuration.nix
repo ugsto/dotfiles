@@ -1,17 +1,22 @@
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  pkgs,
+  username,
+  hostname,
+  ...
+}:
+{
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "steins-gate";
+  networking.hostName = hostname;
   networking.networkmanager.enable = true;
+
   networking.firewall.enable = false;
+  security.rtkit.enable = true;
 
   time.timeZone = "America/Sao_Paulo";
 
@@ -29,10 +34,12 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
+  services.gvfs.enable = true;
   services.xserver.enable = true;
 
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+  programs.hyprland.enable = true;
 
   services.xserver.xkb = {
     layout = "br";
@@ -44,7 +51,6 @@
   services.printing.enable = true;
 
   hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -52,13 +58,14 @@
     pulse.enable = true;
   };
 
-  users.users.kurisu = {
+  users.users.${username} = {
     isNormalUser = true;
     description = "André Augusto Bortoli";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
-
-  nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
     git
@@ -68,11 +75,13 @@
     bat
     fd
     ripgrep
-    starship
     eza
     tmux
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   system.stateVersion = "24.11";
 }
