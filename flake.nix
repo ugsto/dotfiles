@@ -2,35 +2,65 @@
   description = "My dotfiles!";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.11";
-    home-manager.url = "github:nix-community/home-manager/release-24.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nvf.url = "github:notashelf/nvf";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprland.url = "github:hyprwm/Hyprland";
+    ugnvim.url = "github:ugsto/ugnvim";
   };
-  outputs = { self, nixpkgs, home-manager, nvf, ... }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      ...
+    }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-    nixosConfigurations = {
-      main = lib.nixosSystem {
+      username = "kurisu";
+      hostname = "steins-gate";
+      pkgs = import nixpkgs {
         inherit system;
-	modules = [ ./configuration.nix ];
+        config = {
+          allowUnfree = true;
+        };
       };
-    };
-    homeConfigurations = {
-      main = home-manager.lib.homeManagerConfiguration {
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+    in
+    {
+      nixosConfigurations = {
+        ${hostname} = lib.nixosSystem {
+          specialArgs = {
+            inherit
+              username
+              ;
+          };
+          modules = [ ./system/configuration.nix ];
+        };
+      };
+
+      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-	modules = [
-	  ./home
-	  ./home/bash.nix
-	];
+        extraSpecialArgs = {
+          inherit
+            inputs
+            pkgs-unstable
+            system
+            username
+            ;
+        };
+        modules = [
+          ./home/configuration.nix
+        ];
       };
     };
-    packages.${system}.default =
-      (nvf.lib.neovimConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-	modules = [ ./nvf-configuration.nix ];
-      }).neovim;
-  };
 }
