@@ -12,7 +12,6 @@
   home.stateVersion = "24.11";
   home.packages = with pkgs; [
     pkgs-unstable.anydesk
-    librewolf
     chromium
     thunderbird
     keepassxc
@@ -46,6 +45,7 @@
     ./alacritty.nix
     ./bash.nix
     ./hyprland.nix
+    ./librewolf.nix
     ./starship.nix
     ./tmux.nix
     ./wofi.nix
