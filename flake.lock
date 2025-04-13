@@ -645,11 +645,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1744433385,
-        "narHash": "sha256-v2Gz8Yjoii+1tp5h1FNzhi7Zb3pZ0rWbYDcoJcvrOZI=",
+        "lastModified": 1744442333,
+        "narHash": "sha256-M/XdUPk7cJg4EdUfvZmoazlJL5wAmei8hX5p9XeHB+Q=",
         "owner": "ugsto",
         "repo": "ugnvim",
-        "rev": "9b3637cf5e69480bcf3659491b19f3c350763c8c",
+        "rev": "cd7fe78ac6634a46563272ad9d6b296008a5f080",
         "type": "github"
       },
       "original": {

@@ -27,12 +27,14 @@
         inherit system;
         config = {
           allowUnfree = true;
+          rocmSupport = "rocm";
         };
       };
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config = {
           allowUnfree = true;
+          rocmSupport = "rocm";
         };
       };
     in
@@ -42,6 +44,7 @@
           specialArgs = {
             inherit
               username
+              hostname
               ;
           };
           modules = [ ./system/configuration.nix ];

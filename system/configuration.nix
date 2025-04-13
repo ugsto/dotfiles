@@ -58,12 +58,21 @@
     pulse.enable = true;
   };
 
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
   users.users.${username} = {
     isNormalUser = true;
     description = "André Augusto Bortoli";
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
   };
 
