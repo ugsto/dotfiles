@@ -11,6 +11,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.kernelModules = [ "amdgpu" ];
 
   networking.hostName = hostname;
   networking.networkmanager.enable = true;
@@ -36,10 +37,12 @@
 
   services.gvfs.enable = true;
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   programs.hyprland.enable = true;
+  programs.mininet.enable = true;
 
   services.xserver.xkb = {
     layout = "br";
@@ -47,6 +50,14 @@
   };
 
   console.keyMap = "br-abnt2";
+
+  services.ollama = {
+    enable = true;
+    loadModels = [
+      "deepseek-r1:1.5b"
+    ];
+    acceleration = "rocm";
+  };
 
   services.printing.enable = true;
 
