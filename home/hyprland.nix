@@ -69,6 +69,9 @@ in
 
       input = {
         kb_layout = "br";
+        touchpad = {
+          natural_scroll = true;
+        };
       };
 
       monitor = [
