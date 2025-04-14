@@ -45,6 +45,7 @@
   imports = [
     ./alacritty.nix
     ./bash.nix
+    ./eww
     ./hyprland.nix
     # ./librewolf.nix
     ./starship.nix
