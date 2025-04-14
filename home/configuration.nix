@@ -47,7 +47,6 @@
     ./bash.nix
     ./hyprland.nix
     # ./librewolf.nix
-    ./ollama.nix
     ./starship.nix
     ./tmux.nix
     ./wofi.nix
