@@ -11,15 +11,21 @@
   home.homeDirectory = "/home/kurisu";
   home.stateVersion = "24.11";
   home.packages = with pkgs; [
-    pkgs-unstable.anydesk
     chromium
     thunderbird
-    keepassxc
     lazygit
     xsel
     wl-clipboard-rs
     android-file-transfer
     zbar
+    dust
+    bat
+    fd
+    ripgrep
+    eza
+    tmux
+    fzf
+    jaq
 
     inputs.ugnvim.packages.${system}.default
 
@@ -45,8 +51,9 @@
   imports = [
     ./alacritty.nix
     ./bash.nix
-    ./firefox.nix
     ./hyprland.nix
+    ./keepassxc.nix
+    ./librewolf.nix
     ./starship.nix
     ./tmux.nix
     ./wofi.nix
