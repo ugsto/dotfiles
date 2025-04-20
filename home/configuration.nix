@@ -35,6 +35,7 @@
     (retroarch.override {
       cores = with libretro; [
         gpsp
+        melonds
       ];
     })
   ];
