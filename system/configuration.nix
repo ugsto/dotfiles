@@ -36,12 +36,6 @@
     git
     vim
     wget
-    dust
-    bat
-    fd
-    ripgrep
-    eza
-    tmux
   ];
 
   nix.settings.experimental-features = [
