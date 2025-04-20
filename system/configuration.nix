@@ -15,6 +15,7 @@
     ./security.nix
     ./virtualization.nix
     ./modules/ollama.nix
+    ./modules/wireguard.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
