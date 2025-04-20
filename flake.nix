@@ -9,6 +9,10 @@
     };
     hyprland.url = "github:hyprwm/Hyprland";
     ugnvim.url = "github:ugsto/ugnvim";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
   outputs =
     {
@@ -16,6 +20,7 @@
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
+      nur,
       ...
     }@inputs:
     let
@@ -30,6 +35,7 @@
           allowUnfree = true;
           rocmSupport = "rocm";
         };
+        overlays = [ nur.overlays.default ];
       };
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
@@ -37,6 +43,7 @@
           allowUnfree = true;
           rocmSupport = "rocm";
         };
+        overlays = [ nur.overlays.default ];
       };
     in
     {
@@ -63,9 +70,7 @@
             username
             ;
         };
-        modules = [
-          ./home/configuration.nix
-        ];
+        modules = [ ./home/configuration.nix ];
       };
     };
 }
