@@ -18,7 +18,7 @@ in
         [
           # Launch apps
           "$mod, F, exec, ${browser}"
-          "$mod, Return, exec, ${terminal}"
+          "$mod SHIFT, Return, exec, ${terminal}"
           "$mod, R, exec, ${menu}"
           "$mod, P, exec, ${print}"
 
