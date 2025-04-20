@@ -22,6 +22,7 @@
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       username = "kurisu";
+      name = "André Augusto Bortoli";
       hostname = "steins-gate";
       pkgs = import nixpkgs {
         inherit system;
@@ -44,6 +45,7 @@
           specialArgs = {
             inherit
               username
+              name
               hostname
               ;
           };
