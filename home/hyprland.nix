@@ -90,4 +90,131 @@ in
       ];
     };
   };
+
+  programs.waybar = {
+    enable = true;
+    settings = {
+      mainBar = {
+        layer = "top";
+        modules-left = [
+          "custom/launcher"
+          "clock"
+        ];
+        modules-center = [
+          "hyprland/workspaces"
+        ];
+        "custom/launcher" = {
+          format = " ";
+          on-click = "wofi --show run";
+          on-click-right = "pkill wofi";
+        };
+        clock = {
+          format = "󰃭 {:%Y/%m/%d 󰥔 %H:%M}";
+        };
+        "hyprland/workspaces" = {
+          all-outputs = true;
+          format = "{name} {icon}";
+          format-icons = {
+            "1" = " ";
+            "2" = " ";
+            "3" = " ";
+            "4" = "󰇮 ";
+            "9" = "󰌾 ";
+            default = " ";
+          };
+          persistent-workspaces = {
+            "*" = [
+              1
+              2
+              3
+              4
+              5
+              6
+              7
+              8
+              9
+            ];
+          };
+          icon = true;
+        };
+      };
+    };
+    style = ''
+      * {
+        border: none;
+        border-radius: 10px;
+        font-family: "JetbrainsMono Nerd Font";
+        font-size: 15px;
+        min-height: 10px;
+      }
+
+      window#waybar {
+        background: transparent;
+      }
+
+      #window {
+        margin-top: 6px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 10px;
+        color: transparent;
+        background: transparent;
+      }
+
+      #custom-launcher {
+        font-size: 22px;
+        margin-top: 6px;
+        margin-left: 8px;
+        padding-left: 10px;
+        padding-right: 5px;
+        border-radius: 10px;
+        color: #89dceb;
+        background: #161320;
+      }
+
+      #clock {
+        margin-top: 6px;
+        margin-left: 8px;
+        padding: 0px 12px;
+        border-radius: 10px;
+        background: #161320;
+        color: #b5e8e0;
+      }
+
+      #workspaces {
+        border-radius: 10px;
+        background: #161320;
+      }
+
+      #workspaces button {
+        color: #b5e8e0;
+        background: transparent;
+        font-size: 16px;
+        border-radius: 2px;
+      }
+
+      #workspaces button.empty {
+        color: #f28fad;
+        background: transparent;
+      }
+
+      #workspaces button.active {
+        color: #abe9b3;
+        border-top: 2px solid #abe9b3;
+        border-bottom: 2px solid #abe9b3;
+      }
+
+      #workspaces button:hover {
+        box-shadow: inherit;
+        text-shadow: inherit;
+        color: #fae3b0;
+        border-color: #e8a2af;
+        color: #e8a2af;
+      }
+
+      #workspaces button.focused:hover {
+        color: #e8a2af;
+      }
+    '';
+  };
 }
