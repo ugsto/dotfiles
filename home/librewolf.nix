@@ -1,8 +1,10 @@
 { pkgs-unstable, ... }:
 {
+
+  home.packages = [ pkgs-unstable.keepassxc ];
   programs.librewolf = {
     enable = true;
-    # nativeMessagingHosts = [ pkgs-unstable.keepassxc ];
+    nativeMessagingHosts = [ pkgs-unstable.keepassxc ];
     profiles.kurisu = {
       search.engines = {
         "Nix Packages" = {

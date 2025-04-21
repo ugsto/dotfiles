@@ -31,18 +31,10 @@
       hostname = "steins-gate";
       pkgs = import nixpkgs {
         inherit system;
-        config = {
-          allowUnfree = true;
-          rocmSupport = "rocm";
-        };
         overlays = [ nur.overlays.default ];
       };
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
-        config = {
-          allowUnfree = true;
-          rocmSupport = "rocm";
-        };
         overlays = [ nur.overlays.default ];
       };
     in
@@ -63,6 +55,7 @@
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
+          inherit pkgs;
           inherit
             inputs
             pkgs-unstable
