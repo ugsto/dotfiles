@@ -1,0 +1,3 @@
+{
+  programs.mininet.enable = true;
+}
