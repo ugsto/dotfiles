@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  pkgs-unstable,
   system,
   username,
   ...
@@ -23,7 +22,6 @@
     fd
     ripgrep
     eza
-    tmux
     fzf
     jaq
 
@@ -52,7 +50,6 @@
     ./alacritty.nix
     ./bash.nix
     ./hyprland.nix
-    ./keepassxc.nix
     ./librewolf.nix
     ./starship.nix
     ./tmux.nix
