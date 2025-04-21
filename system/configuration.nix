@@ -29,7 +29,10 @@
   users.users.${username} = {
     isNormalUser = true;
     description = name;
-    extraGroups = [ "wheel" ];
+    extraGroups = [
+      "wheel"
+      "input"
+    ];
   };
 
   environment.systemPackages = with pkgs; [

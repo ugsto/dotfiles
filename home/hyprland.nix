@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-unstable,
   ...
 }:
 let
@@ -8,6 +9,7 @@ let
   menu = "${pkgs.wofi}/bin/wofi --show run";
   print = "${pkgs.grimblast}/bin/grimblast";
   mail = "${pkgs.thunderbird}/bin/thunderbird";
+  password-manager = "${pkgs-unstable.keepassxc}/bin/keepassxc";
 in
 {
   wayland.windowManager.hyprland = {
@@ -80,8 +82,11 @@ in
       ];
 
       exec-once = [
-        "[workspace 2 silent] ${browser}"
-        "[workspace 9 silent] ${mail}"
+        "[workspace 1 silent] ${browser}"
+        "[workspace 2 silent] ${terminal}"
+        "[workspace 4 silent] ${mail}"
+        "[workspace 9 silent] ${password-manager}"
+        "waybar &"
       ];
     };
   };
