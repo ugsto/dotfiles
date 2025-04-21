@@ -24,6 +24,7 @@
     eza
     fzf
     jaq
+    tcpdump
 
     inputs.ugnvim.packages.${system}.default
 
@@ -43,6 +44,7 @@
       ];
     })
   ];
+
   fonts.fontconfig.enable = true;
 
   programs.home-manager.enable = true;
