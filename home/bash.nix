@@ -13,5 +13,8 @@
         exec tmux
       fi
     '';
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
 }
