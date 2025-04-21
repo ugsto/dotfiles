@@ -14,6 +14,7 @@
     ./networking.nix
     ./security.nix
     ./virtualization.nix
+    ./modules/mininet.nix
     ./modules/ollama.nix
     ./modules/wireguard.nix
   ];
