@@ -7,8 +7,10 @@ let
   browser = "${pkgs.librewolf}/bin/librewolf";
   terminal = "${pkgs.alacritty}/bin/alacritty";
   menu = "${pkgs.wofi}/bin/wofi --show run";
-  print = "${pkgs.grimblast}/bin/grimblast";
+  print = "${pkgs.grimblast}/bin/grimblast save area \"$HOME/Imagens/Capturas de tela/Captura de tela de $(date '+%Y-%m-%d %H-%M-%S').png\"";
   mail = "${pkgs.thunderbird}/bin/thunderbird";
+  increase-backlight = "${pkgs.light}/bin/light -A 5";
+  decrease-backlight = "${pkgs.light}/bin/light -U 5";
   password-manager = "${pkgs-unstable.keepassxc}/bin/keepassxc";
 in
 {
@@ -22,7 +24,6 @@ in
           "$mod, F, exec, ${browser}"
           "$mod SHIFT, Return, exec, ${terminal}"
           "$mod, R, exec, ${menu}"
-          "$mod, P, exec, ${print}"
 
           # Window control
           "$mod, Q, killactive"
@@ -40,6 +41,14 @@ in
           "$mod SHIFT, J, movewindow, d"
           "$mod SHIFT, K, movewindow, u"
           "$mod SHIFT, L, movewindow, r"
+
+          # Print
+          ", Print, exec, ${print}"
+
+          # Backlight control
+          ", code:233, exec, ${increase-backlight}"
+          ", code:234, exec, ${decrease-backlight}"
+          ", code:232, exec, ${decrease-backlight}"
         ]
         ++ (builtins.concatLists (
           builtins.genList (

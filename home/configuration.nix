@@ -25,6 +25,8 @@
     fzf
     jaq
     tcpdump
+    grimblast
+    light
 
     inputs.ugnvim.packages.${system}.default
 
