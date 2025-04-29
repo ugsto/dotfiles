@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   username,
   name,
@@ -21,6 +22,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.kernelModules = [ "amdgpu" ];
@@ -40,6 +42,7 @@
     git
     vim
     wget
+    config.boot.kernelPackages.perf
   ];
 
   nix.settings.experimental-features = [
