@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  pkgs-unstable,
   system,
   username,
   ...
@@ -27,6 +28,7 @@
     tcpdump
     grimblast
     light
+    pkgs-unstable.devenv
 
     inputs.ugnvim.packages.${system}.default
 
