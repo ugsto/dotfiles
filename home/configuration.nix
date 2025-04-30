@@ -28,6 +28,7 @@
     tcpdump
     grimblast
     light
+    pkgs-unstable.legcord
     pkgs-unstable.devenv
 
     inputs.ugnvim.packages.${system}.default
