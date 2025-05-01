@@ -59,6 +59,7 @@
     ./bash.nix
     ./hyprland.nix
     ./librewolf.nix
+    ./matrix.nix
     ./starship.nix
     ./tmux.nix
     ./wofi.nix
