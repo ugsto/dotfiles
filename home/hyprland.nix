@@ -112,6 +112,9 @@ in
         modules-center = [
           "hyprland/workspaces"
         ];
+        modules-right = [
+          "battery"
+        ];
         "custom/launcher" = {
           format = " ";
           on-click = "wofi --show run";
@@ -146,6 +149,22 @@ in
           };
           icon = true;
         };
+        battery = {
+          interval = 60;
+          states = {
+            warning = 30;
+            critical = 15;
+          };
+          format = "{capacity}% {icon}";
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
+          max-length = 25;
+        };
       };
     };
     style = ''
@@ -173,7 +192,7 @@ in
       #custom-launcher {
         font-size: 22px;
         margin-top: 6px;
-        margin-left: 8px;
+        margin-left: 24px;
         padding-left: 10px;
         padding-right: 5px;
         border-radius: 10px;
@@ -223,6 +242,15 @@ in
 
       #workspaces button.focused:hover {
         color: #e8a2af;
+      }
+
+      #battery {
+        margin-top: 6px;
+        margin-right: 24px;
+        padding: 0px 18px 0px 12px;
+        border-radius: 10px;
+        background: #161320;
+        color: #b5e8e0;
       }
     '';
   };
