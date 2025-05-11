@@ -12,8 +12,8 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    ugnvim = {
-      url = "path:ugnvim";
+    nvim = {
+      url = "path:nvim";
     };
   };
   outputs =
