@@ -8,10 +8,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
-    ugnvim.url = "github:ugsto/ugnvim";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    ugnvim = {
+      url = "path:ugnvim";
     };
   };
   outputs =
