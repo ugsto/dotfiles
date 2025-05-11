@@ -31,7 +31,7 @@
     pkgs-unstable.legcord
     pkgs-unstable.devenv
 
-    inputs.ugnvim.packages.${system}.default
+    inputs.nvim.packages.${system}.default
 
     # Fonts
     (nerdfonts.override {
