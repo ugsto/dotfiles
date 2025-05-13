@@ -29,7 +29,6 @@
     grimblast
     light
     pavucontrol
-    pipewire-pulse
     pkgs-unstable.legcord
     pkgs-unstable.devenv
 
