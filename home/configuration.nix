@@ -8,7 +8,7 @@
 }:
 {
   home.username = username;
-  home.homeDirectory = "/home/kurisu";
+  home.homeDirectory = "/home/${username}";
   home.stateVersion = "24.11";
   home.packages = with pkgs; [
     chromium
