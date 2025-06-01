@@ -1,5 +1,11 @@
-{ username, ... }:
+{ username, lib, ... }:
 {
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "Oracle_VirtualBox_Extension_Pack"
+    ];
+
   virtualisation.virtualbox.host = {
     enable = true;
     enableExtensionPack = true;
