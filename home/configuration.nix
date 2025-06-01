@@ -63,6 +63,7 @@
     ./matrix.nix
     ./starship.nix
     ./tmux.nix
+    ./vscode.nix
     ./wofi.nix
   ];
 }

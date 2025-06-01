@@ -20,6 +20,7 @@
   ];
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs-unstable.config.allowUnfree = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
