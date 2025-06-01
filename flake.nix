@@ -38,6 +38,13 @@
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         overlays = [ nur.overlays.default ];
+        config = {
+          allowUnfreePredicate =
+            pkg:
+            builtins.elem (lib.getName pkg) [
+              "vscode"
+            ];
+        };
       };
     in
     {
