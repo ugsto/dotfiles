@@ -43,6 +43,8 @@
             pkg:
             builtins.elem (lib.getName pkg) [
               "vscode"
+              "zoom-us"
+              "zoom"
             ];
         };
       };

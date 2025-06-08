@@ -4,6 +4,7 @@
     pkg:
     builtins.elem (lib.getName pkg) [
       "Oracle_VirtualBox_Extension_Pack"
+      "zoom-us"
     ];
 
   virtualisation.virtualbox.host = {
