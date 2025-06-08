@@ -31,6 +31,8 @@
     pavucontrol
     pkgs-unstable.legcord
     pkgs-unstable.devenv
+    obs-studio
+    pkgs-unstable.zoom-us
 
     inputs.nvim.packages.${system}.default
 
