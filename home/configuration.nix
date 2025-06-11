@@ -64,6 +64,7 @@
     ./librewolf.nix
     ./matrix.nix
     ./starship.nix
+    ./syncthing.nix
     ./tmux.nix
     ./vscode.nix
     ./wofi.nix
