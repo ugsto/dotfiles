@@ -91,7 +91,6 @@ in
       ];
 
       exec-once = [
-        "[workspace 1 silent] ${browser}"
         "[workspace 2 silent] ${terminal}"
         "[workspace 4 silent] ${mail}"
         "[workspace 9 silent] ${password-manager}"
