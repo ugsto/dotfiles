@@ -45,6 +45,7 @@
               "vscode"
               "zoom-us"
               "zoom"
+              "burpsuite"
             ];
         };
       };
