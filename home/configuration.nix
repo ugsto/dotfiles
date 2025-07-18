@@ -33,6 +33,7 @@
     pkgs-unstable.devenv
     obs-studio
     pkgs-unstable.zoom-us
+    bottles
 
     inputs.nvim.packages.${system}.default
 
