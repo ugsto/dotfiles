@@ -36,19 +36,11 @@
 
     inputs.nvim.packages.${system}.default
 
-    # Fonts
     (nerdfonts.override {
       fonts = [
         "FiraCode"
         "DroidSansMono"
         "JetBrainsMono"
-      ];
-    })
-
-    (retroarch.override {
-      cores = with libretro; [
-        gpsp
-        melonds
       ];
     })
   ];
