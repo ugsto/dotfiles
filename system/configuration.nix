@@ -51,5 +51,5 @@
     dates = "weekly";
     options = "--delete-older-than 30d --max-kept-generations 5";
   };
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }
