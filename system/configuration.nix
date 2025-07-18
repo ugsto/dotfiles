@@ -15,16 +15,12 @@
     ./networking.nix
     ./security.nix
     ./virtualization.nix
-    ./modules/mininet.nix
-    ./modules/wireguard.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.kernelModules = [ "amdgpu" ];
-
-  services.printing.enable = true;
 
   users.users.${username} = {
     isNormalUser = true;
@@ -50,5 +46,10 @@
     extra-substituters = https://devenv.cachix.org
     extra-trusted-public-keys = devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=
   '';
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d --max-kept-generations 5";
+  };
   system.stateVersion = "24.11";
 }

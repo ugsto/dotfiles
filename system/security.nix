@@ -1,7 +1,9 @@
 {
-  networking.firewall.enable = false;
-  security.rtkit.enable = true;
+  security.sudo = {
+    enable = true;
+    wheelNeedsPassword = false;
+  };
 
-  services.clamav.daemon.enable = true;
-  services.clamav.updater.enable = true;
+  networking.firewall.enable = true;
+  networking.nftables.enable = true;
 }

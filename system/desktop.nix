@@ -7,6 +7,6 @@
   services.gvfs.enable = true;
   programs.hyprland.enable = true;
   programs.light.enable = true;
-
+  services.printing.enable = false;
   users.users.${username}.extraGroups = [ "video" ];
 }
