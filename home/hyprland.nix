@@ -29,6 +29,7 @@ in
           "$mod, Q, killactive"
           "$mod, M, exit"
           "$mod, V, togglefloating"
+          "$mod, F, fullscreen"
 
           # Focus windows with HJKL
           "$mod, H, movefocus, l"
@@ -87,7 +88,7 @@ in
 
       monitor = [
         "eDP-1, 1920x1080@60.01Hz, 0x0, 1"
-        "HDMI-A-1, 1920x1080@60.00000, 1920x0, 1"
+        "HDMI-A-1, 1366x768@60.00000, 1920x0, 1"
       ];
 
       exec-once = [
