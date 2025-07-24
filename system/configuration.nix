@@ -15,6 +15,7 @@
     ./networking.nix
     ./security.nix
     ./virtualization.nix
+    ./modules/ollama.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
