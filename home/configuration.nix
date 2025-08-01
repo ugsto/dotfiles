@@ -31,9 +31,10 @@
     pavucontrol
     pkgs-unstable.legcord
     pkgs-unstable.devenv
-    obs-studio
     pkgs-unstable.zoom-us
-    bottles
+    (pkgs-unstable.bottles.override {
+      removeWarningPopup = true;
+    })
 
     inputs.nvim.packages.${system}.default
 
@@ -56,6 +57,7 @@
     ./hyprland.nix
     ./librewolf.nix
     ./matrix.nix
+    ./obs.nix
     ./starship.nix
     ./syncthing.nix
     ./tmux.nix
