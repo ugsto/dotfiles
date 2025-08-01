@@ -7,7 +7,7 @@
       pkgs.tmuxPlugins.catppuccin
     ];
     extraConfig = ''
-      set -g prefix C-a
+      set -g prefix C-b
 
       bind-key h select-pane -L
       bind-key j select-pane -D
