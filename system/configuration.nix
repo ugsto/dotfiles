@@ -33,11 +33,15 @@
   };
 
   environment.systemPackages = with pkgs; [
-    git
     vim
     wget
     config.boot.kernelPackages.perf
   ];
+
+  programs.git = {
+    enable = true;
+    lfs.enable = true;
+  };
 
   nix = {
     settings = {
