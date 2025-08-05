@@ -1,4 +1,6 @@
 {
+  plugins.copilot-lua.enable = true;
+  plugins.copilot-chat.enable = true;
   plugins.cmp = {
     enable = true;
     autoEnableSources = true;
@@ -39,6 +41,7 @@
         })
       '';
       sources = [
+        { name = "copilot"; }
         { name = "nvim_lsp"; }
         { name = "path"; }
         { name = "buffer"; }
