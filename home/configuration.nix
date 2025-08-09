@@ -29,12 +29,12 @@
     grimblast
     light
     pavucontrol
+    tor
+    torsocks
+
     pkgs-unstable.legcord
     pkgs-unstable.devenv
     pkgs-unstable.zoom-us
-    (pkgs-unstable.bottles.override {
-      removeWarningPopup = true;
-    })
 
     inputs.nvim.packages.${system}.default
 

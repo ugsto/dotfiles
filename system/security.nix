@@ -4,6 +4,6 @@
     wheelNeedsPassword = false;
   };
 
-  networking.firewall.enable = true;
-  networking.nftables.enable = true;
+  networking.firewall.enable = false;
+  networking.nftables.enable = false;
 }

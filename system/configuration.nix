@@ -16,6 +16,7 @@
     ./security.nix
     ./virtualization.nix
     ./modules/ollama.nix
+    ./modules/tor.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
