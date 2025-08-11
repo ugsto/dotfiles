@@ -31,6 +31,7 @@
     pavucontrol
     tor
     torsocks
+    busybox
 
     pkgs-unstable.legcord
     pkgs-unstable.devenv
