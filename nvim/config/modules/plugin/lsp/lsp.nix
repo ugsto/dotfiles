@@ -28,6 +28,7 @@
         jsonls.enable = true;
         dockerls.enable = true;
         clangd.enable = true;
+        svelte.enable = true;
         helm_ls = {
           enable = true;
           extraOptions = {
