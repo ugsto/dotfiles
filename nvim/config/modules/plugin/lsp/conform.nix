@@ -74,41 +74,9 @@
         '';
         notify_on_error = true;
         formatters_by_ft = {
-          html = {
-            __unkeyed-1 = "prettierd";
-            __unkeyed-2 = "prettier";
-            stop_after_first = true;
-          };
-          css = {
-            __unkeyed-1 = "prettierd";
-            __unkeyed-2 = "prettier";
-            stop_after_first = true;
-          };
-          javascript = {
-            __unkeyed-1 = "prettierd";
-            __unkeyed-2 = "prettier";
-            stop_after_first = true;
-          };
-          typescript = {
-            __unkeyed-1 = "prettierd";
-            __unkeyed-2 = "prettier";
-            stop_after_first = true;
-          };
-          python = [
-            "ruff"
-          ];
+          python = [ "ruff" ];
           lua = [ "stylua" ];
           nix = [ "nixfmt-rfc-style" ];
-          markdown = {
-            __unkeyed-1 = "prettierd";
-            __unkeyed-2 = "prettier";
-            stop_after_first = true;
-          };
-          yaml = {
-            __unkeyed-1 = "prettierd";
-            __unkeyed-2 = "prettier";
-            stop_after_first = true;
-          };
           terraform = [ "terraform_fmt" ];
           bicep = [ "bicep" ];
           bash = [
@@ -121,7 +89,7 @@
         };
 
         formatters = {
-          black = {
+          ruff = {
             command = "${lib.getExe pkgs.ruff}";
           };
           nixfmt-rfc-style = {
@@ -129,9 +97,6 @@
           };
           jq = {
             command = "${lib.getExe pkgs.jq}";
-          };
-          prettierd = {
-            command = "${lib.getExe pkgs.prettierd}";
           };
           stylua = {
             command = "${lib.getExe pkgs.stylua}";
