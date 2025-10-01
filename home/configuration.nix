@@ -31,20 +31,13 @@
     pavucontrol
     tor
     torsocks
+    wasistlos
 
     pkgs-unstable.legcord
     pkgs-unstable.devenv
     pkgs-unstable.zoom-us
 
     inputs.nvim.packages.${system}.default
-
-    (nerdfonts.override {
-      fonts = [
-        "FiraCode"
-        "DroidSansMono"
-        "JetBrainsMono"
-      ];
-    })
   ];
 
   fonts.fontconfig.enable = true;

@@ -1,4 +1,9 @@
-{ username, ... }:
+{
+  pkgs,
+  lib,
+  username,
+  ...
+}:
 {
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
@@ -9,4 +14,13 @@
   programs.light.enable = true;
   services.printing.enable = false;
   users.users.${username}.extraGroups = [ "video" ];
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = lib.mkForce [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gnome
+    ];
+  };
 }

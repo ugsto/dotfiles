@@ -37,7 +37,7 @@
         "signon.rememberSignons" = false;
       };
 
-      extensions = with pkgs-unstable.nur.repos.rycee.firefox-addons; [
+      extensions.packages = with pkgs-unstable.nur.repos.rycee.firefox-addons; [
         ublock-origin
         canvasblocker
         search-by-image
