@@ -88,7 +88,11 @@ in
 
       monitor = [
         "eDP-1, 1920x1080@60.01Hz, 0x0, 1"
-        "HDMI-A-1, 1366x768@60.00000, 1920x0, 1"
+        "HDMI-A-1, 1920x1080@60.00000, 1920x0, 1"
+      ];
+
+      environment = [
+        "MOZ_ENABLE_WAYLAND,\"1\""
       ];
 
       exec-once = [
@@ -253,5 +257,17 @@ in
         color: #b5e8e0;
       }
     '';
+  };
+
+  home.packages = with pkgs; [
+    gnome-themes-extra
+  ];
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
   };
 }
