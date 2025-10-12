@@ -91,15 +91,17 @@ in
         "HDMI-A-1, 1920x1080@60.00000, 1920x0, 1"
       ];
 
-      environment = [
+      env = [
         "MOZ_ENABLE_WAYLAND,\"1\""
+        "XCURSOR_SIZE,24"
       ];
 
       exec-once = [
         "[workspace 2 silent] ${terminal}"
         "[workspace 4 silent] ${mail}"
         "[workspace 9 silent] ${password-manager}"
-        "waybar &"
+        "waybar"
+        "wl-clip-persist --clipboard regular"
       ];
     };
   };
@@ -261,6 +263,7 @@ in
 
   home.packages = with pkgs; [
     gnome-themes-extra
+    wl-clip-persist
   ];
 
   gtk = {
