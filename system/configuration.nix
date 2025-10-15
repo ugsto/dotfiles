@@ -15,7 +15,6 @@
     ./networking.nix
     ./security.nix
     ./virtualization.nix
-    ./modules/ollama.nix
     ./modules/tor.nix
   ];
 
