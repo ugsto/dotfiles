@@ -36,10 +36,11 @@
     pkgs-unstable.legcord
     pkgs-unstable.devenv
     pkgs-unstable.zoom-us
+    pkgs-unstable.bottles
+    pkgs-unstable.freetube
 
     inputs.nvim.packages.${system}.default
   ];
-
   fonts.fontconfig.enable = true;
 
   programs.home-manager.enable = true;
