@@ -38,6 +38,7 @@
     pkgs-unstable.zoom-us
     pkgs-unstable.bottles
     pkgs-unstable.freetube
+    pkgs-unstable.kind
 
     inputs.nvim.packages.${system}.default
   ];
