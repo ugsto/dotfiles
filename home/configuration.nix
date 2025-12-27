@@ -32,6 +32,9 @@
     tor
     torsocks
     wasistlos
+    bc
+    kubectl
+    k9s
 
     pkgs-unstable.legcord
     pkgs-unstable.devenv
