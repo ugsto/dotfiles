@@ -35,6 +35,7 @@
     bc
     kubectl
     k9s
+    zotero
 
     pkgs-unstable.legcord
     pkgs-unstable.devenv
