@@ -34,20 +34,23 @@
       pkgs = import nixpkgs {
         inherit system;
         overlays = [ nur.overlays.default ];
+        config.allowUnfreePredicate =
+          pkg:
+          builtins.elem (lib.getName pkg) [
+            "displaylink"
+          ];
       };
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         overlays = [ nur.overlays.default ];
-        config = {
-          allowUnfreePredicate =
-            pkg:
-            builtins.elem (lib.getName pkg) [
-              "vscode"
-              "zoom-us"
-              "zoom"
-              "burpsuite"
-            ];
-        };
+        config.allowUnfreePredicate =
+          pkg:
+          builtins.elem (lib.getName pkg) [
+            "vscode"
+            "zoom-us"
+            "zoom"
+            "burpsuite"
+          ];
       };
     in
     {
