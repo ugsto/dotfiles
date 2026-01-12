@@ -59,6 +59,7 @@
   ];
   fonts.fontconfig.enable = true;
 
+  programs.fzf.enableBashIntegration = true;
   programs.home-manager.enable = true;
 
   imports = [

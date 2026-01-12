@@ -5,7 +5,14 @@
       ls = "eza --color=auto --icons --group-directories-first";
       cat = "bat";
       k = "kubectl";
+      ".." = "cd ..";
     };
+    historyControl = [
+      "erasedups"
+      "ignoredups"
+      "ignorespace"
+    ];
+    historySize = 10000;
     initExtra = ''
       set -o vi
 
