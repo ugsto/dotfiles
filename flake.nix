@@ -1,10 +1,10 @@
 {
   description = "My dotfiles!";
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs.url = "nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
@@ -34,23 +34,10 @@
       pkgs = import nixpkgs {
         inherit system;
         overlays = [ nur.overlays.default ];
-        config.allowUnfreePredicate =
-          pkg:
-          builtins.elem (lib.getName pkg) [
-            "displaylink"
-          ];
       };
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         overlays = [ nur.overlays.default ];
-        config.allowUnfreePredicate =
-          pkg:
-          builtins.elem (lib.getName pkg) [
-            "vscode"
-            "zoom-us"
-            "zoom"
-            "burpsuite"
-          ];
       };
     in
     {
@@ -63,14 +50,22 @@
               hostname
               ;
           };
-          modules = [ ./system/configuration.nix ];
+          modules = [
+            ./system/configuration.nix
+            {
+              nixpkgs.config.allowUnfreePredicate =
+                pkg:
+                builtins.elem (lib.getName pkg) [
+                  "displaylink"
+                ];
+            }
+          ];
         };
       };
 
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
-          inherit pkgs;
           inherit
             inputs
             pkgs-unstable
@@ -78,7 +73,12 @@
             username
             ;
         };
-        modules = [ ./home/configuration.nix ];
+        modules = [
+          ./home/configuration.nix
+          {
+            nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
+          }
+        ];
       };
     };
 }

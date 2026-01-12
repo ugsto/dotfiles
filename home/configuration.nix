@@ -9,7 +9,7 @@
 {
   home.username = username;
   home.homeDirectory = "/home/${username}";
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
   home.packages = with pkgs; [
     chromium
     thunderbird
@@ -36,11 +36,22 @@
     kubectl
     k9s
     zotero
+    libreoffice
+
+    sunshine
+    dolphin-emu
+    transmission_4
+    bottles
+
+    (retroarch.withCores (
+      cores: with cores; [
+        dolphin
+        bsnes
+      ]
+    ))
 
     pkgs-unstable.legcord
     pkgs-unstable.devenv
-    pkgs-unstable.zoom-us
-    pkgs-unstable.bottles
     pkgs-unstable.freetube
     pkgs-unstable.kind
 
@@ -60,7 +71,7 @@
     ./starship.nix
     ./syncthing.nix
     ./tmux.nix
-    ./vscode.nix
+    # ./vscode.nix
     ./wofi.nix
   ];
 }
