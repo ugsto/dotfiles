@@ -13,8 +13,6 @@
     ./modules/plugin/utils/mini.nix
     ./modules/plugin/utils/noice.nix
     ./modules/plugin/utils/render-markdown.nix
-    ./modules/plugin/utils/copilot.nix
-    ./modules/plugin/utils/avante.nix
     ./modules/plugin/utils/snacks.nix
     ./modules/plugin/utils/whichkey.nix
     ./keymaps.nix

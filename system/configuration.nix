@@ -16,7 +16,6 @@
     ./security.nix
     ./virtualization.nix
     ./modules/tor.nix
-    ./displaylink.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages;

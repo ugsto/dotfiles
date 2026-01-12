@@ -52,13 +52,6 @@
           };
           modules = [
             ./system/configuration.nix
-            {
-              nixpkgs.config.allowUnfreePredicate =
-                pkg:
-                builtins.elem (lib.getName pkg) [
-                  "displaylink"
-                ];
-            }
           ];
         };
       };

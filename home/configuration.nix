@@ -31,7 +31,6 @@
     pavucontrol
     tor
     torsocks
-    wasistlos
     bc
     kubectl
     k9s
@@ -50,9 +49,7 @@
       ]
     ))
 
-    pkgs-unstable.legcord
     pkgs-unstable.devenv
-    pkgs-unstable.freetube
     pkgs-unstable.kind
 
     inputs.nvim.packages.${system}.default
