@@ -15,7 +15,6 @@
     ./networking.nix
     ./security.nix
     ./virtualization.nix
-    ./modules/tor.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages;

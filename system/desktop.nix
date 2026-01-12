@@ -7,8 +7,16 @@
 {
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        user = "greeter";
+      };
+    };
+  };
+
   services.gvfs.enable = true;
   programs.hyprland.enable = true;
   programs.light.enable = true;
