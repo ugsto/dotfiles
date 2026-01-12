@@ -27,7 +27,11 @@
         ansiblels.enable = true;
         jsonls.enable = true;
         dockerls.enable = true;
-        clangd.enable = true;
+        clangd = {
+          enable = true;
+          filetypes = [ "c" "cpp" "objc" "objcpp" "cuda" ];
+        };
+        protols.enable = true;
         svelte.enable = true;
         helm_ls = {
           enable = true;
