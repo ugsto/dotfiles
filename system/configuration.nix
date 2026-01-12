@@ -36,7 +36,7 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
-    config.boot.kernelPackages.perf
+    perf
   ];
 
   programs.git = {
