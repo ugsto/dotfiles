@@ -14,7 +14,6 @@
     chromium
     thunderbird
     lazygit
-    xsel
     wl-clipboard-rs
     android-file-transfer
     zbar

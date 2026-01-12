@@ -97,9 +97,6 @@ in
       ];
 
       exec-once = [
-        "[workspace 2 silent] ${terminal}"
-        "[workspace 4 silent] ${mail}"
-        "[workspace 9 silent] ${password-manager}"
         "waybar"
         "wl-clip-persist --clipboard regular"
       ];
