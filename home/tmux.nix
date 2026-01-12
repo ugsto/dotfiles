@@ -8,6 +8,8 @@
     ];
     extraConfig = ''
       set -g prefix C-b
+      set -sg escape-time 0
+      set -g mouse on
 
       bind-key h select-pane -L
       bind-key j select-pane -D

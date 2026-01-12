@@ -63,6 +63,7 @@
         "root"
         "kurisu"
       ];
+      auto-optimise-store = true;
     };
     gc = {
       automatic = true;
@@ -70,5 +71,8 @@
       options = "--delete-older-than 30d --max-kept-generations 5";
     };
   };
+
+  zramSwap.enable = true;
+
   system.stateVersion = "25.11";
 }
