@@ -16,7 +16,6 @@
     chromium
     thunderbird
     lazygit
-    wl-clipboard-rs
     android-file-transfer
     zbar
     dust
@@ -27,7 +26,6 @@
     fzf
     jaq
     tcpdump
-    grimblast
     light
     pavucontrol
     tor

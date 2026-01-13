@@ -9,7 +9,7 @@ let
   browser = "${pkgs.librewolf}/bin/librewolf";
   terminal = "${config.programs.alacritty.package}/bin/alacritty";
   menu = "${pkgs.wofi}/bin/wofi --show drun,run --insensitive --allow-images";
-  print = "${pkgs.grimblast}/bin/grimblast save area \"$HOME/Imagens/Capturas de tela/Captura de tela de $(date '+%Y-%m-%d %H-%M-%S').png\"";
+  print = "${pkgs.wayfreeze}/bin/wayfreeze --after-freeze-cmd '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy; pkill wayfreeze'";
   increase-backlight = "${pkgs.light}/bin/light -A 5";
   decrease-backlight = "${pkgs.light}/bin/light -U 5";
 
@@ -300,5 +300,9 @@ in
     mako
     wl-clip-persist
     nerd-fonts.noto
+    wayfreeze
+    grim
+    slurp
+    wl-clipboard
   ];
 }
