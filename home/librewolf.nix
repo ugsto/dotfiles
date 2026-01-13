@@ -37,14 +37,17 @@
         "signon.rememberSignons" = false;
       };
 
-      extensions.packages = with pkgs-unstable.nur.repos.rycee.firefox-addons; [
-        ublock-origin
-        canvasblocker
-        search-by-image
-        tridactyl
-        youtube-shorts-block
-        keepassxc-browser
-      ];
+      extensions = {
+        force = true;
+        packages = with pkgs-unstable.nur.repos.rycee.firefox-addons; [
+          ublock-origin
+          canvasblocker
+          search-by-image
+          tridactyl
+          youtube-shorts-block
+          keepassxc-browser
+        ];
+      };
     };
   };
   home.sessionVariables = {
