@@ -127,7 +127,7 @@ in
         {
           fonts = {
             names = [ "NotoSans Nerd Font" ];
-            size = 13.0;
+            size = 12.0;
           };
           position = "top";
           statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs $HOME/.config/i3status-rust/config-main.toml";
@@ -244,6 +244,9 @@ in
         settings = {
           theme = {
             theme = "ctp-mocha";
+            overrides = {
+              separator = "";
+            };
           };
           icons = {
             icons = "material-nf";
