@@ -50,11 +50,13 @@ in
       output = {
         "eDP-1" = {
           mode = "1920x1080@60.010Hz";
-          pos = "0 0";
+          pos = "1366 0";
+          bg = "${./wallpapers/columbina-hand.png} fill";
         };
         "HDMI-A-1" = {
           mode = "1366x768@60Hz";
-          pos = "1920 0";
+          pos = "0 0";
+          bg = "${./wallpapers/columbina-moon.png} fill";
         };
       };
 
@@ -66,6 +68,14 @@ in
       window = {
         border = 2;
         titlebar = false;
+        commands = [
+          {
+            command = "floating enable, border none, move position center";
+            criteria = {
+              title = "^Tab Selection$";
+            };
+          }
+        ];
       };
 
       keybindings =
@@ -112,6 +122,47 @@ in
             }
           ) 9
         ));
+
+      bars = [
+        {
+          fonts = {
+            names = [ "NotoSans Nerd Font" ];
+            size = 13.0;
+          };
+          position = "top";
+          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs /home/kurisu/.config/i3status-rust/config-main.toml";
+          colors = {
+            background = "#1e1e2e";
+            statusline = "#cdd6f4";
+            separator = "#585b70";
+            focusedWorkspace = {
+              border = "#89b4fa";
+              background = "#89b4fa";
+              text = "#11111b";
+            };
+            activeWorkspace = {
+              border = "#313244";
+              background = "#313244";
+              text = "#cdd6f4";
+            };
+            inactiveWorkspace = {
+              border = "#1e1e2e";
+              background = "#1e1e2e";
+              text = "#6c7086";
+            };
+            urgentWorkspace = {
+              border = "#f38ba8";
+              background = "#f38ba8";
+              text = "#11111b";
+            };
+          };
+          extraConfig = ''
+            height 24
+            workspace_buttons yes
+            strip_workspace_numbers yes
+          '';
+        }
+      ];
     };
 
     extraConfig = ''
@@ -201,47 +252,6 @@ in
       };
     };
   };
-
-  wayland.windowManager.sway.config.bars = [
-    {
-      fonts = {
-        names = [ "NotoSans Nerd Font" ];
-        size = 13.0;
-      };
-      position = "top";
-      statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs /home/kurisu/.config/i3status-rust/config-main.toml";
-      colors = {
-        background = "#1e1e2e";
-        statusline = "#cdd6f4";
-        separator = "#585b70";
-        focusedWorkspace = {
-          border = "#89b4fa";
-          background = "#89b4fa";
-          text = "#11111b";
-        };
-        activeWorkspace = {
-          border = "#313244";
-          background = "#313244";
-          text = "#cdd6f4";
-        };
-        inactiveWorkspace = {
-          border = "#1e1e2e";
-          background = "#1e1e2e";
-          text = "#6c7086";
-        };
-        urgentWorkspace = {
-          border = "#f38ba8";
-          background = "#f38ba8";
-          text = "#11111b";
-        };
-      };
-      extraConfig = ''
-        height 24
-        workspace_buttons yes
-        strip_workspace_numbers yes
-      '';
-    }
-  ];
 
   services.swayidle = {
     enable = true;
