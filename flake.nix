@@ -16,6 +16,7 @@
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin.url = "github:catppuccin/nix";
     nvim = {
       url = "path:nvim";
     };
@@ -28,6 +29,7 @@
       home-manager,
       nur,
       nixgl,
+      catppuccin,
       ...
     }@inputs:
     let
@@ -51,8 +53,11 @@
           nixgl.overlay
         ];
       };
+      theme = import ./home/theme.nix;
     in
     {
+      formatter.${system} = pkgs.nixfmt-rfc-style;
+
       nixosConfigurations = {
         ${hostname} = lib.nixosSystem {
           specialArgs = {
@@ -76,6 +81,7 @@
             pkgs-unstable
             system
             username
+            theme
             ;
         };
         modules = [
@@ -93,6 +99,7 @@
             inputs
             pkgs-unstable
             system
+            theme
             ;
           username = work-username;
         };

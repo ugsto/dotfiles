@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  theme,
   ...
 }:
 let
@@ -30,6 +31,8 @@ let
   modifier = "Mod4";
 in
 {
+  catppuccin.sway.enable = false;
+  catppuccin.swaylock.enable = false;
   wayland.windowManager.sway = {
     enable = true;
     checkConfig = false;
@@ -132,36 +135,41 @@ in
           };
           position = "top";
           statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs $HOME/.config/i3status-rust/config-main.toml";
-          colors = {
-            background = "#1e1e2e";
-            statusline = "#cdd6f4";
-            separator = "#585b70";
-            focusedWorkspace = {
-              border = "#89b4fa";
-              background = "#89b4fa";
-              text = "#11111b";
-            };
-            activeWorkspace = {
-              border = "#313244";
-              background = "#313244";
-              text = "#cdd6f4";
-            };
-            inactiveWorkspace = {
-              border = "#1e1e2e";
-              background = "#1e1e2e";
-              text = "#6c7086";
-            };
-            urgentWorkspace = {
-              border = "#f38ba8";
-              background = "#f38ba8";
-              text = "#11111b";
-            };
-          };
           extraConfig = ''
             height 24
             workspace_buttons yes
             strip_workspace_numbers yes
           '';
+          colors = {
+            background = theme.colors.base;
+            statusline = theme.colors.text;
+            separator = theme.colors.surface0;
+            focusedWorkspace = {
+              border = theme.colors.blue;
+              background = theme.colors.blue;
+              text = theme.colors.crust;
+            };
+            activeWorkspace = {
+              border = theme.colors.surface1;
+              background = theme.colors.surface1;
+              text = theme.colors.text;
+            };
+            inactiveWorkspace = {
+              border = theme.colors.base;
+              background = theme.colors.base;
+              text = theme.colors.overlay0;
+            };
+            urgentWorkspace = {
+              border = theme.colors.red;
+              background = theme.colors.red;
+              text = theme.colors.crust;
+            };
+            bindingMode = {
+              border = theme.colors.lavender;
+              background = theme.colors.lavender;
+              text = theme.colors.crust;
+            };
+          };
         }
       ];
     };
@@ -175,9 +183,9 @@ in
   services.mako = {
     enable = true;
     settings = {
-      background-color = "#161320";
-      text-color = "#b5e8e0";
-      border-color = "#89dceb";
+      background-color = theme.colors.base;
+      text-color = theme.colors.text;
+      border-color = theme.colors.blue;
       border-radius = 10;
       border-size = 2;
       default-timeout = 5000;
@@ -193,16 +201,16 @@ in
             block = "cpu";
             format = " $icon  $utilization.eng(w:2) ";
             theme_overrides = {
-              idle_bg = "#89b4fa";
-              idle_fg = "#11111b";
+              idle_bg = theme.colors.blue;
+              idle_fg = theme.colors.crust;
             };
           }
           {
             block = "memory";
             format = " $icon  $mem_used_percents.eng(w:2) ";
             theme_overrides = {
-              idle_bg = "#94e2d5";
-              idle_fg = "#11111b";
+              idle_bg = theme.colors.teal;
+              idle_fg = theme.colors.crust;
             };
           }
           {
@@ -211,8 +219,8 @@ in
             format = " $icon  eth ";
             missing_format = "";
             theme_overrides = {
-              idle_bg = "#a6e3a1";
-              idle_fg = "#11111b";
+              idle_bg = theme.colors.green;
+              idle_fg = theme.colors.crust;
             };
           }
           {
@@ -221,24 +229,24 @@ in
             format = " $icon  $ssid $signal_strength ";
             missing_format = "";
             theme_overrides = {
-              idle_bg = "#f9e2af";
-              idle_fg = "#11111b";
+              idle_bg = theme.colors.yellow;
+              idle_fg = theme.colors.crust;
             };
           }
           {
             block = "battery";
             format = " $icon ";
             theme_overrides = {
-              idle_bg = "#fab387";
-              idle_fg = "#11111b";
+              idle_bg = theme.colors.peach;
+              idle_fg = theme.colors.crust;
             };
           }
           {
             block = "time";
             format = " $icon  $timestamp.datetime(f:'%a %d/%m %R') ";
             theme_overrides = {
-              idle_bg = "#cba6f7";
-              idle_fg = "#11111b";
+              idle_bg = theme.colors.mauve;
+              idle_fg = theme.colors.crust;
             };
           }
         ];
@@ -273,12 +281,16 @@ in
     enable = true;
     package = pkgs.swaylock-effects;
     settings = {
-      color = "000000";
+      color = theme.colors.base;
+      ring-color = theme.colors.surface2;
+      line-color = theme.colors.surface0;
+      inside-color = theme.colors.base;
+      key-hl-color = theme.colors.blue;
+      separator-color = theme.colors.surface0;
+
       font-size = 2;
       indicator-idle-visible = true;
       indicator-radius = 100;
-      line-color = "ffffff";
-      ring-color = "ffffff";
     };
   };
 

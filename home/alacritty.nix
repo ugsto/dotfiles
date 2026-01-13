@@ -1,79 +1,81 @@
+{ theme, ... }:
 {
+  catppuccin.alacritty.enable = false;
   programs.alacritty = {
     enable = true;
     settings = {
       colors = {
         primary = {
-          background = "#24273a";
-          foreground = "#cad3f5";
-          dim_foreground = "#8087a2";
-          bright_foreground = "#cad3f5";
+          background = theme.colors.base;
+          foreground = theme.colors.text;
+          dim_foreground = theme.colors.subtext1;
+          bright_foreground = theme.colors.text;
         };
         cursor = {
-          text = "#24273a";
-          cursor = "#f4dbd6";
+          text = theme.colors.base;
+          cursor = theme.colors.rosewater;
         };
         vi_mode_cursor = {
-          text = "#24273a";
-          cursor = "#b7bdf8";
+          text = theme.colors.base;
+          cursor = theme.colors.lavender;
         };
         search = {
           matches = {
-            foreground = "#24273a";
-            background = "#a5adcb";
+            foreground = theme.colors.base;
+            background = theme.colors.subtext0;
           };
           focused_match = {
-            foreground = "#24273a";
-            background = "#a6da95";
+            foreground = theme.colors.base;
+            background = theme.colors.green;
           };
         };
         footer_bar = {
-          foreground = "#24273a";
-          background = "#a5adcb";
+          foreground = theme.colors.base;
+          background = theme.colors.subtext0;
         };
         hints = {
           start = {
-            foreground = "#24273a";
-            background = "#eed49f";
+            foreground = theme.colors.base;
+            background = theme.colors.yellow;
           };
           end = {
-            foreground = "#24273a";
-            background = "#a5adcb";
+            foreground = theme.colors.base;
+            background = theme.colors.subtext0;
           };
         };
         selection = {
-          text = "#24273a";
-          background = "#f4dbd6";
+          text = theme.colors.base;
+          background = theme.colors.rosewater;
         };
         normal = {
-          black = "#494d64";
-          red = "#ed8796";
-          green = "#a6da95";
-          yellow = "#eed49f";
-          blue = "#8aadf4";
-          magenta = "#f5bde6";
-          cyan = "#8bd5ca";
-          white = "#b8c0e0";
+          black = theme.colors.surface1;
+          red = theme.colors.red;
+          green = theme.colors.green;
+          yellow = theme.colors.yellow;
+          blue = theme.colors.blue;
+          magenta = theme.colors.pink;
+          cyan = theme.colors.teal;
+          white = theme.colors.subtext1;
         };
         bright = {
-          black = "#5b6078";
-          red = "#ed8796";
-          green = "#a6da95";
-          yellow = "#eed49f";
-          blue = "#8aadf4";
-          magenta = "#f5bde6";
-          cyan = "#8bd5ca";
-          white = "#a5adcb";
+          black = theme.colors.surface2;
+          red = theme.colors.red;
+          green = theme.colors.green;
+          yellow = theme.colors.yellow;
+          blue = theme.colors.blue;
+          magenta = theme.colors.pink;
+          cyan = theme.colors.teal;
+          white = theme.colors.subtext0;
         };
         dim = {
-          black = "#494d64";
-          red = "#ed8796";
-          green = "#a6da95";
-          yellow = "#eed49f";
-          blue = "#8aadf4";
-          magenta = "#f5bde6";
-          cyan = "#8bd5ca";
-          white = "#b8c0e0";
+          black = theme.colors.surface1;
+          red = theme.colors.red;
+          green = theme.colors.green;
+          yellow = theme.colors.yellow;
+          blue = theme.colors.blue;
+          magenta = theme.colors.pink;
+          cyan = theme.colors.teal;
+          white = theme.colors.subtext1;
         };
       };
       env = {

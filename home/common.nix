@@ -7,6 +7,11 @@
 }:
 {
   home.stateVersion = "25.11";
+
+  catppuccin.enable = true;
+  catppuccin.flavor = "mocha";
+  catppuccin.accent = "blue";
+
   home.packages = with pkgs; [
     chromium
     thunderbird
@@ -45,6 +50,7 @@
   programs.home-manager.enable = true;
 
   imports = [
+    inputs.catppuccin.homeModules.catppuccin
     ./bash.nix
     ./librewolf.nix
     ./matrix.nix
