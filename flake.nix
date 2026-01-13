@@ -29,6 +29,7 @@
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       username = "kurisu";
+      work-username = "andre.bortoli";
       name = "André Augusto Bortoli";
       hostname = "steins-gate";
       pkgs = import nixpkgs {
@@ -68,6 +69,25 @@
         };
         modules = [
           ./home/configuration.nix
+          {
+            nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
+          }
+        ];
+      };
+
+      homeConfigurations.${work-username} = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {
+          inherit
+            inputs
+            pkgs-unstable
+            system
+            ;
+          username = work-username;
+        };
+        modules = [
+          ./home/configuration.nix
+          ./home/work-overrides.nix
           {
             nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
           }

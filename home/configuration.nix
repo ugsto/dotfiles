@@ -50,6 +50,7 @@
 
     pkgs-unstable.devenv
     pkgs-unstable.kind
+    pkgs-unstable.wasistlos
 
     inputs.nvim.packages.${system}.default
   ];
