@@ -283,5 +283,6 @@ in
     swayidle
     mako
     wl-clip-persist
+    nerd-fonts.noto
   ];
 }
