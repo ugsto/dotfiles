@@ -3,12 +3,9 @@
   pkgs,
   pkgs-unstable,
   system,
-  username,
   ...
 }:
 {
-  home.username = username;
-  home.homeDirectory = "/home/${username}";
   home.stateVersion = "25.11";
   home.packages = with pkgs; [
     chromium
@@ -36,18 +33,6 @@
     zotero
     libreoffice
 
-    sunshine
-    dolphin-emu
-    transmission_4
-    bottles
-
-    (retroarch.withCores (
-      cores: with cores; [
-        dolphin
-        bsnes
-      ]
-    ))
-
     pkgs-unstable.devenv
     pkgs-unstable.kind
     pkgs-unstable.wasistlos
@@ -60,9 +45,7 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ./alacritty.nix
     ./bash.nix
-    ./sway.nix
     ./librewolf.nix
     ./matrix.nix
     ./obs.nix

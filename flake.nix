@@ -12,6 +12,10 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nvim = {
       url = "path:nvim";
     };
@@ -23,6 +27,7 @@
       nixpkgs-unstable,
       home-manager,
       nur,
+      nixgl,
       ...
     }@inputs:
     let
@@ -34,11 +39,17 @@
       hostname = "steins-gate";
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [ nur.overlays.default ];
+        overlays = [
+          nur.overlays.default
+          nixgl.overlay
+        ];
       };
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
-        overlays = [ nur.overlays.default ];
+        overlays = [
+          nur.overlays.default
+          nixgl.overlay
+        ];
       };
     in
     {
@@ -68,7 +79,7 @@
             ;
         };
         modules = [
-          ./home/configuration.nix
+          ./home/personal.nix
           {
             nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
           }
@@ -86,8 +97,7 @@
           username = work-username;
         };
         modules = [
-          ./home/configuration.nix
-          ./home/work-overrides.nix
+          ./home/work.nix
           {
             nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
           }
