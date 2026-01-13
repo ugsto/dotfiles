@@ -130,7 +130,7 @@ in
             size = 13.0;
           };
           position = "top";
-          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs /home/kurisu/.config/i3status-rust/config-main.toml";
+          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs $HOME/.config/i3status-rust/config-main.toml";
           colors = {
             background = "#1e1e2e";
             statusline = "#cdd6f4";
