@@ -61,14 +61,13 @@
   imports = [
     ./alacritty.nix
     ./bash.nix
-    ./hyprland.nix
+    ./sway.nix
     ./librewolf.nix
     ./matrix.nix
     ./obs.nix
     ./starship.nix
     ./syncthing.nix
     ./tmux.nix
-    # ./vscode.nix
     ./wofi.nix
   ];
 }
