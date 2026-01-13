@@ -8,7 +8,7 @@
 let
   browser = "${pkgs.librewolf}/bin/librewolf";
   terminal = "${config.programs.alacritty.package}/bin/alacritty";
-  menu = "${pkgs.wofi}/bin/wofi --show run";
+  menu = "${pkgs.wofi}/bin/wofi --show drun,run --insensitive --allow-images";
   print = "${pkgs.grimblast}/bin/grimblast save area \"$HOME/Imagens/Capturas de tela/Captura de tela de $(date '+%Y-%m-%d %H-%M-%S').png\"";
   increase-backlight = "${pkgs.light}/bin/light -A 5";
   decrease-backlight = "${pkgs.light}/bin/light -U 5";
