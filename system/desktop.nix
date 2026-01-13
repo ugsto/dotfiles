@@ -11,14 +11,14 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd sway";
         user = "greeter";
       };
     };
   };
 
   services.gvfs.enable = true;
-  programs.hyprland.enable = true;
+  programs.sway.enable = true;
   programs.light.enable = true;
   services.printing.enable = false;
   users.users.${username}.extraGroups = [ "video" ];
@@ -40,8 +40,7 @@
     enable = true;
     extraPortals = lib.mkForce [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-      # pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-wlr
     ];
   };
 }
