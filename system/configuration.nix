@@ -14,6 +14,7 @@
     ./locale.nix
     ./networking.nix
     ./security.nix
+    ./steam.nix
     ./virtualization.nix
   ];
 
