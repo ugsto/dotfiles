@@ -35,13 +35,19 @@
     k9s
     zotero
     libreoffice
+    zoom-us
 
     pkgs-unstable.devenv
     pkgs-unstable.kind
     pkgs-unstable.wasistlos
+    pkgs-unstable.freetube
 
     inputs.nvim.packages.${system}.default
+
     nerd-fonts.fira-code
+    font-awesome
+    freefont_ttf
+    liberation_ttf
   ];
   fonts.fontconfig.enable = true;
 
