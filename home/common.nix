@@ -13,7 +13,6 @@
   catppuccin.accent = "blue";
 
   home.packages = with pkgs; [
-    chromium
     thunderbird
     lazygit
     android-file-transfer
@@ -41,6 +40,8 @@
     pkgs-unstable.kind
     pkgs-unstable.wasistlos
     pkgs-unstable.freetube
+    antigravity
+    vscode
 
     inputs.nvim.packages.${system}.default
 
@@ -50,6 +51,8 @@
     liberation_ttf
   ];
   fonts.fontconfig.enable = true;
+  xdg.mime.enable = true;
+  xdg.desktopEntries = { };
 
   programs.fzf.enableBashIntegration = true;
   programs.home-manager.enable = true;
@@ -57,6 +60,7 @@
   imports = [
     inputs.catppuccin.homeModules.catppuccin
     ./bash.nix
+    ./chromium.nix
     ./librewolf.nix
     ./matrix.nix
     ./obs.nix

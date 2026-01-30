@@ -21,6 +21,7 @@
         ts_ls.enable = true;
         marksman.enable = true;
         ruff.enable = true;
+        rust_analyzer.enable = false;
         pyright.enable = true;
         gopls.enable = true;
         terraformls.enable = true;
@@ -29,7 +30,13 @@
         dockerls.enable = true;
         clangd = {
           enable = true;
-          filetypes = [ "c" "cpp" "objc" "objcpp" "cuda" ];
+          filetypes = [
+            "c"
+            "cpp"
+            "objc"
+            "objcpp"
+            "cuda"
+          ];
         };
         protols.enable = true;
         svelte.enable = true;

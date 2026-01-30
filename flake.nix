@@ -98,6 +98,9 @@
             nixpkgs.config.allowUnfreePredicate =
               pkg:
               builtins.elem (lib.getName pkg) [
+                "antigravity"
+                "vscode"
+                "aseprite"
                 "zoom-us"
                 "zoom"
               ];
@@ -119,7 +122,12 @@
         modules = [
           ./home/work.nix
           {
-            nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
+            nixpkgs.config.allowUnfreePredicate =
+              pkg:
+              builtins.elem (lib.getName pkg) [
+                "antigravity"
+                "vscode"
+              ];
           }
         ];
       };
