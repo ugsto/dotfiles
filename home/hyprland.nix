@@ -1,17 +1,11 @@
-{
-  pkgs,
-  pkgs-unstable,
-  ...
-}:
+{ pkgs, ... }:
 let
   browser = "${pkgs.librewolf}/bin/librewolf";
   terminal = "${pkgs.alacritty}/bin/alacritty";
   menu = "${pkgs.wofi}/bin/wofi --show run";
   print = "${pkgs.grimblast}/bin/grimblast save area \"$HOME/Imagens/Capturas de tela/Captura de tela de $(date '+%Y-%m-%d %H-%M-%S').png\"";
-  mail = "${pkgs.thunderbird}/bin/thunderbird";
   increase-backlight = "${pkgs.light}/bin/light -A 5";
   decrease-backlight = "${pkgs.light}/bin/light -U 5";
-  password-manager = "${pkgs-unstable.keepassxc}/bin/keepassxc";
 in
 {
   wayland.windowManager.hyprland = {

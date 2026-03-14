@@ -2,7 +2,7 @@
   inputs,
   pkgs,
   pkgs-unstable,
-  system,
+  pkgs-custom,
   ...
 }:
 {
@@ -13,7 +13,6 @@
   catppuccin.accent = "blue";
 
   home.packages = with pkgs; [
-    thunderbird
     lazygit
     android-file-transfer
     zbar
@@ -31,19 +30,25 @@
     torsocks
     bc
     kubectl
+    kubernetes-helm
     k9s
     zotero
     libreoffice
     zoom-us
+    trilium-desktop
 
     pkgs-unstable.devenv
     pkgs-unstable.kind
     pkgs-unstable.wasistlos
     pkgs-unstable.freetube
-    antigravity
+    pkgs-unstable.antigravity
+    pkgs-unstable.claude-code
+    pkgs-unstable.gemini-cli
+    pkgs-unstable.codex
     vscode
 
-    inputs.nvim.packages.${system}.default
+    pkgs-custom.nvim
+    pkgs-custom.betterbird
 
     nerd-fonts.fira-code
     font-awesome
