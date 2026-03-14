@@ -8,7 +8,7 @@
 let
   browser = "${pkgs.librewolf}/bin/librewolf";
   terminal = "${config.programs.alacritty.package}/bin/alacritty";
-  menu = "${pkgs.wofi}/bin/wofi --show drun,run --insensitive --allow-images";
+  menu = "${pkgs.wofi}/bin/wofi --show run --insensitive --allow-images";
   print = "${pkgs.wayfreeze}/bin/wayfreeze --after-freeze-cmd '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy; pkill wayfreeze'";
   increase-backlight = "${pkgs.light}/bin/light -A 5";
   decrease-backlight = "${pkgs.light}/bin/light -U 5";
@@ -304,5 +304,6 @@ in
     grim
     slurp
     wl-clipboard
+    xfce.thunar
   ];
 }

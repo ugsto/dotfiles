@@ -18,7 +18,7 @@
     };
     catppuccin.url = "github:catppuccin/nix";
     nvim = {
-      url = "path:nvim";
+      url = "path:pkgs/nvim";
     };
   };
   outputs =
@@ -52,6 +52,12 @@
           nur.overlays.default
           nixgl.overlay
         ];
+        config.allowUnfreePredicate =
+          pkg:
+          builtins.elem (lib.getName pkg) [
+            "antigravity"
+            "claude-code"
+          ];
       };
       theme = import ./home/theme.nix;
     in
@@ -75,6 +81,7 @@
                 builtins.elem (lib.getName pkg) [
                   "steam"
                   "steam-unwrapped"
+                  "vagrant"
                 ];
             }
           ];
@@ -91,6 +98,10 @@
             username
             theme
             ;
+          pkgs-custom = {
+            nvim = inputs.nvim.packages.${system}.default;
+            betterbird = pkgs.callPackage ./pkgs/by-name/be/betterbird/package.nix { };
+          };
         };
         modules = [
           ./home/personal.nix
@@ -98,7 +109,6 @@
             nixpkgs.config.allowUnfreePredicate =
               pkg:
               builtins.elem (lib.getName pkg) [
-                "antigravity"
                 "vscode"
                 "aseprite"
                 "zoom-us"
@@ -125,7 +135,6 @@
             nixpkgs.config.allowUnfreePredicate =
               pkg:
               builtins.elem (lib.getName pkg) [
-                "antigravity"
                 "vscode"
               ];
           }
