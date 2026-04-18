@@ -41,11 +41,7 @@
     pkgs-unstable.kind
     pkgs-unstable.wasistlos
     pkgs-unstable.freetube
-    pkgs-unstable.antigravity
-    pkgs-unstable.claude-code
-    pkgs-unstable.gemini-cli
-    pkgs-unstable.codex
-    vscode
+    pkgs-unstable.opencode
 
     pkgs-custom.nvim
     pkgs-custom.betterbird
