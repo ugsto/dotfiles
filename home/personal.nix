@@ -8,6 +8,7 @@
     ./common.nix
     ./gaming.nix
     ./sway.nix
+    ./noctalia.nix
     ./alacritty.nix
   ];
 

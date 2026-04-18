@@ -10,4 +10,7 @@
 
   networking.firewall.enable = false;
   networking.nftables.enable = false;
+
+  programs.adb.enable = true;
+  users.users.kurisu.extraGroups = [ "adbusers" ];
 }
