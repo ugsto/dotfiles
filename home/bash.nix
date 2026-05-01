@@ -16,6 +16,11 @@
     initExtra = ''
       set -o vi
 
+      case ":$PATH:" in
+        *:"$HOME/.cargo/bin":*) ;;
+        *) PATH="$PATH:$HOME/.cargo/bin" ;;
+      esac
+
       if command -v tmux >&- && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
         exec tmux
       fi

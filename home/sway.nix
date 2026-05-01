@@ -2,7 +2,7 @@
   pkgs,
   lib,
   config,
-  theme,
+  inputs,
   ...
 }:
 let
@@ -13,26 +13,14 @@ let
   increase-backlight = "${pkgs.light}/bin/light -A 5";
   decrease-backlight = "${pkgs.light}/bin/light -U 5";
 
-  idle-script = pkgs.writeShellScript "sway-idle" ''
-    #!/usr/bin/env bash
-
-    light -O
-    light -S 10
-
-    sleep 10
-
-    if grep -q 1 /sys/class/power_supply/AC/online; then
-        swaymsg "output * power off"
-    else
-        systemctl suspend
-    fi
-  '';
-
   modifier = "Mod4";
 in
 {
+  imports = [
+    ./noctalia.nix
+  ];
+
   catppuccin.sway.enable = false;
-  catppuccin.swaylock.enable = false;
   wayland.windowManager.sway = {
     enable = true;
     checkConfig = false;
@@ -55,12 +43,10 @@ in
         "eDP-1" = {
           mode = "1920x1080@60.010Hz";
           pos = "1366 0";
-          bg = "${./wallpapers/columbina-hand.png} fill";
         };
         "HDMI-A-1" = {
           mode = "1366x768@60Hz";
           pos = "0 0";
-          bg = "${./wallpapers/columbina-moon.png} fill";
         };
       };
 
@@ -127,51 +113,16 @@ in
           ) 9
         ));
 
-      bars = [
+      startup = [
         {
-          fonts = {
-            names = [ "NotoSans Nerd Font" ];
-            size = 12.0;
-          };
-          position = "top";
-          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs $HOME/.config/i3status-rust/config-main.toml";
-          extraConfig = ''
-            height 24
-            workspace_buttons yes
-            strip_workspace_numbers yes
-          '';
-          colors = {
-            background = theme.colors.base;
-            statusline = theme.colors.text;
-            separator = theme.colors.surface0;
-            focusedWorkspace = {
-              border = theme.colors.blue;
-              background = theme.colors.blue;
-              text = theme.colors.crust;
-            };
-            activeWorkspace = {
-              border = theme.colors.surface1;
-              background = theme.colors.surface1;
-              text = theme.colors.text;
-            };
-            inactiveWorkspace = {
-              border = theme.colors.base;
-              background = theme.colors.base;
-              text = theme.colors.overlay0;
-            };
-            urgentWorkspace = {
-              border = theme.colors.red;
-              background = theme.colors.red;
-              text = theme.colors.crust;
-            };
-            bindingMode = {
-              border = theme.colors.lavender;
-              background = theme.colors.lavender;
-              text = theme.colors.crust;
-            };
-          };
+          command = "${
+            inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+          }/bin/noctalia-shell";
+          always = true;
         }
       ];
+
+      bars = [ ];
     };
 
     extraConfig = ''
@@ -180,124 +131,7 @@ in
     '';
   };
 
-  services.mako = {
-    enable = true;
-    settings = {
-      background-color = theme.colors.base;
-      text-color = theme.colors.text;
-      border-color = theme.colors.blue;
-      border-radius = 10;
-      border-size = 2;
-      default-timeout = 5000;
-    };
-  };
-
-  programs.i3status-rust = {
-    enable = true;
-    bars = {
-      main = {
-        blocks = [
-          {
-            block = "cpu";
-            format = " $icon  $utilization.eng(w:2) ";
-            theme_overrides = {
-              idle_bg = theme.colors.blue;
-              idle_fg = theme.colors.crust;
-            };
-          }
-          {
-            block = "memory";
-            format = " $icon  $mem_used_percents.eng(w:2) ";
-            theme_overrides = {
-              idle_bg = theme.colors.teal;
-              idle_fg = theme.colors.crust;
-            };
-          }
-          {
-            block = "net";
-            device = "enp2s0";
-            format = " $icon  eth ";
-            missing_format = "";
-            theme_overrides = {
-              idle_bg = theme.colors.green;
-              idle_fg = theme.colors.crust;
-            };
-          }
-          {
-            block = "net";
-            device = "wlp3s0";
-            format = " $icon  $ssid $signal_strength ";
-            missing_format = "";
-            theme_overrides = {
-              idle_bg = theme.colors.yellow;
-              idle_fg = theme.colors.crust;
-            };
-          }
-          {
-            block = "battery";
-            format = " $icon ";
-            theme_overrides = {
-              idle_bg = theme.colors.peach;
-              idle_fg = theme.colors.crust;
-            };
-          }
-          {
-            block = "time";
-            format = " $icon  $timestamp.datetime(f:'%a %d/%m %R') ";
-            theme_overrides = {
-              idle_bg = theme.colors.mauve;
-              idle_fg = theme.colors.crust;
-            };
-          }
-        ];
-        settings = {
-          theme = {
-            theme = "ctp-mocha";
-            overrides = {
-              separator = "";
-            };
-          };
-          icons = {
-            icons = "material-nf";
-          };
-        };
-      };
-    };
-  };
-
-  services.swayidle = {
-    enable = true;
-    extraArgs = [ "idlehaskinhibitor" ];
-    timeouts = [
-      {
-        timeout = 300;
-        command = "${idle-script}";
-        resumeCommand = "light -I && swaymsg \"output * power on\"";
-      }
-    ];
-  };
-
-  programs.swaylock = {
-    enable = true;
-    package = pkgs.swaylock-effects;
-    settings = {
-      color = theme.colors.base;
-      ring-color = theme.colors.surface2;
-      line-color = theme.colors.surface0;
-      inside-color = theme.colors.base;
-      key-hl-color = theme.colors.blue;
-      separator-color = theme.colors.surface0;
-
-      font-size = 2;
-      indicator-idle-visible = true;
-      indicator-radius = 100;
-    };
-  };
-
   home.packages = with pkgs; [
-    swaylock-effects
-    swayidle
-    mako
     wl-clip-persist
     nerd-fonts.noto
     wayfreeze

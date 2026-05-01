@@ -6,7 +6,6 @@
     transmission_4
     bottles
     veloren
-    aseprite
     (retroarch.withCores (
       cores: with cores; [
         dolphin

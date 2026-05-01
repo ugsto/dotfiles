@@ -36,12 +36,12 @@
     libreoffice
     zoom-us
     trilium-desktop
+    yazi
 
     pkgs-unstable.devenv
     pkgs-unstable.kind
     pkgs-unstable.wasistlos
     pkgs-unstable.freetube
-    pkgs-unstable.opencode
 
     pkgs-custom.nvim
     pkgs-custom.betterbird
@@ -59,7 +59,6 @@
   programs.home-manager.enable = true;
 
   imports = [
-    inputs.catppuccin.homeModules.catppuccin
     ./bash.nix
     ./chromium.nix
     ./librewolf.nix
