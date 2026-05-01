@@ -75,6 +75,8 @@
             };
           };
         };
+        ruby_lsp.enable = true;
+        rubocop.enable = true;
       };
 
       keymaps = {

@@ -1,62 +1,123 @@
-{ pkgs, inputs, ... }:
 {
-  home-manager.users.drfoobar = {
-    imports = [
-      inputs.noctalia.homeModules.default
-    ];
-
-    programs.noctalia-shell = {
-      enable = true;
-      settings = {
-        bar = {
-          density = "compact";
-          position = "right";
-          showCapsule = false;
-          widgets = {
-            left = [
-              {
-                id = "ControlCenter";
-                useDistroLogo = true;
-              }
-              {
-                id = "Network";
-              }
-              {
-                id = "Bluetooth";
-              }
-            ];
-            center = [
-              {
-                hideUnoccupied = false;
-                id = "Workspace";
-                labelMode = "none";
-              }
-            ];
-            right = [
-              {
-                alwaysShowPercentage = false;
-                id = "Battery";
-                warningThreshold = 30;
-              }
-              {
-                formatHorizontal = "HH:mm";
-                formatVertical = "HH mm";
-                id = "Clock";
-                useMonospacedFont = true;
-                usePrimaryColor = true;
-              }
-            ];
-          };
+  programs.noctalia-shell = {
+    enable = true;
+    settings = {
+      bar = {
+        density = "compact";
+        position = "top";
+        showCapsule = true;
+        widgets = {
+          left = [
+            {
+              id = "ControlCenter";
+              useDistroLogo = true;
+            }
+          ];
+          center = [
+            {
+              id = "Workspace";
+              hideUnoccupied = false;
+              labelMode = "none";
+            }
+          ];
+          right = [
+            {
+              id = "Clock";
+              formatHorizontal = "HH:mm";
+              useMonospacedFont = true;
+            }
+            {
+              id = "Bluetooth";
+            }
+            {
+              id = "Network";
+            }
+            {
+              id = "Battery";
+            }
+            {
+              id = "Tray";
+            }
+          ];
         };
-        colorSchemes.predefinedScheme = "Monochrome";
-        general = {
-          avatarImage = "/home/drfoobar/.face";
-          radiusRatio = 0.2;
+      };
+      colorSchemes.predefinedScheme = "Catppuccin Mocha";
+      general = {
+        radiusRatio = 0.5;
+        fontSize = 0.8;
+      };
+      location = {
+        weatherEnabled = false;
+        autoLocate = false;
+      };
+      idle = {
+        enabled = true;
+        screenOffTimeout = 600;
+        fadeDuration = 5;
+        screenOffCommand = "swaymsg \"output * power off\"";
+        resumeScreenOffCommand = "swaymsg \"output * power on\"";
+        customCommands = "[]";
+      };
+      dock.enabled = false;
+      controlCenter = {
+        position = "close_to_bar_button";
+        diskPath = "/";
+        shortcuts = {
+          left = [
+            {
+              id = "Network";
+            }
+            {
+              id = "Bluetooth";
+            }
+            {
+              id = "WallpaperSelector";
+            }
+            {
+              id = "NoctaliaPerformance";
+            }
+          ];
+          right = [
+            {
+              id = "Notifications";
+            }
+            {
+              id = "PowerProfile";
+            }
+            {
+              id = "KeepAwake";
+            }
+            {
+              id = "NightLight";
+            }
+          ];
         };
-        location = {
-          monthBeforeDay = true;
-          name = "Marseille, France";
-        };
+        cards = [
+          {
+            enabled = true;
+            id = "profile-card";
+          }
+          {
+            enabled = true;
+            id = "shortcuts-card";
+          }
+          {
+            enabled = true;
+            id = "audio-card";
+          }
+          {
+            enabled = true;
+            id = "brightness-card";
+          }
+          {
+            enabled = false;
+            id = "weather-card";
+          }
+          {
+            enabled = false;
+            id = "media-sysmon-card";
+          }
+        ];
       };
     };
   };
