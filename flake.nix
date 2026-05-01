@@ -19,7 +19,7 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin.url = "github:catppuccin/nix/release-25.11";
     nvim = {
       url = "path:pkgs/nvim";
     };
@@ -32,7 +32,6 @@
       home-manager,
       nur,
       nixgl,
-      catppuccin,
       ...
     }@inputs:
     let
@@ -101,13 +100,14 @@
           };
         };
         modules = [
+          inputs.catppuccin.homeModules.catppuccin
+          inputs.noctalia.homeModules.default
           ./home/personal.nix
           {
             nixpkgs.config.allowUnfreePredicate =
               pkg:
               builtins.elem (lib.getName pkg) [
                 "vscode"
-                "aseprite"
                 "zoom-us"
                 "zoom"
               ];
