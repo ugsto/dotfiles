@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   pkgs-unstable,
   pkgs-custom,
@@ -37,11 +36,19 @@
     zoom-us
     trilium-desktop
     yazi
+    drawio
 
     pkgs-unstable.devenv
     pkgs-unstable.kind
-    pkgs-unstable.wasistlos
     pkgs-unstable.freetube
+    pkgs-unstable.ferdium
+    pkgs-unstable.openscad
+    pkgs-unstable.freecad
+    pkgs-unstable.opencode
+    pkgs-unstable.solvespace
+    pkgs-unstable.tor-browser
+    pkgs-unstable.arduino
+    pkgs-unstable.blender
 
     pkgs-custom.nvim
     pkgs-custom.betterbird
@@ -50,6 +57,15 @@
     font-awesome
     freefont_ttf
     liberation_ttf
+
+    pkgs.ruff
+    pkgs.nixfmt-rfc-style
+    pkgs.jq
+    pkgs.stylua
+    pkgs.shellcheck
+    pkgs.shfmt
+    pkgs.shellharden
+    pkgs.bicep
   ];
   fonts.fontconfig.enable = true;
   xdg.mime.enable = true;
