@@ -5,39 +5,38 @@
   ...
 }:
 {
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "amdgpu" ];
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd sway";
-        user = "greeter";
+  services = {
+    xserver = {
+      enable = true;
+      videoDrivers = [ "amdgpu" ];
+    };
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd sway";
+          user = "greeter";
+        };
       };
     };
+    gvfs.enable = true;
+    printing.enable = false;
+    flatpak.enable = true;
+    dbus.enable = true;
   };
 
-  services.gvfs.enable = true;
-  programs.sway.enable = true;
-  programs.light.enable = true;
-  services.printing.enable = false;
+  programs = {
+    sway.enable = true;
+    light.enable = true;
+    gamemode.enable = true;
+    gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
+    dconf.enable = true;
+  };
+
   users.users.${username}.extraGroups = [ "video" ];
-
-  programs.gamemode.enable = true;
-  programs.gamescope = {
-    enable = true;
-    capSysNice = true;
-  };
-  programs.dconf.enable = true;
-
-  services.flatpak.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    gnome-themes-extra
-    adwaita-icon-theme
-  ];
-
-  services.dbus.enable = true;
   xdg.portal = {
     enable = true;
     extraPortals = lib.mkForce [
