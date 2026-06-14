@@ -4,6 +4,7 @@
   home.packages = [ pkgs-unstable.keepassxc ];
   programs.librewolf = {
     enable = true;
+    package = pkgs-unstable.librewolf;
     nativeMessagingHosts = [ pkgs-unstable.keepassxc ];
     profiles.kurisu = {
       search.engines = {
