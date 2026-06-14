@@ -49,30 +49,30 @@
         };
         normal = {
           black = theme.colors.surface1;
-          red = theme.colors.red;
-          green = theme.colors.green;
-          yellow = theme.colors.yellow;
-          blue = theme.colors.blue;
+          inherit (theme.colors) red;
+          inherit (theme.colors) green;
+          inherit (theme.colors) yellow;
+          inherit (theme.colors) blue;
           magenta = theme.colors.pink;
           cyan = theme.colors.teal;
           white = theme.colors.subtext1;
         };
         bright = {
           black = theme.colors.surface2;
-          red = theme.colors.red;
-          green = theme.colors.green;
-          yellow = theme.colors.yellow;
-          blue = theme.colors.blue;
+          inherit (theme.colors) red;
+          inherit (theme.colors) green;
+          inherit (theme.colors) yellow;
+          inherit (theme.colors) blue;
           magenta = theme.colors.pink;
           cyan = theme.colors.teal;
           white = theme.colors.subtext0;
         };
         dim = {
           black = theme.colors.surface1;
-          red = theme.colors.red;
-          green = theme.colors.green;
-          yellow = theme.colors.yellow;
-          blue = theme.colors.blue;
+          inherit (theme.colors) red;
+          inherit (theme.colors) green;
+          inherit (theme.colors) yellow;
+          inherit (theme.colors) blue;
           magenta = theme.colors.pink;
           cyan = theme.colors.teal;
           white = theme.colors.subtext1;

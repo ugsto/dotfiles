@@ -8,20 +8,23 @@
     vagrant
   ];
 
-  virtualisation.docker = {
-    enable = true;
-    rootless = {
-      enable = false;
-      setSocketVariable = true;
+  virtualisation = {
+    docker = {
+      enable = true;
+      rootless = {
+        enable = false;
+        setSocketVariable = true;
+      };
     };
+    virtualbox.host.enable = true;
+    libvirtd.enable = true;
   };
+
   users.users.${username}.extraGroups = [
     "docker"
     "libvirtd"
   ];
 
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.libvirtd.enable = true;
   services.nfs.server.enable = true;
   users.extraGroups.vboxusers.members = [ username ];
 
