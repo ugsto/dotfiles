@@ -8,7 +8,7 @@
 let
   browser = "${pkgs.librewolf}/bin/librewolf";
   terminal = "${config.programs.alacritty.package}/bin/alacritty";
-  menu = "${pkgs.wofi}/bin/wofi --show run --insensitive --allow-images";
+  menu = "${pkgs.wofi}/bin/wofi --show drun --insensitive --allow-images --no-actions";
   print = "${pkgs.wayfreeze}/bin/wayfreeze --after-freeze-cmd '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy; pkill wayfreeze'";
   increase-backlight = "${pkgs.light}/bin/light -A 5";
   decrease-backlight = "${pkgs.light}/bin/light -U 5";
@@ -41,7 +41,7 @@ in
 
       output = {
         "eDP-1" = {
-          mode = "1920x1080@60.010Hz";
+          mode = "1600x1200@60.010Hz";
           pos = "1366 0";
         };
         "HDMI-A-1" = {
