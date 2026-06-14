@@ -11,8 +11,17 @@
     ./alacritty.nix
   ];
 
-  home.username = username;
-  home.homeDirectory = "/home/${username}";
+  home = {
+    inherit username;
+    homeDirectory = "/home/${username}";
+    sessionPath = [
+      "$HOME/.nix-profile/bin"
+      "$HOME/.local/bin"
+    ];
+    sessionVariables = lib.mkForce {
+      XDG_DATA_DIRS = "$HOME/.nix-profile/share:$HOME/.local/share:$XDG_DATA_DIRS:/usr/local/share:/usr/share";
+    };
+  };
 
   targets.genericLinux.enable = true;
 
@@ -32,14 +41,8 @@
           --add-flags "${pkgs.alacritty}/bin/alacritty"
       '';
 
-  xdg.enable = true;
-  xdg.mime.enable = true;
-
-  home.sessionPath = [
-    "$HOME/.nix-profile/bin"
-    "$HOME/.local/bin"
-  ];
-  home.sessionVariables = lib.mkForce {
-    XDG_DATA_DIRS = "$HOME/.nix-profile/share:$HOME/.local/share:$XDG_DATA_DIRS:/usr/local/share:/usr/share";
+  xdg = {
+    enable = true;
+    mime.enable = true;
   };
 }

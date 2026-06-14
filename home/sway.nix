@@ -25,9 +25,9 @@ in
     enable = true;
     checkConfig = false;
     config = {
-      modifier = modifier;
-      terminal = terminal;
-      menu = menu;
+      inherit modifier;
+      inherit terminal;
+      inherit menu;
 
       input = {
         "*" = {
