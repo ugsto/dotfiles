@@ -45,12 +45,12 @@
 }:
 
 let
-  version = "140.9.0esr-bb20";
+  version = "140.11.0esr-bb23";
 
   sources = {
     x86_64-linux = {
       url = "https://www.betterbird.eu/downloads/LinuxArchive/betterbird-${version}.en-US.linux-x86_64.tar.xz";
-      hash = "sha256:YtBAy1vz59Nezk0mcA+TJPPhc2dkhCHl4XfH0Zo5MCQ=";
+      hash = "sha256:f5feH3Yj1XsKTaKJyEGJ3zASrwKTulFNDoowtaLYSyU=";
     };
   };
 
