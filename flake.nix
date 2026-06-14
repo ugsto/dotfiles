@@ -27,13 +27,11 @@
   };
   outputs =
     {
-      self,
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
       nur,
       nixgl,
-      nix-flatpak,
       ...
     }@inputs:
     let
@@ -128,9 +126,21 @@
             ;
           username = work-username;
         };
-        modules = [
-          ./home/work.nix
+        modules = [ ./home/work.nix ];
+      };
+
+      devShells.${system}.default = pkgs.mkShell {
+        name = "dotfiles-shell";
+        buildInputs = with pkgs; [
+          pre-commit
+          detect-secrets
+          deadnix
+          statix
+          nixfmt-rfc-style
         ];
+        shellHook = ''
+          pre-commit install
+        '';
       };
     };
 }
