@@ -12,7 +12,7 @@
   };
 
   home = {
-    stateVersion = "25.11";
+    stateVersion = "26.05";
     packages = with pkgs; [
       lazygit
       android-file-transfer
@@ -61,9 +61,10 @@
       liberation_ttf
 
       pkgs.ruff
-      pkgs.nixfmt-rfc-style
+      pkgs.nixfmt
       pkgs.jq
       pkgs.stylua
+
       pkgs.shellcheck
       pkgs.shfmt
       pkgs.shellharden

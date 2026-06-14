@@ -1,10 +1,10 @@
 {
   description = "My dotfiles!";
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-25.11";
+    nixpkgs.url = "nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur = {
@@ -19,7 +19,7 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin.url = "github:catppuccin/nix/release-25.11";
+    catppuccin.url = "github:catppuccin/nix/release-26.05";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nvim = {
       url = "path:pkgs/nvim";
@@ -58,7 +58,7 @@
       theme = import ./home/theme.nix;
     in
     {
-      formatter.${system} = pkgs.nixfmt-rfc-style;
+      formatter.${system} = pkgs.nixfmt;
 
       nixosConfigurations = {
         ${hostname} = lib.nixosSystem {
@@ -136,7 +136,7 @@
           detect-secrets
           deadnix
           statix
-          nixfmt-rfc-style
+          nixfmt
         ];
         shellHook = ''
           pre-commit install
