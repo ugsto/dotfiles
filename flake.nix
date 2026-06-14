@@ -20,6 +20,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin.url = "github:catppuccin/nix/release-25.11";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nvim = {
       url = "path:pkgs/nvim";
     };
@@ -32,6 +33,7 @@
       home-manager,
       nur,
       nixgl,
+      nix-flatpak,
       ...
     }@inputs:
     let
@@ -75,9 +77,8 @@
               nixpkgs.config.allowUnfreePredicate =
                 pkg:
                 builtins.elem (lib.getName pkg) [
-                  "steam"
-                  "steam-unwrapped"
                   "vagrant"
+                  "drawio"
                 ];
             }
           ];
@@ -100,6 +101,7 @@
           };
         };
         modules = [
+          inputs.nix-flatpak.homeManagerModules.nix-flatpak
           inputs.catppuccin.homeModules.catppuccin
           inputs.noctalia.homeModules.default
           ./home/personal.nix
@@ -107,9 +109,9 @@
             nixpkgs.config.allowUnfreePredicate =
               pkg:
               builtins.elem (lib.getName pkg) [
-                "vscode"
                 "zoom-us"
                 "zoom"
+                "drawio"
               ];
           }
         ];
@@ -128,13 +130,6 @@
         };
         modules = [
           ./home/work.nix
-          {
-            nixpkgs.config.allowUnfreePredicate =
-              pkg:
-              builtins.elem (lib.getName pkg) [
-                "vscode"
-              ];
-          }
         ];
       };
     };

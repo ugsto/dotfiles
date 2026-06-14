@@ -30,6 +30,8 @@
   };
   programs.dconf.enable = true;
 
+  services.flatpak.enable = true;
+
   environment.systemPackages = with pkgs; [
     gnome-themes-extra
     adwaita-icon-theme
