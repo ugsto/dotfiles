@@ -7,7 +7,7 @@
     ./modules/plugin/lsp/rustaceanvim.nix
     ./modules/plugin/lsp/treesitter.nix
     ./modules/plugin/utils/cmp.nix
-    ./modules/plugin/utils/diffviw.nix
+    ./modules/plugin/utils/diffview.nix
     ./modules/plugin/utils/flash.nix
     ./modules/plugin/utils/gitsigns.nix
     ./modules/plugin/utils/guess-indent.nix
