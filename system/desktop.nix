@@ -27,11 +27,6 @@
 
   programs = {
     sway.enable = true;
-    gamemode.enable = true;
-    gamescope = {
-      enable = true;
-      capSysNice = true;
-    };
     dconf.enable = true;
   };
 

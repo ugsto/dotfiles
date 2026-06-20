@@ -6,7 +6,6 @@
 {
   imports = [
     ./common.nix
-    ./gaming.nix
     ./sway.nix
     ./alacritty.nix
   ];
