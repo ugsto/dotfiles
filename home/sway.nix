@@ -9,8 +9,8 @@ let
   terminal = "${config.programs.alacritty.package}/bin/alacritty";
   menu = "${pkgs.wofi}/bin/wofi --show drun --insensitive --allow-images --no-actions";
   print = "${pkgs.wayfreeze}/bin/wayfreeze --after-freeze-cmd '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy; pkill wayfreeze'";
-  increase-backlight = "${pkgs.light}/bin/light -A 5";
-  decrease-backlight = "${pkgs.light}/bin/light -U 5";
+  increase-backlight = "${pkgs.brightnessctl}/bin/brightnessctl set +5%";
+  decrease-backlight = "${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
 
   modifier = "Mod4";
 in
