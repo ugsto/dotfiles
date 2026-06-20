@@ -31,6 +31,8 @@
     packages = [
       "com.bambulab.BambuStudio"
       "io.github.tobagin.karere"
+      "org.skytemple.SkyTemple"
+      "io.github.marco_calautti.DeltaPatcher"
     ];
     remotes = [
       {
