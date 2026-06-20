@@ -43,6 +43,15 @@
       hostname = "steins-gate";
       pkgs = import nixpkgs {
         inherit system;
+        config.allowUnfreePredicate =
+          pkg:
+          builtins.elem (lib.getName pkg) [
+            "grok"
+            "vagrant"
+            "drawio"
+            "zoom"
+            "zoom-us"
+          ];
         overlays = [
           nur.overlays.default
           nixgl.overlay
@@ -77,6 +86,7 @@
                 builtins.elem (lib.getName pkg) [
                   "vagrant"
                   "drawio"
+                  "grok"
                 ];
             }
           ];
@@ -96,6 +106,7 @@
           pkgs-custom = {
             nvim = inputs.nvim.packages.${system}.default;
             betterbird = pkgs.callPackage ./pkgs/by-name/be/betterbird/package.nix { };
+            grok = pkgs.callPackage ./pkgs/by-name/gr/grok/package.nix { };
           };
         };
         modules = [
@@ -110,6 +121,7 @@
                 "zoom-us"
                 "zoom"
                 "drawio"
+                "grok"
               ];
           }
         ];
