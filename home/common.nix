@@ -43,13 +43,10 @@
       pkgs-unstable.kind
       pkgs-unstable.freetube
       pkgs-unstable.ferdium
-      pkgs-unstable.openscad
-      pkgs-unstable.freecad
-      pkgs-unstable.opencode
-      pkgs-unstable.solvespace
       pkgs-unstable.tor-browser
       pkgs-unstable.arduino
       pkgs-unstable.blender
+      pkgs-unstable.doctl
 
       pkgs-custom.nvim
       pkgs-custom.betterbird
