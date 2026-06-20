@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-unstable,
   username,
   ...
 }:
@@ -11,7 +12,10 @@
   ];
 
   home = {
-    packages = [ pkgs.polkit_gnome ];
+    packages = [
+      pkgs.polkit_gnome
+      pkgs-unstable.opencode
+    ];
     inherit username;
     homeDirectory = "/home/${username}";
     sessionVariables = {
