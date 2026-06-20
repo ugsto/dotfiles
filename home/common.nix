@@ -25,7 +25,6 @@
       fzf
       jaq
       tcpdump
-      light
       pavucontrol
       tor
       torsocks

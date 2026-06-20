@@ -38,6 +38,7 @@
     vim
     wget
     perf
+    brightnessctl
   ];
 
   programs.git = {

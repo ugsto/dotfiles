@@ -27,7 +27,6 @@
 
   programs = {
     sway.enable = true;
-    light.enable = true;
     gamemode.enable = true;
     gamescope = {
       enable = true;
