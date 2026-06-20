@@ -11,10 +11,13 @@
     ./alacritty.nix
   ];
 
+  # programs.antigravity-cli.enable = true;
+
   home = {
     packages = [
       pkgs.polkit_gnome
       pkgs-unstable.opencode
+      pkgs-unstable.antigravity-cli
     ];
     inherit username;
     homeDirectory = "/home/${username}";
