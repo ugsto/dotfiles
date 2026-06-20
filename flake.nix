@@ -59,6 +59,11 @@
       };
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
+        config.allowUnfreePredicate =
+          pkg:
+          builtins.elem (lib.getName pkg) [
+            "antigravity-cli"
+          ];
         overlays = [
           nur.overlays.default
           nixgl.overlay
