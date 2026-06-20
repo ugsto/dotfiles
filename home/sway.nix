@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  inputs,
   ...
 }:
 let
@@ -74,7 +73,8 @@ in
           "${modifier}+Shift+Return" = "exec ${terminal}";
           "${modifier}+r" = "exec ${menu}";
           "${modifier}+q" = "kill";
-          "${modifier}+m" = "exit";
+          "${modifier}+m" =
+            "exec ${config.programs.noctalia.package}/bin/noctalia msg panel-toggle control-center";
           "${modifier}+v" = "floating toggle";
           "${modifier}+f" = "fullscreen toggle";
           "${modifier}+h" = "focus left";
@@ -113,14 +113,7 @@ in
           ) 9
         ));
 
-      startup = [
-        {
-          command = "${
-            inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-          }/bin/noctalia-shell";
-          always = true;
-        }
-      ];
+      startup = [ ];
 
       bars = [ ];
     };
