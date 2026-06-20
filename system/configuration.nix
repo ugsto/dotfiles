@@ -39,6 +39,7 @@
     wget
     perf
     brightnessctl
+    android-tools
   ];
 
   programs.git = {
