@@ -131,6 +131,6 @@ in
     grim
     slurp
     wl-clipboard
-    xfce.thunar
+    thunar
   ];
 }
