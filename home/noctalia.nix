@@ -1,123 +1,94 @@
 {
-  programs.noctalia-shell = {
+  programs.noctalia = {
     enable = true;
+    systemd.enable = true;
     settings = {
-      bar = {
-        density = "compact";
+      shell = {
+        ui_scale = 0.8;
+        corner_radius_scale = 0.5;
+        font_family = "sans-serif";
+      };
+
+      theme = {
+        palette = "catppuccin-mocha";
+      };
+
+      bar.main = {
+        enabled = true;
         position = "top";
-        showCapsule = true;
-        widgets = {
-          left = [
-            {
-              id = "ControlCenter";
-              useDistroLogo = true;
-            }
-          ];
-          center = [
-            {
-              id = "Workspace";
-              hideUnoccupied = false;
-              labelMode = "none";
-            }
-          ];
-          right = [
-            {
-              id = "Clock";
-              formatHorizontal = "HH:mm";
-              useMonospacedFont = true;
-            }
-            {
-              id = "Bluetooth";
-            }
-            {
-              id = "Network";
-            }
-            {
-              id = "Battery";
-            }
-            {
-              id = "Tray";
-            }
-          ];
+        start = [ "control-center" ];
+        center = [ "workspaces" ];
+        end = [
+          "clock"
+          "bluetooth"
+          "network"
+          "battery"
+          "tray"
+        ];
+      };
+
+      widget = {
+        control-center = {
+          type = "control-center";
+          icon = "distributor-logo";
+        };
+        workspaces = {
+          type = "workspaces";
+          hide_unoccupied = false;
+        };
+        clock = {
+          type = "clock";
+          format = "%H:%M";
+        };
+        bluetooth = {
+          type = "bluetooth";
+        };
+        network = {
+          type = "network";
+        };
+        battery = {
+          type = "battery";
+        };
+        tray = {
+          type = "tray";
         };
       };
-      colorSchemes.predefinedScheme = "Catppuccin Mocha";
-      general = {
-        radiusRatio = 0.5;
-        fontSize = 0.8;
-      };
+
       location = {
-        weatherEnabled = false;
-        autoLocate = false;
+        auto_locate = false;
       };
+
+      weather = {
+        enabled = false;
+      };
+
       idle = {
         enabled = true;
-        screenOffTimeout = 600;
-        fadeDuration = 5;
-        screenOffCommand = "swaymsg \"output * power off\"";
-        resumeScreenOffCommand = "swaymsg \"output * power on\"";
-        customCommands = "[]";
+        screen_off_timeout = 600;
+        fade_duration = 5;
+        screen_off_command = "swaymsg \"output * power off\"";
+        resume_screen_off_command = "swaymsg \"output * power on\"";
       };
-      dock.enabled = false;
-      controlCenter = {
+
+      dock = {
+        enabled = false;
+      };
+
+      control_center = {
         position = "close_to_bar_button";
-        diskPath = "/";
-        shortcuts = {
-          left = [
-            {
-              id = "Network";
-            }
-            {
-              id = "Bluetooth";
-            }
-            {
-              id = "WallpaperSelector";
-            }
-            {
-              id = "NoctaliaPerformance";
-            }
-          ];
-          right = [
-            {
-              id = "Notifications";
-            }
-            {
-              id = "PowerProfile";
-            }
-            {
-              id = "KeepAwake";
-            }
-            {
-              id = "NightLight";
-            }
-          ];
-        };
-        cards = [
-          {
-            enabled = true;
-            id = "profile-card";
-          }
-          {
-            enabled = true;
-            id = "shortcuts-card";
-          }
-          {
-            enabled = true;
-            id = "audio-card";
-          }
-          {
-            enabled = true;
-            id = "brightness-card";
-          }
-          {
-            enabled = false;
-            id = "weather-card";
-          }
-          {
-            enabled = false;
-            id = "media-sysmon-card";
-          }
+        shortcuts = [
+          { type = "wifi"; }
+          { type = "bluetooth"; }
+          { type = "wallpaper"; }
+          { type = "notification"; }
+          { type = "power_profile"; }
+          { type = "nightlight"; }
         ];
+      };
+
+      wallpaper = {
+        enabled = true;
+        default.path = ./wallpapers/frieren.png;
       };
     };
   };
