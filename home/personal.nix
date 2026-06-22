@@ -9,9 +9,8 @@
     ./common.nix
     ./sway.nix
     ./alacritty.nix
+    ./gaming.nix
   ];
-
-  # programs.antigravity-cli.enable = true;
 
   home = {
     packages = [
