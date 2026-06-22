@@ -1,16 +1,9 @@
-{ pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    sunshine
-    dolphin-emu
-    transmission_4
-    bottles
-    veloren
-    (retroarch.withCores (
-      cores: with cores; [
-        dolphin
-        bsnes
-      ]
-    ))
-  ];
+  programs.retroarch = {
+    enable = true;
+    cores = {
+      citra.enable = true;
+      desmume.enable = true;
+    };
+  };
 }
