@@ -112,6 +112,7 @@
             nvim = inputs.nvim.packages.${system}.default;
             betterbird = pkgs.callPackage ./pkgs/by-name/be/betterbird/package.nix { };
             grok = pkgs.callPackage ./pkgs/by-name/gr/grok/package.nix { };
+            vastai = pkgs.callPackage ./pkgs/by-name/va/vastai/package.nix { };
           };
         };
         modules = [
