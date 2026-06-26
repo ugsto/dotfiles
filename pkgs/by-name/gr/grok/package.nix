@@ -42,7 +42,7 @@ stdenv.mkDerivation {
   meta = with lib; {
     description = "Grok CLI from x.ai";
     homepage = "https://x.ai/cli";
-    license = licenses.unfree; # Assuming it's unfree as it's from x.ai
+    license = licenses.unfree;
     maintainers = [ ];
     platforms = [
       "x86_64-linux"
