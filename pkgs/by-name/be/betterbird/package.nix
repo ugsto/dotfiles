@@ -45,12 +45,12 @@
 }:
 
 let
-  version = "140.11.0esr-bb23";
+  version = "140.12.0esr-bb24";
 
   sources = {
     x86_64-linux = {
       url = "https://www.betterbird.eu/downloads/LinuxArchive/betterbird-${version}.en-US.linux-x86_64.tar.xz";
-      hash = "sha256:f5feH3Yj1XsKTaKJyEGJ3zASrwKTulFNDoowtaLYSyU=";
+      hash = "sha256:ChJWJKS7y8NxFmVBtZtD+yRc5jMxo0HN7AaWmUl7RuA=";
     };
   };
 
@@ -89,39 +89,16 @@ let
     stdenv.cc.cc.lib
     systemd
   ];
-
-  betterbird-unwrapped = stdenv.mkDerivation {
-    pname = "betterbird-unwrapped";
-    inherit version;
-
-    src = fetchurl {
-      url = sources.${stdenv.system}.url or (throw "Unsupported system: ${stdenv.system}");
-      sha256 = sources.${stdenv.system}.hash;
-    };
-
-    installPhase = ''
-      mkdir -p $out/lib/betterbird
-      cp -r * $out/lib/betterbird/
-
-      for exe in betterbird betterbird-bin rnpkeys; do
-        if [ -f "$out/lib/betterbird/$exe" ]; then
-          patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
-                   "$out/lib/betterbird/$exe" || true
-        fi
-      done
-    '';
-
-    dontPatchELF = true;
-    dontStrip = true;
-  };
-
 in
 
 stdenv.mkDerivation {
   pname = "betterbird";
   inherit version;
 
-  dontUnpack = true;
+  src = fetchurl {
+    url = sources.${stdenv.system}.url or (throw "Unsupported system: ${stdenv.system}");
+    sha256 = sources.${stdenv.system}.hash;
+  };
 
   nativeBuildInputs = [
     makeWrapper
@@ -153,26 +130,27 @@ stdenv.mkDerivation {
   ];
 
   dontWrapGApps = true;
+  dontPatchELF = true;
+  dontStrip = true;
 
   installPhase = ''
     runHook preInstall
 
     mkdir -p $out/lib/betterbird
-    cd ${betterbird-unwrapped}/lib/betterbird
+    cp -r * $out/lib/betterbird/
 
-    find . -type d -exec mkdir -p "$out/lib/betterbird/{}" \;
-
-    find . -type f \( -not -name "betterbird" -a -not -name "betterbird-bin" \) -exec ln -sT "${betterbird-unwrapped}/lib/betterbird/{}" "$out/lib/betterbird/{}" \;
-
-    cp -P --no-preserve=mode,ownership "${betterbird-unwrapped}/lib/betterbird/betterbird" "$out/lib/betterbird/betterbird"
-    cp -P --no-preserve=mode,ownership "${betterbird-unwrapped}/lib/betterbird/betterbird-bin" "$out/lib/betterbird/betterbird-bin"
-    chmod a+rwx "$out/lib/betterbird/betterbird" "$out/lib/betterbird/betterbird-bin"
+    for exe in betterbird betterbird-bin rnpkeys; do
+      if [ -f "$out/lib/betterbird/$exe" ]; then
+        patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
+                 "$out/lib/betterbird/$exe" || true
+      fi
+    done
 
     for size in 16 22 24 32 48 64 128 256; do
       icon_dir=$out/share/icons/hicolor/''${size}x''${size}/apps
       mkdir -p $icon_dir
-      if [ -f "${betterbird-unwrapped}/lib/betterbird/chrome/icons/default/default''${size}.png" ]; then
-        cp "${betterbird-unwrapped}/lib/betterbird/chrome/icons/default/default''${size}.png" "$icon_dir/betterbird.png"
+      if [ -f "$out/lib/betterbird/chrome/icons/default/default''${size}.png" ]; then
+        cp "$out/lib/betterbird/chrome/icons/default/default''${size}.png" "$icon_dir/betterbird.png"
       fi
     done
 
