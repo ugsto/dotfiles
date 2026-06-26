@@ -51,6 +51,7 @@
       pkgs-custom.nvim
       pkgs-custom.betterbird
       pkgs-custom.grok
+      pkgs-custom.vastai
 
       nerd-fonts.fira-code
       font-awesome
