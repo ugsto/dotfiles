@@ -52,6 +52,7 @@
       pkgs-custom.betterbird
       pkgs-custom.grok
       pkgs-custom.vastai
+      pkgs-custom.google-colab-cli
 
       nerd-fonts.fira-code
       font-awesome
