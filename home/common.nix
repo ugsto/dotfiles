@@ -9,6 +9,7 @@
     enable = true;
     flavor = "mocha";
     accent = "blue";
+    gemini-cli.enable = false;
   };
 
   home = {
