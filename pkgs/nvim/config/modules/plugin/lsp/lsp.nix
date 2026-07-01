@@ -22,10 +22,13 @@
         marksman.enable = true;
         ruff.enable = true;
         rust_analyzer.enable = false;
-        pyright.enable = true;
+        ty.enable = true;
         gopls.enable = true;
         terraformls.enable = true;
-        ansiblels.enable = true;
+        ansiblels = {
+          enable = true;
+          package = null;
+        };
         jsonls.enable = true;
         dockerls.enable = true;
         clangd = {
