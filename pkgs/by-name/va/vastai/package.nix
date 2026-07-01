@@ -4,7 +4,7 @@
 }:
 
 let
-  borb = python3.pkgs.borb.overridePythonAttrs (oldAttrs: {
+  borb = python3.pkgs.borb.overridePythonAttrs (_oldAttrs: {
     doCheck = false;
     nativeCheckInputs = [ ];
     disabledTestPaths = [ ];
