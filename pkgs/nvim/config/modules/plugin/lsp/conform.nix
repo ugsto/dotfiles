@@ -76,7 +76,7 @@
         formatters_by_ft = {
           python = [ "ruff" ];
           lua = [ "stylua" ];
-          nix = [ "nixfmt-rfc-style" ];
+          nix = [ "nixfmt" ];
           terraform = [ "terraform_fmt" ];
           bicep = [ "bicep" ];
           bash = [
@@ -92,8 +92,8 @@
           ruff = {
             command = "${lib.getExe pkgs.ruff}";
           };
-          nixfmt-rfc-style = {
-            command = "${lib.getExe pkgs.nixfmt-rfc-style}";
+          nixfmt = {
+            command = "${lib.getExe pkgs.nixfmt}";
           };
           jq = {
             command = "${lib.getExe pkgs.jq}";
