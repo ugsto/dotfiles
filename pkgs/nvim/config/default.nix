@@ -1,5 +1,5 @@
 {
-  plugins.lazy.enable = true;
+  plugins.lazy.enable = false;
   imports = [
     ./modules/colorscheme.nix
     ./modules/plugin/lsp/conform.nix
