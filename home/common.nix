@@ -39,6 +39,7 @@
       trilium-desktop
       yazi
       drawio
+      hcloud
 
       pkgs-unstable.devenv
       pkgs-unstable.kind
@@ -48,6 +49,7 @@
       pkgs-unstable.arduino
       pkgs-unstable.blender
       pkgs-unstable.doctl
+      pkgs-unstable.openscad
 
       pkgs-custom.nvim
       pkgs-custom.betterbird
