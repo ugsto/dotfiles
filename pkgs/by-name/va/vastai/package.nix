@@ -34,6 +34,7 @@ python3.pkgs.buildPythonApplication rec {
     "cryptography"
     "psutil"
     "pycares"
+    "pillow"
   ];
 
   dependencies = [
