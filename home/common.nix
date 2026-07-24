@@ -36,7 +36,6 @@
       zotero
       libreoffice
       zoom-us
-      trilium-desktop
       yazi
       drawio
       hcloud
