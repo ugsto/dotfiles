@@ -77,7 +77,6 @@
           python = [ "ruff" ];
           lua = [ "stylua" ];
           nix = [ "nixfmt" ];
-          terraform = [ "terraform_fmt" ];
           bicep = [ "bicep" ];
           bash = [
             "shellcheck"

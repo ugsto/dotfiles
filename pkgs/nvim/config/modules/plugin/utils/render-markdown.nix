@@ -13,6 +13,9 @@
           "󰲫 "
         ];
       };
+      latex = {
+        enabled = false;
+      };
     };
   };
 }

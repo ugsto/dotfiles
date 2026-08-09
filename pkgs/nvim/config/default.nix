@@ -1,5 +1,15 @@
+{ pkgs, ... }:
 {
   plugins.lazy.enable = false;
+
+  extraPackages = with pkgs; [
+    tree-sitter
+    trash-cli
+    sqlite
+    imagemagick
+    ghostscript
+    tectonic
+  ];
   imports = [
     ./modules/colorscheme.nix
     ./modules/plugin/lsp/conform.nix

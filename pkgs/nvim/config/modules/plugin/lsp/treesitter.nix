@@ -61,4 +61,8 @@
       };
     };
   };
+
+  extraConfigLuaPre = ''
+    vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/site")
+  '';
 }
