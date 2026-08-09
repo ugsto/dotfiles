@@ -83,6 +83,7 @@
   imports = [
     ./bash.nix
     ./chromium.nix
+    ./gammastep.nix
     ./librewolf.nix
     ./matrix.nix
     ./obs.nix
