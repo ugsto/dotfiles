@@ -31,4 +31,27 @@ in
       /run/current-system/sw/bin/netbird-wt0 up
     '';
   };
+
+  services.netbird.clients.wt1 = {
+    autoStart = true;
+    port = 51822;
+    ui.enable = false;
+    openFirewall = true;
+    openInternalFirewall = true;
+  };
+  systemd.services."netbird-wt1-custom-up" = {
+    description = "Custom auto-login for Netbird wt1";
+    wantedBy = [ "multi-user.target" ];
+    requires = [ "netbird-wt1.service" ];
+    after = [ "netbird-wt1.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      sleep 3
+      export NB_MANAGEMENT_URL="NETBIRD_MANAGEMENT_URL_REDACTED"
+      /run/current-system/sw/bin/netbird-wt1 up
+    '';
+  };
 }
