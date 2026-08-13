@@ -131,7 +131,6 @@
         modules = [
           inputs.nix-flatpak.homeManagerModules.nix-flatpak
           inputs.catppuccin.homeModules.catppuccin
-          inputs.noctalia.homeModules.default
           ./home/personal.nix
           {
             nixpkgs.config.allowUnfreePredicate =
