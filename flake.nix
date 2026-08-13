@@ -147,20 +147,6 @@
         ];
       };
 
-      homeConfigurations.${work-username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit
-            inputs
-            pkgs-unstable
-            system
-            theme
-            ;
-          username = work-username;
-        };
-        modules = [ ./home/work.nix ];
-      };
-
       devShells.${system}.default = pkgs.mkShell {
         name = "dotfiles-shell";
         buildInputs = with pkgs; [
