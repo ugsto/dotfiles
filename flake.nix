@@ -62,6 +62,7 @@
             "drawio"
             "zoom"
             "zoom-us"
+            "slack"
           ];
         overlays = [
           nur.overlays.default
@@ -103,6 +104,7 @@
                   "vagrant"
                   "drawio"
                   "grok"
+                  "slack"
                 ];
             }
           ];
@@ -139,6 +141,7 @@
                 "zoom"
                 "drawio"
                 "grok"
+                "slack"
               ];
           }
         ];
