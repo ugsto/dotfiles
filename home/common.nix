@@ -87,6 +87,7 @@
     ./librewolf.nix
     ./matrix.nix
     ./obs.nix
+    ./sops.nix
     ./starship.nix
     ./syncthing.nix
     ./tmux.nix
