@@ -50,7 +50,6 @@
       inherit (nixpkgs) lib;
       system = "x86_64-linux";
       username = "kurisu";
-      work-username = "andre.bortoli";
       name = "André Augusto Bortoli";
       hostname = "steins-gate";
       pkgs = import nixpkgs {
