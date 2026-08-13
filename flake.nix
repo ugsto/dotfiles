@@ -96,6 +96,7 @@
               ;
           };
           modules = [
+            inputs.sops-nix.nixosModules.sops
             ./system/configuration.nix
             {
               nixpkgs.config.allowUnfreePredicate =

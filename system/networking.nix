@@ -1,8 +1,24 @@
-{ username, hostname, ... }:
+{
+  config,
+  username,
+  hostname,
+  ...
+}:
 let
-  loginServer = "NETBIRD_MANAGEMENT_URL_REDACTED";
+  wt0ManagementUrl = config.sops.secrets.netbird_wt0_management_url.path;
+  wt1ManagementUrl = config.sops.secrets.netbird_wt1_management_url.path;
 in
 {
+  sops = {
+    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+    defaultSopsFile = ../secrets/secret.yaml;
+
+    secrets = {
+      netbird_wt0_management_url = { };
+      netbird_wt1_management_url = { };
+    };
+  };
+
   networking.hostName = hostname;
   networking.networkmanager.enable = true;
   users.users.${username}.extraGroups = [ "networkmanager" ];
@@ -26,7 +42,7 @@ in
     };
     script = ''
       sleep 3
-      export NB_MANAGEMENT_URL="***REMOVED***"
+      export NB_MANAGEMENT_URL="$(< ${wt0ManagementUrl})"
       export NB_SETUP_KEY="$(< /var/lib/netbird-wt0.key)"
       /run/current-system/sw/bin/netbird-wt0 up
     '';
@@ -50,7 +66,7 @@ in
     };
     script = ''
       sleep 3
-      export NB_MANAGEMENT_URL="NETBIRD_MANAGEMENT_URL_REDACTED"
+      export NB_MANAGEMENT_URL="$(< ${wt1ManagementUrl})"
       /run/current-system/sw/bin/netbird-wt1 up
     '';
   };
