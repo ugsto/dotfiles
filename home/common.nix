@@ -31,6 +31,7 @@
       torsocks
       bc
       kubectl
+      kubectx
       kubernetes-helm
       k9s
       zotero
@@ -39,6 +40,9 @@
       yazi
       drawio
       hcloud
+      terragrunt
+
+      slack
 
       pkgs-unstable.devenv
       pkgs-unstable.kind
