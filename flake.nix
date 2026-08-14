@@ -28,6 +28,7 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko.url = "github:nix-community/disko";
   };
 
   nixConfig = {
@@ -44,6 +45,7 @@
       home-manager,
       nur,
       nixgl,
+      disko,
       ...
     }@inputs:
     let
@@ -86,67 +88,106 @@
     {
       formatter.${system} = pkgs.nixfmt;
 
-      nixosConfigurations = {
-        ${hostname} = lib.nixosSystem {
-          specialArgs = {
-            inherit
-              username
-              name
-              hostname
-              ;
-          };
-          modules = [
-            inputs.sops-nix.nixosModules.sops
-            ./system/configuration.nix
+      nixosConfigurations =
+        let
+          mkConfiguration =
             {
-              nixpkgs.config.allowUnfreePredicate =
-                pkg:
-                builtins.elem (lib.getName pkg) [
-                  "vagrant"
-                  "drawio"
-                  "grok"
-                  "slack"
-                ];
-            }
-          ];
-        };
-      };
-
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit
-            inputs
-            pkgs-unstable
-            system
-            username
-            theme
-            ;
-          pkgs-custom = {
-            nvim = inputs.nvim.packages.${system}.default;
-            betterbird = pkgs.callPackage ./pkgs/by-name/be/betterbird/package.nix { };
-            grok = pkgs.callPackage ./pkgs/by-name/gr/grok/package.nix { };
-            vastai = pkgs.callPackage ./pkgs/by-name/va/vastai/package.nix { };
-            google-colab-cli = pkgs.callPackage ./pkgs/by-name/go/google-colab-cli/package.nix { };
+              hostName,
+              hardwareModule,
+              diskModule ? null,
+              storageModule ? null,
+              videoDrivers ? [ ],
+            }:
+            lib.nixosSystem {
+              specialArgs = {
+                inherit
+                  username
+                  name
+                  hardwareModule
+                  diskModule
+                  storageModule
+                  videoDrivers
+                  ;
+                hostname = hostName;
+              };
+              modules = [
+                inputs.sops-nix.nixosModules.sops
+                ./system/configuration.nix
+                {
+                  nixpkgs.config.allowUnfreePredicate =
+                    pkg:
+                    builtins.elem (lib.getName pkg) [
+                      "vagrant"
+                      "drawio"
+                      "grok"
+                      "slack"
+                    ];
+                }
+              ]
+              ++ lib.optional (diskModule != null) disko.nixosModules.disko;
+            };
+        in
+        {
+          ${hostname} = mkConfiguration {
+            hostName = hostname;
+            hardwareModule = ./system/hardware-configuration.nix;
+            videoDrivers = [ "amdgpu" ];
+          };
+          andrebortoli-workstation = mkConfiguration {
+            hostName = "andrebortoli-workstation";
+            hardwareModule = ./system/hardware-configuration-andrebortoli-workstation.nix;
+            diskModule = ./system/disko-andrebortoli-workstation.nix;
+            storageModule = ./system/storage-btrfs.nix;
+            videoDrivers = [ "modesetting" ];
           };
         };
-        modules = [
-          inputs.nix-flatpak.homeManagerModules.nix-flatpak
-          inputs.catppuccin.homeModules.catppuccin
-          ./home/personal.nix
-          {
-            nixpkgs.config.allowUnfreePredicate =
-              pkg:
-              builtins.elem (lib.getName pkg) [
-                "zoom-us"
-                "zoom"
-                "drawio"
-                "grok"
-                "slack"
+
+      homeConfigurations =
+        let
+          mkHomeConfiguration =
+            profile:
+            home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+              extraSpecialArgs = {
+                inherit
+                  inputs
+                  pkgs-unstable
+                  system
+                  username
+                  theme
+                  ;
+                pkgs-custom = {
+                  nvim = inputs.nvim.packages.${system}.default;
+                  betterbird = pkgs.callPackage ./pkgs/by-name/be/betterbird/package.nix { };
+                  grok = pkgs.callPackage ./pkgs/by-name/gr/grok/package.nix { };
+                  vastai = pkgs.callPackage ./pkgs/by-name/va/vastai/package.nix { };
+                  google-colab-cli = pkgs.callPackage ./pkgs/by-name/go/google-colab-cli/package.nix { };
+                };
+              };
+              modules = [
+                inputs.nix-flatpak.homeManagerModules.nix-flatpak
+                inputs.catppuccin.homeModules.catppuccin
+                profile
+                {
+                  nixpkgs.config.allowUnfreePredicate =
+                    pkg:
+                    builtins.elem (lib.getName pkg) [
+                      "zoom-us"
+                      "zoom"
+                      "drawio"
+                      "grok"
+                      "slack"
+                    ];
+                }
               ];
-          }
-        ];
-      };
+            };
+        in
+        rec {
+          personal = mkHomeConfiguration ./home/profiles/personal.nix;
+          professional = mkHomeConfiguration ./home/profiles/professional.nix;
+          # Backwards-compatible alias for the old standalone activation command.
+          ${username} = personal;
+        };
 
       devShells.${system}.default = pkgs.mkShell {
         name = "dotfiles-shell";

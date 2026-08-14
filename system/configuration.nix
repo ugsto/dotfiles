@@ -1,7 +1,12 @@
 {
   pkgs,
+  lib,
   username,
   name,
+  hardwareModule,
+  diskModule ? null,
+  storageModule ? null,
+  videoDrivers ? [ ],
   ...
 }:
 {
@@ -9,12 +14,14 @@
     ./audio.nix
     ./bluetooth.nix
     ./desktop.nix
-    ./hardware-configuration.nix
     ./locale.nix
     ./networking.nix
     ./security.nix
     ./virtualization.nix
-  ];
+    hardwareModule
+  ]
+  ++ lib.optional (diskModule != null) diskModule
+  ++ lib.optional (storageModule != null) storageModule;
 
   boot = {
     kernelPackages = pkgs.linuxPackages;
@@ -22,12 +29,16 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.kernelModules = [ "amdgpu" ];
   };
+
+  services.xserver.videoDrivers = videoDrivers;
 
   users.users.${username} = {
     isNormalUser = true;
     description = name;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKurce3BpIVo4bSs17/NPoLzRoEWDN2GwpcI96kksov9 kurisu@steins-gate"
+    ];
     extraGroups = [
       "wheel"
       "input"

@@ -8,7 +8,6 @@
   services = {
     xserver = {
       enable = true;
-      videoDrivers = [ "amdgpu" ];
     };
     greetd = {
       enable = true;
