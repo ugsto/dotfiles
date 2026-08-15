@@ -1,73 +1,91 @@
 {
   config,
+  lib,
   username,
   hostname,
+  netbirdClients ? [ ],
   ...
 }:
 let
-  wt0ManagementUrl = config.sops.secrets.netbird_wt0_management_url.path;
-  wt1ManagementUrl = config.sops.secrets.netbird_wt1_management_url.path;
+  mkUpService =
+    client:
+    let
+      netbirdUnit = "netbird-${client.name}";
+      managementUrlFile = config.sops.secrets.${client.managementUrlSecret}.path;
+    in
+    lib.nameValuePair "${netbirdUnit}-up" {
+      description = "Bring up NetBird client ${client.name}";
+      wantedBy = [ "multi-user.target" ];
+
+      requires = [
+        "${netbirdUnit}.service"
+        "sops-install-secrets.service"
+      ];
+
+      after = [
+        "${netbirdUnit}.service"
+        "sops-install-secrets.service"
+      ];
+
+      unitConfig.StartLimitIntervalSec = 0;
+
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        Restart = "on-failure";
+        RestartSec = "2s";
+        TimeoutStartSec = "2min";
+      };
+
+      script = ''
+        set -euo pipefail
+
+        export NB_MANAGEMENT_URL="$(
+          < ${lib.escapeShellArg managementUrlFile}
+        )"
+
+        ${lib.optionalString (client ? setupKeyFile) ''
+          export NB_SETUP_KEY="$(
+            < ${lib.escapeShellArg client.setupKeyFile}
+          )"
+        ''}
+
+        exec /run/current-system/sw/bin/netbird-${client.name} up
+      '';
+    };
 in
 {
   sops = {
-    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+    age.keyFile = "/var/lib/sops-nix/key.txt";
     defaultSopsFile = ../secrets/secret.yaml;
 
-    secrets = {
-      netbird_wt0_management_url = { };
-      netbird_wt1_management_url = { };
+    secrets = lib.genAttrs (map (client: client.managementUrlSecret) netbirdClients) (_: { });
+  };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/sops-nix 0700 root root -"
+  ];
+
+  networking = {
+    hostName = hostname;
+    networkmanager.enable = true;
+  };
+
+  users.users.${username}.extraGroups = [
+    "networkmanager"
+  ];
+
+  services = {
+    resolved.enable = true;
+
+    netbird = {
+      ui.enable = false;
+
+      clients = lib.listToAttrs (
+        map (client: lib.nameValuePair client.name client.settings) netbirdClients
+      );
     };
   };
 
-  networking.hostName = hostname;
-  networking.networkmanager.enable = true;
-  users.users.${username}.extraGroups = [ "networkmanager" ];
-
-  services.netbird.clients.wt0 = {
-    autoStart = true;
-    port = 51821;
-    ui.enable = false;
-    openFirewall = true;
-    openInternalFirewall = true;
-  };
-  services.resolved.enable = true;
-  systemd.services."netbird-wt0-custom-up" = {
-    description = "Custom auto-login for Netbird wt0";
-    wantedBy = [ "multi-user.target" ];
-    requires = [ "netbird-wt0.service" ];
-    after = [ "netbird-wt0.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-    };
-    script = ''
-      sleep 3
-      export NB_MANAGEMENT_URL="$(< ${wt0ManagementUrl})"
-      export NB_SETUP_KEY="$(< /var/lib/netbird-wt0.key)"
-      /run/current-system/sw/bin/netbird-wt0 up
-    '';
-  };
-
-  services.netbird.clients.wt1 = {
-    autoStart = true;
-    port = 51822;
-    ui.enable = false;
-    openFirewall = true;
-    openInternalFirewall = true;
-  };
-  systemd.services."netbird-wt1-custom-up" = {
-    description = "Custom auto-login for Netbird wt1";
-    wantedBy = [ "multi-user.target" ];
-    requires = [ "netbird-wt1.service" ];
-    after = [ "netbird-wt1.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-    };
-    script = ''
-      sleep 3
-      export NB_MANAGEMENT_URL="$(< ${wt1ManagementUrl})"
-      /run/current-system/sw/bin/netbird-wt1 up
-    '';
-  };
+  systemd.services = lib.listToAttrs (map mkUpService netbirdClients);
 }

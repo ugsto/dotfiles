@@ -44,33 +44,35 @@ in
     interval = "weekly";
   };
 
-  systemd.tmpfiles.rules = [
-    "d /.snapshots 0700 root root -"
-    "d /.snapshots/root 0700 root root -"
-    "d /.snapshots/home 0700 root root -"
-  ];
-
-  systemd.services.btrfs-snapshot = {
-    description = "Create read-only Btrfs snapshots";
-    wants = [ "local-fs.target" ];
-    after = [ "local-fs.target" ];
-    unitConfig.RequiresMountsFor = [
-      "/"
-      "/home"
-      "/.snapshots"
+  systemd = {
+    tmpfiles.rules = [
+      "d /.snapshots 0700 root root -"
+      "d /.snapshots/root 0700 root root -"
+      "d /.snapshots/home 0700 root root -"
     ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = snapshot;
-    };
-  };
 
-  systemd.timers.btrfs-snapshot = {
-    description = "Daily Btrfs snapshots";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "*-*-* 03:15:00";
-      Persistent = true;
+    services.btrfs-snapshot = {
+      description = "Create read-only Btrfs snapshots";
+      wants = [ "local-fs.target" ];
+      after = [ "local-fs.target" ];
+      unitConfig.RequiresMountsFor = [
+        "/"
+        "/home"
+        "/.snapshots"
+      ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = snapshot;
+      };
+    };
+
+    timers.btrfs-snapshot = {
+      description = "Daily Btrfs snapshots";
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "*-*-* 03:15:00";
+        Persistent = true;
+      };
     };
   };
 }

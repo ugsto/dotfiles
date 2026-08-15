@@ -26,9 +26,14 @@ Os alvos atuais são:
 | Home Manager | `personal` | Perfil pessoal |
 | Home Manager | `professional` | Perfil profissional |
 
-Os perfis `personal` e `professional` estão separados no repositório, mas
-atualmente possuem o mesmo conteúdo. A separação permite que eles evoluam de
-forma independente.
+Os perfis `personal` e `professional` compartilham a base, mas o pessoal
+adiciona gaming e Flatpaks voltados a hobbies, enquanto o profissional mantém
+as ferramentas de trabalho e o `antigravity-cli`. A separação permite que eles
+evoluam de forma independente.
+
+O host pessoal usa apenas o cliente NetBird `wt0`; a workstation profissional
+usa `wt0` e `wt1`. O firewall bloqueia conexões de entrada por padrão e o SSH
+permanece desativado.
 
 ## Estrutura do repositório
 
@@ -63,8 +68,7 @@ forma independente.
 - Conexão com a internet.
 - Um disco que possa ser apagado integralmente durante a instalação.
 - Conhecimento do dispositivo correto, por exemplo `/dev/nvme0n1`.
-- A chave privada SSH autorizada em
-  [`system/configuration.nix`](system/configuration.nix).
+- Acesso local à máquina para concluir a instalação e ativar o perfil.
 - A chave privada age, caso os segredos do SOPS sejam necessários:
   `~/.config/sops/age/keys.txt`.
 
@@ -216,16 +220,21 @@ Antes do reboot, é possível verificar a configuração que será instalada:
 nix flake check --no-build /mnt/tmp/dotfiles
 ```
 
-### 7. Chave age do SOPS
+### 7. Chaves age do SOPS
 
 O sistema e o Home Manager usam segredos criptografados em
 [`secrets/secret.yaml`](secrets/secret.yaml). A chave age privada nunca deve
 ser commitada.
 
-Antes de ativar o Home Manager, copie a chave para o home do usuário já
-montado, ajustando o UID/GID se necessário:
+Antes de instalar e ativar o sistema, copie a chave para os dois locais
+necessários. O NixOS usa uma cópia root-only em `/var/lib/sops-nix`; o Home
+Manager standalone continua usando uma cópia no home do usuário:
 
 ```bash
+install -d -m 700 /mnt/var/lib/sops-nix
+install -m 600 ~/.config/sops/age/keys.txt \
+  /mnt/var/lib/sops-nix/key.txt
+
 install -d -m 700 /mnt/home/kurisu/.config/sops/age
 install -m 600 ~/.config/sops/age/keys.txt \
   /mnt/home/kurisu/.config/sops/age/keys.txt
@@ -235,8 +244,9 @@ chown -R 1000:100 /mnt/home/kurisu/.config
 Se a chave estiver em outro lugar, substitua o caminho de origem. A conta
 `kurisu` usa atualmente UID/GID `1000`.
 
-Alternativamente, copie a chave depois do primeiro boot, antes de ativar o
-Home Manager.
+Não adie a cópia de `/var/lib/sops-nix/key.txt` para depois do primeiro boot:
+o NixOS precisa dela para materializar os segredos do sistema, incluindo os
+endereços de gerenciamento do NetBird.
 
 ### 8. Reiniciar
 
@@ -250,11 +260,8 @@ systemd-boot. O initrd solicitará a senha do LUKS antes de montar o sistema.
 
 ### 9. Primeiro acesso
 
-O acesso SSH é feito pela chave autorizada na configuração:
-
-```bash
-ssh kurisu@ENDERECO_IP
-```
+O SSH está desativado nesta configuração. O primeiro acesso deve ser feito
+localmente, pelo console da máquina.
 
 Como `security.sudo.wheelNeedsPassword = false`, o usuário `kurisu` pode usar
 `sudo` sem senha. A conta root permanece bloqueada quando a instalação foi
@@ -272,7 +279,7 @@ Para definir explicitamente uma senha de root, algo normalmente desnecessário:
 sudo passwd root
 ```
 
-Não é recomendado habilitar login SSH direto como root.
+Não há serviço SSH ativo nesta configuração.
 
 ## Ativar o perfil Home Manager
 
@@ -452,7 +459,7 @@ Use [`system/configuration.nix`](system/configuration.nix) para mudanças que
 devem valer para todos os hosts, como:
 
 - usuário principal e grupos;
-- SSH e Git;
+- Git;
 - políticas de sudo;
 - garbage collection do Nix;
 - fontes comuns;
@@ -584,8 +591,14 @@ sops secrets/secret.yaml
 ```
 
 Adicionar ou alterar a chave age exige que a nova chave seja incluída nas
-regras do SOPS e que o arquivo seja recriptografado. A chave privada age deve
-ficar somente na máquina do usuário, em:
+regras do SOPS e que o arquivo seja recriptografado. A cópia usada pelo
+NixOS deve ficar somente na máquina, em:
+
+```text
+/var/lib/sops-nix/key.txt
+```
+
+Para o Home Manager standalone, a cópia do usuário fica em:
 
 ```text
 ~/.config/sops/age/keys.txt
@@ -601,6 +614,11 @@ Nunca commit:
 
 O Home Manager lê a chave por meio de [`home/sops.nix`](home/sops.nix). O
 NixOS também usa a mesma chave para os segredos necessários ao NetBird.
+
+O login automático do cliente `wt0` também exige o arquivo root-only
+`/var/lib/netbird-wt0.key`, provisionado fora do repositório. O cliente `wt1`
+usa o estado persistido pelo próprio NetBird; em uma instalação nova, ele deve
+ser autenticado/provisionado antes de depender do login automático.
 
 ## Validação e estilo
 

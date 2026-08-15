@@ -9,7 +9,6 @@
     ../common.nix
     ../sway.nix
     ../alacritty.nix
-    ../gaming.nix
   ];
 
   home = {
@@ -25,21 +24,5 @@
       QT_IM_MODULE = "cedilla";
       IBUS_ENABLE_SYNC_MODE = "1";
     };
-  };
-
-  services.flatpak = {
-    enable = true;
-    packages = [
-      "com.bambulab.BambuStudio"
-      "io.github.tobagin.karere"
-      "org.skytemple.SkyTemple"
-      "io.github.marco_calautti.DeltaPatcher"
-    ];
-    remotes = [
-      {
-        name = "flathub";
-        location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-      }
-    ];
   };
 }
