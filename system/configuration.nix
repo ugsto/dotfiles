@@ -36,9 +36,6 @@
   users.users.${username} = {
     isNormalUser = true;
     description = name;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKurce3BpIVo4bSs17/NPoLzRoEWDN2GwpcI96kksov9 kurisu@steins-gate"
-    ];
     extraGroups = [
       "wheel"
       "input"
@@ -87,7 +84,6 @@
   };
 
   services = {
-    openssh.enable = true;
     upower.enable = true;
     power-profiles-daemon.enable = false;
     system76-scheduler.settings.cfsProfiles.enable = true;

@@ -45,12 +45,12 @@
 }:
 
 let
-  version = "140.12.0esr-bb24";
+  version = "140.13.0esr-bb25";
 
   sources = {
     x86_64-linux = {
       url = "https://www.betterbird.eu/downloads/LinuxArchive/betterbird-${version}.en-US.linux-x86_64.tar.xz";
-      hash = "sha256:ChJWJKS7y8NxFmVBtZtD+yRc5jMxo0HN7AaWmUl7RuA=";
+      hash = "sha256:00bAxsT43N4gT5fy14DWhVMLkWPYZLzNXBSUVjlLocA=";
     };
   };
 
@@ -96,8 +96,10 @@ stdenv.mkDerivation {
   inherit version;
 
   src = fetchurl {
-    url = sources.${stdenv.system}.url or (throw "Unsupported system: ${stdenv.system}");
-    sha256 = sources.${stdenv.system}.hash;
+    url =
+      sources.${stdenv.hostPlatform.system}.url
+        or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
+    sha256 = sources.${stdenv.hostPlatform.system}.hash;
   };
 
   nativeBuildInputs = [
@@ -175,7 +177,6 @@ stdenv.mkDerivation {
     maintainers = [ ];
     platforms = [
       "x86_64-linux"
-      "aarch64-linux"
     ];
     mainProgram = "betterbird";
   };

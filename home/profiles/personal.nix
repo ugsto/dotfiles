@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-unstable,
   username,
   ...
 }:
@@ -15,7 +14,6 @@
   home = {
     packages = [
       pkgs.polkit_gnome
-      pkgs-unstable.antigravity-cli
     ];
     inherit username;
     homeDirectory = "/home/${username}";
@@ -31,7 +29,6 @@
     enable = true;
     packages = [
       "com.bambulab.BambuStudio"
-      "io.github.tobagin.karere"
       "org.skytemple.SkyTemple"
       "io.github.marco_calautti.DeltaPatcher"
     ];

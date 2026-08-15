@@ -22,7 +22,7 @@ in
   catppuccin.sway.enable = false;
   wayland.windowManager.sway = {
     enable = true;
-    checkConfig = false;
+    checkConfig = true;
     config = {
       inherit modifier;
       inherit terminal;
@@ -35,17 +35,6 @@ in
         "type:touchpad" = {
           natural_scroll = "enabled";
           tap = "enabled";
-        };
-      };
-
-      output = {
-        "eDP-1" = {
-          mode = "1600x1200@60.010Hz";
-          pos = "1366 0";
-        };
-        "HDMI-A-1" = {
-          mode = "1366x768@60Hz";
-          pos = "0 0";
         };
       };
 

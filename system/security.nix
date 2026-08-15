@@ -1,3 +1,4 @@
+{ username, ... }:
 {
   security.sudo = {
     enable = true;
@@ -8,8 +9,15 @@
   security.pam.services.login.enableGnomeKeyring = true;
   programs.dconf.enable = true;
 
-  networking.firewall.enable = false;
+  networking.firewall = {
+    enable = true;
+    allowPing = false;
+    logRefusedConnections = true;
+    logRefusedPackets = true;
+  };
   networking.nftables.enable = false;
 
-  users.users.kurisu.extraGroups = [ "adbusers" ];
+  users.users.${username}.extraGroups = [ "adbusers" ];
+
+  services.openssh.enable = false;
 }

@@ -97,6 +97,7 @@
               diskModule ? null,
               storageModule ? null,
               videoDrivers ? [ ],
+              netbirdClients ? [ ],
             }:
             lib.nixosSystem {
               specialArgs = {
@@ -107,6 +108,7 @@
                   diskModule
                   storageModule
                   videoDrivers
+                  netbirdClients
                   ;
                 hostname = hostName;
               };
@@ -132,6 +134,16 @@
             hostName = hostname;
             hardwareModule = ./system/hardware-configuration.nix;
             videoDrivers = [ "amdgpu" ];
+            netbirdClients = [
+              {
+                name = "wt0";
+                settings = {
+                  port = 51821;
+                };
+                managementUrlSecret = "netbird_wt0_management_url";
+                setupKeyFile = "/var/lib/netbird-wt0.key";
+              }
+            ];
           };
           andrebortoli-workstation = mkConfiguration {
             hostName = "andrebortoli-workstation";
@@ -139,6 +151,23 @@
             diskModule = ./system/disko-andrebortoli-workstation.nix;
             storageModule = ./system/storage-btrfs.nix;
             videoDrivers = [ "modesetting" ];
+            netbirdClients = [
+              {
+                name = "wt0";
+                settings = {
+                  port = 51821;
+                };
+                managementUrlSecret = "netbird_wt0_management_url";
+                setupKeyFile = "/var/lib/netbird-wt0.key";
+              }
+              {
+                name = "wt1";
+                settings = {
+                  port = 51822;
+                };
+                managementUrlSecret = "netbird_wt1_management_url";
+              }
+            ];
           };
         };
 
