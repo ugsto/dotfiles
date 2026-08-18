@@ -12,6 +12,11 @@
     gemini-cli.enable = false;
   };
 
+  services.cliphist = {
+    enable = true;
+    allowImages = true;
+  };
+
   home = {
     stateVersion = "26.05";
     packages = with pkgs; [
@@ -74,6 +79,43 @@
       pkgs.shfmt
       pkgs.shellharden
       pkgs.bicep
+
+      (pkgs.stdenv.mkDerivation rec {
+        pname = "ai-jail";
+        version = "1.17.0";
+
+        src = pkgs.fetchurl {
+          url = "https://github.com/akitaonrails/${pname}/releases/download/v${version}/${pname}-linux-x86_64.tar.gz";
+          hash = "sha256-uQd6SmgRlV4jk7tVOBLkBwYhJqnccQav0aJGh1wfAE4=";
+        };
+
+        sourceRoot = ".";
+        dontConfigure = true;
+        dontBuild = true;
+
+        nativeBuildInputs = [
+          pkgs.autoPatchelfHook
+          pkgs.makeBinaryWrapper
+        ];
+
+        buildInputs = [
+          pkgs.stdenv.cc.cc.lib
+          pkgs.openssl
+          pkgs.zlib
+        ];
+
+        installPhase = ''
+          runHook preInstall
+          install -Dm755 ai-jail $out/bin/ai-jail
+          runHook postInstall
+        '';
+
+        postFixup = ''
+          wrapProgram $out/bin/ai-jail \
+            --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.bubblewrap ]} \
+            --set BWRAP_BIN "${pkgs.bubblewrap}/bin/bwrap"
+        '';
+      })
     ];
   };
 
@@ -96,5 +138,6 @@
     ./syncthing.nix
     ./tmux.nix
     ./wofi.nix
+    ./activitywatch.nix
   ];
 }
