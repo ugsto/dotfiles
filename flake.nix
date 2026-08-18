@@ -15,10 +15,7 @@
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
     catppuccin.url = "github:catppuccin/nix/release-26.05";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nvim = {
@@ -29,6 +26,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko.url = "github:nix-community/disko";
+    ai-jail.url = "github:akitaonrails/ai-jail/1a51f003f5d1a9df9970c56fb1f0855dd9125943";
   };
 
   nixConfig = {

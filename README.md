@@ -316,7 +316,11 @@ e inicia serviços de usuário como:
 - `noctalia.service`;
 - `gammastep.service`;
 - `syncthing.service`;
+- `cliphist.service`;
 - `sops-nix.service`.
+
+O atalho `Mod4+C` abre o histórico de clipboard no Wofi. Como o histórico pode
+conter segredos, ele pode ser limpo com `cliphist wipe` quando necessário.
 
 Saia e entre novamente no Sway após a primeira ativação para que toda a sessão
 use a configuração nova. Para verificar:

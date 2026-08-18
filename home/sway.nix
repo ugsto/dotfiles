@@ -8,6 +8,7 @@ let
   browser = "${pkgs.librewolf}/bin/librewolf";
   terminal = "${config.programs.alacritty.package}/bin/alacritty";
   menu = "${pkgs.wofi}/bin/wofi --show drun --insensitive --allow-images --no-actions";
+  clipboard = "${pkgs.cliphist}/bin/cliphist list | ${pkgs.wofi}/bin/wofi --dmenu --prompt Clipboard | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy";
   print = "${pkgs.wayfreeze}/bin/wayfreeze --after-freeze-cmd '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy; pkill wayfreeze'";
   increase-backlight = "${pkgs.brightnessctl}/bin/brightnessctl set +5%";
   decrease-backlight = "${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
@@ -61,6 +62,7 @@ in
           "${modifier}+Shift+f" = "exec ${browser}";
           "${modifier}+Shift+Return" = "exec ${terminal}";
           "${modifier}+r" = "exec ${menu}";
+          "${modifier}+c" = "exec ${clipboard}";
           "${modifier}+q" = "kill";
           "${modifier}+m" =
             "exec ${config.programs.noctalia.package}/bin/noctalia msg panel-toggle control-center";
