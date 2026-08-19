@@ -21,7 +21,7 @@ Os alvos atuais são:
 
 | Tipo | Alvo | Descrição |
 | --- | --- | --- |
-| NixOS | `steins-gate` | Computador pessoal atual, com hardware AMD |
+| NixOS | `steins-gate` | Computador pessoal atual, com hardware AMD (ainda sem Disko/LUKS; ver [planejamento de reinstalação](#reinstalar-o-steins-gate-com-disko-e-luks)) |
 | NixOS | `andrebortoli-workstation` | Workstation profissional, Intel, Disko, LUKS e Btrfs |
 | Home Manager | `personal` | Perfil pessoal |
 | Home Manager | `professional` | Perfil profissional |
@@ -71,6 +71,9 @@ permanece desativado.
 - Acesso local à máquina para concluir a instalação e ativar o perfil.
 - A chave privada age, caso os segredos do SOPS sejam necessários:
   `~/.config/sops/age/keys.txt`.
+- Uma chave de segurança FIDO2 (ex.: YubiKey), de preferência duas — uma
+  principal e uma de backup — para o desbloqueio do LUKS e o segundo fator de
+  login. Ver [FIDO2 para LUKS e login](#fido2-para-luks-e-login).
 
 > **Atenção:** os comandos Disko deste README são destrutivos. Eles apagam
 > todas as partições e dados do dispositivo configurado. Confirme o modelo e
@@ -200,6 +203,10 @@ Também é possível listar os subvolumes:
 btrfs subvolume list /mnt
 ```
 
+A senha continua sendo o método de desbloqueio obrigatório. A chave FIDO2 é
+adicionada depois, como um método extra — ver
+[FIDO2 para LUKS e login](#fido2-para-luks-e-login).
+
 ### 6. Instalar o NixOS
 
 Instale o host usando o flake:
@@ -257,6 +264,9 @@ reboot
 
 Remova a ISO durante o reboot. No boot seguinte, o firmware deve mostrar o
 systemd-boot. O initrd solicitará a senha do LUKS antes de montar o sistema.
+Depois que uma chave FIDO2 for inscrita (ver
+[FIDO2 para LUKS e login](#fido2-para-luks-e-login)), o initrd tenta a chave
+primeiro e só pede a senha se a chave não estiver presente.
 
 ### 9. Primeiro acesso
 
@@ -654,6 +664,169 @@ segredos:
 ```bash
 nix develop
 ```
+
+## FIDO2 para LUKS e login
+
+A configuração usa uma chave de segurança FIDO2 (ex.: YubiKey) de duas formas
+independentes, ambas como um fator **adicional**, nunca como substituto:
+
+1. **Desbloqueio do LUKS no boot** — a senha continua funcionando sempre; a
+   chave é só um atalho mais rápido.
+2. **Segundo fator no login gráfico** (greetd/tuigreet) — a senha continua
+   sendo exigida; a chave (toque, e PIN se configurado) é exigida também.
+
+Nenhuma das duas inscrições é declarativa: o keyslot do LUKS mora no cabeçalho
+do disco e o mapeamento do `pamu2fcfg` precisa ser gerado uma vez contra a
+chave física. Ambas sobrevivem a `nixos-rebuild switch` normalmente; só se
+perdem se o disco for reparticionado (`disko --mode disko`).
+
+### Inscrever a chave no LUKS
+
+Com a chave conectada, na máquina de destino:
+
+```bash
+sudo systemd-cryptenroll --fido2-device=list
+sudo cryptsetup luksDump /dev/nvme0n1p2   # confira o estado atual dos keyslots
+sudo systemd-cryptenroll --fido2-device=auto /dev/nvme0n1p2
+```
+
+> **Nunca use `--wipe-slot` neste comando.** Ele apagaria o keyslot da senha
+> existente, eliminando o único método de recuperação caso a chave se perca ou
+> quebre.
+
+Inscreva uma **segunda chave, de backup**, repetindo o último comando com a
+chave reserva conectada. Confirme o resultado:
+
+```bash
+sudo cryptsetup luksDump /dev/nvme0n1p2 | grep -A4 -iE 'keyslots:|tokens:'
+```
+
+Deve aparecer o keyslot original da senha, mais um keyslot e um token
+`systemd-fido2` por chave inscrita.
+
+Teste com um reboot real: com a chave conectada, o boot deve pedir toque (e
+PIN, se configurado) em vez da senha. Depois, reinicie **sem** a chave
+conectada e confirme que a senha ainda funciona normalmente. Os dois sentidos
+devem ser testados.
+
+Para remover a inscrição de uma chave:
+
+```bash
+sudo systemd-cryptenroll --wipe-slot=fido2 /dev/nvme0n1p2
+```
+
+### Inscrever a chave no login (segundo fator)
+
+O segundo fator é configurado em [`system/security.nix`](system/security.nix)
+e vale para todas as máquinas (o mapeamento não depende do host). Gere o
+mapeamento com `pamu2fcfg` (pacote `pam_u2f`, já incluído no
+`environment.systemPackages` do host):
+
+```bash
+pamu2fcfg -o pam://kurisu -i pam://kurisu -u kurisu   # chave principal
+pamu2fcfg -o pam://kurisu -i pam://kurisu -n          # chave de backup, sem o prefixo "kurisu:"
+```
+
+Os parâmetros `-o`/`-i` precisam ser exatamente iguais a
+`security.pam.u2f.settings.origin`/`appid` em `system/security.nix`.
+
+Cole a saída do primeiro comando em
+[`system/u2f-mappings`](system/u2f-mappings), e adicione a saída do segundo
+comando à mesma linha, separada por `:`. O resultado tem este formato:
+
+```text
+kurisu:<keyHandle1>,<pubkey1>,<coseType1>,<opts1>:<keyHandle2>,<pubkey2>,<coseType2>,<opts2>
+```
+
+O conteúdo desse arquivo (handles e chaves públicas) não é secreto — pode ser
+commitado normalmente. Depois de editar, aplique a configuração:
+
+```bash
+sudo nixos-rebuild switch --flake .#andrebortoli-workstation
+```
+
+**Antes de aplicar**, abra um TTY livre (`Ctrl+Alt+F2`) e confirme que o login
+por senha funciona ali — `/etc/pam.d/login` não exige a chave, então esse
+console continua sendo a rota de recuperação caso algo saia errado no greetd.
+
+Depois de aplicar, reinicie o greetd (`sudo systemctl restart greetd`) e teste:
+
+- Login normal: usuário → toque na chave → senha → sessão inicia.
+- Sem a chave conectada: o login deve **falhar** mesmo com a senha correta.
+- Um usuário sem entrada em `u2f-mappings` ainda deve conseguir logar (efeito
+  de `nouserok`).
+
+Se perder a chave: a senha do LUKS sempre funciona (ela nunca é removida). Já
+o login trava sem a chave — as rotas de recuperação são, em ordem: o TTY
+(`Ctrl+Alt+F2`), uma geração anterior do systemd-boot (que não tem a regra de
+u2f em `/etc/pam.d/greetd`), ou a chave de backup, se uma segunda tiver sido
+inscrita.
+
+## Reinstalar o steins-gate com Disko e LUKS
+
+O `steins-gate` ainda roda em ext4 puro, sem Disko e sem criptografia,
+instalado da forma tradicional (imperativa). Não existe camada declarativa
+para "converter" esse disco em uso — a única forma de aplicar o layout
+LUKS/Btrfs é reparticionar e reinstalar, exatamente como foi feito para a
+`andrebortoli-workstation`.
+
+O arquivo [`system/disko-steins-gate.nix`](system/disko-steins-gate.nix) já
+existe no repositório, com o mesmo layout (ESP + LUKS `cryptroot` + Btrfs com
+as mesmas subvolumes), mas **ainda não está referenciado em
+[`flake.nix`](flake.nix)** — a troca de `hardwareModule`/`diskModule` do host
+`steins-gate` deve ser feita como parte da própria reinstalação, não antes,
+porque o `steins-gate` atual continua sendo o ext4 real em uso. Ligar o módulo
+Disko antes da reinstalação faria o próximo `nixos-rebuild switch` tentar
+montar um layout LUKS/Btrfs que ainda não existe no disco.
+
+> **Este procedimento é destrutivo.** Faça um backup verificado (restaurável)
+> antes de continuar.
+
+1. **Backup.** Copie para mídia externa e confirme que a cópia é restaurável:
+   `/home`, `~/.config/sops/age/keys.txt`, `/var/lib/sops-nix/key.txt`,
+   `/var/lib/netbird-wt0.key`, e qualquer branch git local ainda não
+   publicada.
+2. **Confirmar o disco** a partir da ISO live:
+   ```bash
+   lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINT,MODEL
+   ls -l /dev/disk/by-id/ | grep -v part
+   ```
+   Edite `device` em `system/disko-steins-gate.nix` para o caminho `by-id`
+   correto (evite `/dev/nvme0n1`: prefira `by-id`, que sobrevive a mudanças de
+   enumeração do controlador).
+3. **Ligar o Disko no host**, em `flake.nix`:
+   ```nix
+   ${hostname} = mkConfiguration {
+     hostName = hostname;
+     hardwareModule = ./system/hardware-configuration-steins-gate.nix;
+     diskModule = ./system/disko-steins-gate.nix;
+     storageModule = ./system/storage-btrfs.nix;
+     videoDrivers = [ "amdgpu" ];
+     netbirdClients = [ /* mantidos */ ];
+   };
+   ```
+4. **Remover as declarações antigas de sistema de arquivos** de
+   `system/hardware-configuration-steins-gate.nix` — o Disko passa a gerar
+   `fileSystems`/`swapDevices` automaticamente:
+   - `fileSystems."/"`
+   - `fileSystems."/boot"`
+   - `swapDevices`
+
+   Note que isso remove a partição de swap dedicada; hibernação deixa de ser
+   possível (o swap em runtime continua coberto pelo `zramSwap.enable` já
+   existente na configuração base).
+5. **Particionar e instalar**, seguindo os mesmos passos das seções
+   [3](#3-disponibilizar-o-repositório) a [7](#7-chaves-age-do-sops) acima,
+   trocando `disko-andrebortoli-workstation.nix` por `disko-steins-gate.nix` e
+   o alvo do flake por `steins-gate`.
+6. **Antes do primeiro login gráfico**, garanta que
+   [`system/u2f-mappings`](system/u2f-mappings) já tenha uma entrada válida
+   (ou dependa de `nouserok`) — como `security.pam.u2f` está em
+   `system/security.nix`, compartilhado entre hosts, o greetd já vai exigir a
+   chave FIDO2 desde o primeiro boot.
+7. **Inscrever a chave FIDO2** no LUKS recém-criado, seguindo
+   [Inscrever a chave no LUKS](#inscrever-a-chave-no-luks) acima, com o
+   dispositivo correto do `steins-gate`.
 
 ## Recuperação
 
