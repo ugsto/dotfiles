@@ -63,6 +63,7 @@
       pkgs-unstable.openscad
       pkgs-unstable.claude-code
       pkgs-unstable.nodejs
+      pkgs-unstable.antigravity-cli
 
       pkgs-custom.nvim
       pkgs-custom.betterbird
@@ -125,16 +126,21 @@
   };
 
   fonts.fontconfig.enable = true;
-  xdg.mime.enable = true;
-  xdg.desktopEntries = { };
+  xdg = {
+    mime.enable = true;
+    autostart.enable = true;
+    desktopEntries = { };
+  };
 
   programs.fzf.enableBashIntegration = true;
   programs.home-manager.enable = true;
 
   imports = [
+    ./activitywatch.nix
     ./bash.nix
     ./chromium.nix
     ./gammastep.nix
+    ./keepassxc.nix
     ./librewolf.nix
     ./matrix.nix
     ./obs.nix
@@ -143,6 +149,5 @@
     ./syncthing.nix
     ./tmux.nix
     ./wofi.nix
-    ./activitywatch.nix
   ];
 }

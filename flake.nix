@@ -132,6 +132,8 @@
           ${hostname} = mkConfiguration {
             hostName = hostname;
             hardwareModule = ./system/hardware-configuration-steins-gate.nix;
+            diskModule = ./system/disko-steins-gate.nix;
+            storageModule = ./system/storage-btrfs.nix;
             videoDrivers = [ "amdgpu" ];
             netbirdClients = [
               {

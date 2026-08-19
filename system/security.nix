@@ -13,7 +13,6 @@
         cue = true;
         nouserok = true;
       };
-      services.login.enableGnomeKeyring = true;
       services.greetd.u2f = {
         enable = true;
         control = "required";
@@ -21,7 +20,6 @@
     };
   };
 
-  services.gnome.gnome-keyring.enable = true;
   programs.dconf.enable = true;
 
   environment.systemPackages = [
@@ -35,7 +33,7 @@
   };
 
   networking.firewall = {
-    enable = true;
+    enable = false;
     allowPing = false;
     logRefusedConnections = true;
     logRefusedPackets = true;
