@@ -48,6 +48,9 @@
       terragrunt
 
       slack
+      glab
+      trivy
+      crane
 
       pkgs-unstable.devenv
       pkgs-unstable.kind
@@ -58,6 +61,8 @@
       pkgs-unstable.blender
       pkgs-unstable.doctl
       pkgs-unstable.openscad
+      pkgs-unstable.claude-code
+      pkgs-unstable.nodejs
 
       pkgs-custom.nvim
       pkgs-custom.betterbird

@@ -75,6 +75,7 @@
           pkg:
           builtins.elem (lib.getName pkg) [
             "antigravity-cli"
+            "claude-code"
           ];
         overlays = [
           nur.overlays.default
@@ -130,7 +131,7 @@
         {
           ${hostname} = mkConfiguration {
             hostName = hostname;
-            hardwareModule = ./system/hardware-configuration.nix;
+            hardwareModule = ./system/hardware-configuration-steins-gate.nix;
             videoDrivers = [ "amdgpu" ];
             netbirdClients = [
               {
