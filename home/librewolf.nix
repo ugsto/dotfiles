@@ -1,7 +1,5 @@
 { pkgs-unstable, ... }:
 {
-
-  home.packages = [ pkgs-unstable.keepassxc ];
   programs.librewolf = {
     enable = true;
     package = pkgs-unstable.librewolf;

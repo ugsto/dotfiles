@@ -1,9 +1,7 @@
 {
   disko.devices.disk.main = {
     type = "disk";
-    # TODO: confirm on the machine before running disko:
-    #   ls -l /dev/disk/by-id/ | grep -v part
-    device = "/dev/disk/by-id/CHANGE-ME";
+    device = "/dev/nvme0n1";
     content = {
       type = "gpt";
       partitions = {
@@ -22,7 +20,13 @@
           content = {
             type = "luks";
             name = "cryptroot";
-            settings.allowDiscards = true;
+            settings = {
+              allowDiscards = true;
+              crypttabExtraOpts = [
+                "fido2-device=auto"
+                "token-timeout=15"
+              ];
+            };
             content = {
               type = "btrfs";
               extraArgs = [
