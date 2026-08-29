@@ -24,7 +24,14 @@
         rust_analyzer.enable = false;
         ty.enable = true;
         gopls.enable = true;
-        terraformls.enable = true;
+        terraformls = {
+          enable = true;
+          onAttach = {
+            function = ''
+              client.server_capabilities.semanticTokensProvider = nil
+            '';
+          };
+        };
         ansiblels = {
           enable = true;
           package = null;
@@ -140,6 +147,14 @@
   ];
 
   extraConfigLua = ''
+    vim.filetype.add({
+      extension = {
+        tf = "terraform",
+        tfvars = "terraform-vars",
+        hcl = "hcl",
+      },
+    })
+
     local _border = "rounded"
 
     vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, config)

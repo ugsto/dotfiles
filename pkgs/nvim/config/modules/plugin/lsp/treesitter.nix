@@ -65,4 +65,8 @@
   extraConfigLuaPre = ''
     vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/site")
   '';
+
+  extraConfigLua = ''
+    vim.treesitter.language.register('terraform', 'terraform-vars')
+  '';
 }
