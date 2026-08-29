@@ -76,7 +76,8 @@ in
           "${modifier}+Shift+j" = "move down";
           "${modifier}+Shift+k" = "move up";
           "${modifier}+Shift+p" = "move right";
-          "${modifier}+g" = "exec swaylock";
+          "${modifier}+g" =
+            "exec ${config.programs.noctalia.package}/bin/noctalia msg session lock";
           "Print" = "exec ${print}";
         }
         // (builtins.listToAttrs (

@@ -5,7 +5,10 @@
     package = pkgs-unstable.keepassxc;
     autostart = true;
     settings = {
-      Browser.Enabled = true;
+      Browser = {
+        Enabled = true;
+        UpdateBinaryPath = false;
+      };
       FdoSecrets.Enabled = true;
     };
   };

@@ -9,7 +9,6 @@
     enable = true;
     flavor = "mocha";
     accent = "blue";
-    gemini-cli.enable = false;
   };
 
   services.cliphist = {
@@ -64,12 +63,22 @@
       pkgs-unstable.claude-code
       pkgs-unstable.nodejs
       pkgs-unstable.antigravity-cli
+      pkgs-unstable.codex
+      (pkgs.symlinkJoin {
+        name = "element-desktop-keepassxc";
+        paths = [ pkgs-unstable.element-desktop ];
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/element-desktop \
+            --add-flags "--password-store=gnome-libsecret"
+        '';
+      })
 
       pkgs-custom.nvim
       pkgs-custom.betterbird
-      pkgs-custom.grok
       pkgs-custom.vastai
       pkgs-custom.google-colab-cli
+      pkgs-custom.mgccli
 
       nerd-fonts.fira-code
       font-awesome
