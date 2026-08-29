@@ -25,6 +25,7 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages;
+    kernelModules = [ "hidraw" ];
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -61,6 +62,11 @@
       nerd-fonts.fira-code
       nerd-fonts.droid-sans-mono
       nerd-fonts.jetbrains-mono
+
+      dina-font
+      proggyfonts
+
+      google-fonts
     ];
   };
 
