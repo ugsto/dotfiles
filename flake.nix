@@ -57,7 +57,6 @@
         config.allowUnfreePredicate =
           pkg:
           builtins.elem (lib.getName pkg) [
-            "grok"
             "vagrant"
             "drawio"
             "zoom"
@@ -120,7 +119,6 @@
                     builtins.elem (lib.getName pkg) [
                       "vagrant"
                       "drawio"
-                      "grok"
                       "slack"
                     ];
                 }
@@ -189,9 +187,9 @@
                 pkgs-custom = {
                   nvim = inputs.nvim.packages.${system}.default;
                   betterbird = pkgs.callPackage ./pkgs/by-name/be/betterbird/package.nix { };
-                  grok = pkgs.callPackage ./pkgs/by-name/gr/grok/package.nix { };
                   vastai = pkgs.callPackage ./pkgs/by-name/va/vastai/package.nix { };
                   google-colab-cli = pkgs.callPackage ./pkgs/by-name/go/google-colab-cli/package.nix { };
+                  mgccli = pkgs.callPackage ./pkgs/by-name/mg/mgccli/package.nix { };
                 };
               };
               modules = [
@@ -205,7 +203,6 @@
                       "zoom-us"
                       "zoom"
                       "drawio"
-                      "grok"
                       "slack"
                     ];
                 }
