@@ -56,7 +56,7 @@ let
 in
 {
   sops = {
-    age.keyFile = "/var/lib/sops-nix/key.txt";
+    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
     defaultSopsFile = ../secrets/secret.yaml;
 
     secrets = lib.genAttrs (map (client: client.managementUrlSecret) netbirdClients) (_: { });
