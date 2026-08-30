@@ -59,7 +59,7 @@
       pkgs-unstable.arduino
       pkgs-unstable.blender
       pkgs-unstable.doctl
-      pkgs-unstable.openscad
+      pkgs-unstable.openscad-unstable
       pkgs-unstable.claude-code
       pkgs-unstable.nodejs
       pkgs-unstable.antigravity-cli
