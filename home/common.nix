@@ -76,6 +76,7 @@
 
       pkgs-custom.nvim
       pkgs-custom.betterbird
+      pkgs-custom.grayjay
       pkgs-custom.vastai
       pkgs-custom.google-colab-cli
       pkgs-custom.mgccli
