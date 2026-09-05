@@ -1,5 +1,30 @@
-{ inputs, ... }: {
+{ inputs, pkgs-custom, ... }: {
   imports = [ inputs.noctalia.homeModules.default ];
+
+  # The felipeartur/ai-usagebar plugin shells out to the CLI by name, so it has
+  # to be on PATH for the widget to show anything.
+  home.packages = [ pkgs-custom.ai-usagebar ];
+
+  # Claude Code only. The CLI ships openai, zai and openrouter enabled by
+  # default, so they are turned off here rather than left to fall silent for
+  # want of a key. Anthropic holds no credential here: it reads the Claude CLI
+  # OAuth file at ~/.claude/.credentials.json, which this config never touches.
+  xdg.configFile."ai-usagebar/config.toml".text = ''
+    [ui]
+    primary = "anthropic"
+
+    [anthropic]
+    enabled = true
+
+    [openai]
+    enabled = false
+
+    [zai]
+    enabled = false
+
+    [openrouter]
+    enabled = false
+  '';
 
   programs.noctalia = {
     enable = true;
@@ -21,12 +46,19 @@
         start = [ "control-center" ];
         center = [ "workspaces" ];
         end = [
+          "ai-usage"
           "clock"
           "bluetooth"
           "network"
           "battery"
           "tray"
         ];
+      };
+
+      plugins.enabled = [ "felipeartur/ai-usagebar" ];
+
+      plugin_settings."felipeartur/ai-usagebar" = {
+        refresh_minutes = 5;
       };
 
       widget = {
@@ -37,6 +69,12 @@
         workspaces = {
           type = "workspaces";
           hide_unoccupied = false;
+        };
+        ai-usage = {
+          type = "felipeartur/ai-usagebar:bar";
+          vendor = "anthropic";
+          visualization = "gauge";
+          extras = "countdown";
         };
         clock = {
           type = "clock";

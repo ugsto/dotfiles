@@ -81,6 +81,7 @@
       pkgs-custom.google-colab-cli
       pkgs-custom.mgccli
       pkgs-custom.openlogi
+      pkgs-custom.ai-usagebar
 
       nerd-fonts.fira-code
       font-awesome
