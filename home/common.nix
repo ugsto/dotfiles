@@ -80,6 +80,7 @@
       pkgs-custom.vastai
       pkgs-custom.google-colab-cli
       pkgs-custom.mgccli
+      pkgs-custom.openlogi
 
       nerd-fonts.fira-code
       font-awesome
@@ -154,6 +155,7 @@
     ./librewolf.nix
     ./matrix.nix
     ./obs.nix
+    ./openlogi.nix
     ./sops.nix
     ./starship.nix
     ./syncthing.nix

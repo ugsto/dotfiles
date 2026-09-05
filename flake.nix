@@ -84,6 +84,17 @@
         ];
       };
       theme = import ./home/theme.nix;
+      # Shared by the NixOS and home-manager sides so a package installed into the
+      # user profile and a system module referencing it resolve to one store path.
+      pkgs-custom = {
+        nvim = inputs.nvim.packages.${system}.default;
+        betterbird = pkgs.callPackage ./pkgs/by-name/be/betterbird/package.nix { };
+        grayjay = pkgs.callPackage ./pkgs/by-name/gr/grayjay/package.nix { };
+        vastai = pkgs.callPackage ./pkgs/by-name/va/vastai/package.nix { };
+        google-colab-cli = pkgs.callPackage ./pkgs/by-name/go/google-colab-cli/package.nix { };
+        mgccli = pkgs.callPackage ./pkgs/by-name/mg/mgccli/package.nix { };
+        openlogi = pkgs.callPackage ./pkgs/by-name/op/openlogi/package.nix { };
+      };
     in
     {
       formatter.${system} = pkgs.nixfmt;
@@ -104,6 +115,7 @@
                 inherit
                   username
                   name
+                  pkgs-custom
                   hardwareModule
                   diskModule
                   storageModule
@@ -182,18 +194,11 @@
                 inherit
                   inputs
                   pkgs-unstable
+                  pkgs-custom
                   system
                   username
                   theme
                   ;
-                pkgs-custom = {
-                  nvim = inputs.nvim.packages.${system}.default;
-                  betterbird = pkgs.callPackage ./pkgs/by-name/be/betterbird/package.nix { };
-                  grayjay = pkgs.callPackage ./pkgs/by-name/gr/grayjay/package.nix { };
-                  vastai = pkgs.callPackage ./pkgs/by-name/va/vastai/package.nix { };
-                  google-colab-cli = pkgs.callPackage ./pkgs/by-name/go/google-colab-cli/package.nix { };
-                  mgccli = pkgs.callPackage ./pkgs/by-name/mg/mgccli/package.nix { };
-                };
               };
               modules = [
                 inputs.nix-flatpak.homeManagerModules.nix-flatpak
