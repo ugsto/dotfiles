@@ -16,6 +16,7 @@
     ./desktop.nix
     ./locale.nix
     ./networking.nix
+    ./openlogi.nix
     ./security.nix
     ./virtualization.nix
     hardwareModule
