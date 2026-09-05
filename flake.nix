@@ -88,6 +88,7 @@
       # user profile and a system module referencing it resolve to one store path.
       pkgs-custom = {
         nvim = inputs.nvim.packages.${system}.default;
+        ai-usagebar = pkgs.callPackage ./pkgs/by-name/ai/ai-usagebar/package.nix { };
         betterbird = pkgs.callPackage ./pkgs/by-name/be/betterbird/package.nix { };
         grayjay = pkgs.callPackage ./pkgs/by-name/gr/grayjay/package.nix { };
         vastai = pkgs.callPackage ./pkgs/by-name/va/vastai/package.nix { };
