@@ -64,6 +64,7 @@
       pkgs-unstable.nodejs
       pkgs-unstable.antigravity-cli
       pkgs-unstable.codex
+      pkgs-unstable.yq-go
       (pkgs.symlinkJoin {
         name = "element-desktop-keepassxc";
         paths = [ pkgs-unstable.element-desktop ];
@@ -73,6 +74,9 @@
             --add-flags "--password-store=gnome-libsecret"
         '';
       })
+      (pkgs-unstable.google-cloud-sdk.withExtraComponents [
+        pkgs-unstable.google-cloud-sdk.components.gke-gcloud-auth-plugin
+      ])
 
       pkgs-custom.nvim
       pkgs-custom.betterbird
