@@ -86,6 +86,7 @@
       pkgs-custom.mgccli
       pkgs-custom.openlogi
       pkgs-custom.ai-usagebar
+      pkgs-custom.helium
 
       nerd-fonts.fira-code
       font-awesome
