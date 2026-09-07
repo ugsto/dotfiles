@@ -5,10 +5,9 @@
   # to be on PATH for the widget to show anything.
   home.packages = [ pkgs-custom.ai-usagebar ];
 
-  # Claude Code only. The CLI ships openai, zai and openrouter enabled by
-  # default, so they are turned off here rather than left to fall silent for
-  # want of a key. Anthropic holds no credential here: it reads the Claude CLI
-  # OAuth file at ~/.claude/.credentials.json, which this config never touches.
+  # Claude Code, Codex, and Antigravity. Anthropic reads the Claude CLI OAuth file
+  # at ~/.claude/.credentials.json, OpenAI reads ~/.codex/auth.json, and Antigravity
+  # reads from the local Antigravity server. zai and openrouter remain disabled.
   xdg.configFile."ai-usagebar/config.toml".text = ''
     [ui]
     primary = "anthropic"
@@ -17,7 +16,10 @@
     enabled = true
 
     [openai]
-    enabled = false
+    enabled = true
+
+    [antigravity]
+    enabled = true
 
     [zai]
     enabled = false
@@ -72,7 +74,8 @@
         };
         ai-usage = {
           type = "felipeartur/ai-usagebar:bar";
-          vendor = "anthropic";
+          vendor = "auto";
+          provider_limit = 3;
           visualization = "gauge";
           extras = "countdown";
         };
