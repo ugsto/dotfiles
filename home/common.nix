@@ -65,6 +65,7 @@
       pkgs-unstable.antigravity-cli
       pkgs-unstable.codex
       pkgs-unstable.yq-go
+      pkgs-unstable.openutau
       (pkgs.symlinkJoin {
         name = "element-desktop-keepassxc";
         paths = [ pkgs-unstable.element-desktop ];
