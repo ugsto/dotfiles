@@ -113,6 +113,8 @@
     };
   };
 
+  programs.direnv.enable = true;
+
   powerManagement.powertop.enable = true;
 
   zramSwap.enable = true;
