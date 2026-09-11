@@ -1,14 +1,14 @@
-{ inputs, pkgs-custom, ... }: {
+{
+  config,
+  inputs,
+  pkgs-custom,
+  ...
+}:
+{
   imports = [ inputs.noctalia.homeModules.default ];
-
-  # The felipeartur/ai-usagebar plugin shells out to the CLI by name, so it has
-  # to be on PATH for the widget to show anything.
   home.packages = [ pkgs-custom.ai-usagebar ];
 
-  # Claude Code, Codex, and Antigravity. Anthropic reads the Claude CLI OAuth file
-  # at ~/.claude/.credentials.json, OpenAI reads ~/.codex/auth.json, and Antigravity
-  # reads from the local Antigravity server. zai and openrouter remain disabled.
-  xdg.configFile."ai-usagebar/config.toml".text = ''
+  sops.templates."ai-usagebar-config.toml".content = ''
     [ui]
     primary = "anthropic"
 
@@ -22,11 +22,24 @@
     enabled = true
 
     [zai]
-    enabled = false
+    enabled = true
+    api_key = "${config.sops.placeholder.zai_api_key}"
+
+    [deepseek]
+    enabled = true
+    api_key = "${config.sops.placeholder.deepseek_api_key}"
+
+    [minimax]
+    enabled = true
+    api_key = "${config.sops.placeholder.minimax_api_key}"
 
     [openrouter]
     enabled = false
   '';
+
+  xdg.configFile."ai-usagebar/config.toml".source =
+    config.lib.file.mkOutOfStoreSymlink
+      config.sops.templates."ai-usagebar-config.toml".path;
 
   programs.noctalia = {
     enable = true;
@@ -75,7 +88,7 @@
         ai-usage = {
           type = "felipeartur/ai-usagebar:bar";
           vendor = "auto";
-          provider_limit = 3;
+          provider_limit = 2;
           visualization = "gauge";
           extras = "countdown";
         };
