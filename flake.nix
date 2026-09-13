@@ -96,6 +96,7 @@
         mgccli = pkgs.callPackage ./pkgs/by-name/mg/mgccli/package.nix { };
         helium = pkgs.callPackage ./pkgs/by-name/he/helium/package.nix { };
         openlogi = pkgs.callPackage ./pkgs/by-name/op/openlogi/package.nix { };
+        deepseek-harness = pkgs.callPackage ./pkgs/by-name/de/deepseek-harness/package.nix { };
       };
     in
     {
