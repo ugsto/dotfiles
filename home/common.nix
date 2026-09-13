@@ -67,6 +67,7 @@
       pkgs-unstable.yq-go
       pkgs-unstable.openutau
       pkgs-unstable.k0sctl
+      pkgs-unstable.openbao
       (pkgs.symlinkJoin {
         name = "element-desktop-keepassxc";
         paths = [ pkgs-unstable.element-desktop ];
@@ -89,6 +90,7 @@
       pkgs-custom.openlogi
       pkgs-custom.ai-usagebar
       pkgs-custom.helium
+      pkgs-custom.deepseek-harness
 
       nerd-fonts.fira-code
       font-awesome
