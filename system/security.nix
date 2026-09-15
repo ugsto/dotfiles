@@ -3,7 +3,7 @@
   security = {
     sudo = {
       enable = true;
-      wheelNeedsPassword = false;
+      wheelNeedsPassword = true;
     };
     pam = {
       u2f = {
