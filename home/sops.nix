@@ -13,6 +13,7 @@
     secrets = {
       "deepseek_api_key" = { };
       "minimax_api_key" = { };
+      "openrouter_api_key" = { };
       "openrouter_nvim_api_key" = { };
       "zai_api_key" = { };
     };
