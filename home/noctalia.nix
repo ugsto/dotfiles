@@ -34,7 +34,8 @@
     api_key = "${config.sops.placeholder.minimax_api_key}"
 
     [openrouter]
-    enabled = false
+    enabled = true
+    api_key = "${config.sops.placeholder.openrouter_api_key}"
   '';
 
   xdg.configFile."ai-usagebar/config.toml".source =
