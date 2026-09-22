@@ -97,6 +97,7 @@
         helium = pkgs.callPackage ./pkgs/by-name/he/helium/package.nix { };
         openlogi = pkgs.callPackage ./pkgs/by-name/op/openlogi/package.nix { };
         deepseek-harness = pkgs.callPackage ./pkgs/by-name/de/deepseek-harness/package.nix { };
+        orca = pkgs.callPackage ./pkgs/by-name/or/orca/package.nix { };
       };
     in
     {

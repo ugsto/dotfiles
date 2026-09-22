@@ -91,6 +91,7 @@
       pkgs-custom.ai-usagebar
       pkgs-custom.helium
       pkgs-custom.deepseek-harness
+      pkgs-custom.orca
 
       nerd-fonts.fira-code
       font-awesome
