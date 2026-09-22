@@ -140,7 +140,8 @@
         postFixup = ''
           wrapProgram $out/bin/ai-jail \
             --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.bubblewrap ]} \
-            --set BWRAP_BIN "${pkgs.bubblewrap}/bin/bwrap"
+            --set BWRAP_BIN "${pkgs.bubblewrap}/bin/bwrap" \
+            --unset TMPDIR
         '';
       })
     ];
