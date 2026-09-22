@@ -81,6 +81,17 @@
         overlays = [
           nur.overlays.default
           nixgl.overlay
+          (final: prev: {
+            claude-code = prev.claude-code.override {
+              manifest = {
+                version = "2.1.280";
+                platforms.linux-x64 = {
+                  binary = "claude.zst";
+                  checksum = "27910e2ae704d8f2e8024897d8fdf1e7710807baf4f6982c0e3797c058315384";
+                };
+              };
+            };
+          })
         ];
       };
       theme = import ./home/theme.nix;
