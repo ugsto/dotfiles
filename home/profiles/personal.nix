@@ -13,7 +13,6 @@
 
   home = {
     packages = [
-      pkgs.polkit_gnome
     ];
     inherit username;
     homeDirectory = "/home/${username}";
