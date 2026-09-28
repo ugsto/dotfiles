@@ -47,9 +47,16 @@
     systemd.enable = true;
     settings = {
       shell = {
-        ui_scale = 0.8;
         corner_radius_scale = 0.5;
         font_family = "sans-serif";
+        lang = "en";
+        polkit_agent = true;
+
+        screenshot = {
+          save_to_file = false;
+          copy_to_clipboard = true;
+          freeze_screen = true;
+        };
       };
 
       theme = {

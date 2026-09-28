@@ -13,7 +13,6 @@
 
   home = {
     packages = [
-      pkgs.polkit_gnome
       pkgs-unstable.antigravity-cli
     ];
     inherit username;
