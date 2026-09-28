@@ -1,4 +1,5 @@
 {
+  pkgs-unstable,
   config,
   lib,
   username,
@@ -80,7 +81,7 @@ in
 
     netbird = {
       ui.enable = false;
-
+      package = pkgs-unstable.netbird;
       clients = lib.listToAttrs (
         map (client: lib.nameValuePair client.name client.settings) netbirdClients
       );
