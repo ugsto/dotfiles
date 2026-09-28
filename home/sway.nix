@@ -7,11 +7,10 @@
 let
   browser = "${pkgs.librewolf}/bin/librewolf";
   terminal = "${config.programs.alacritty.package}/bin/alacritty";
-  menu = "${pkgs.wofi}/bin/wofi --show drun --insensitive --allow-images --no-actions";
-  clipboard = "${pkgs.cliphist}/bin/cliphist list | ${pkgs.wofi}/bin/wofi --dmenu --prompt Clipboard | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy";
-  print = "${pkgs.wayfreeze}/bin/wayfreeze --after-freeze-cmd '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy; pkill wayfreeze'";
-  increase-backlight = "${pkgs.brightnessctl}/bin/brightnessctl set +5%";
-  decrease-backlight = "${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
+  noctalia = "${config.programs.noctalia.package}/bin/noctalia msg";
+  menu = "${noctalia} panel-toggle launcher";
+  clipboard = "${noctalia} panel-toggle clipboard";
+  print = "${noctalia} screenshot-region";
 
   modifier = "Mod4";
 in
@@ -64,8 +63,7 @@ in
           "${modifier}+r" = "exec ${menu}";
           "${modifier}+c" = "exec ${clipboard}";
           "${modifier}+q" = "kill";
-          "${modifier}+m" =
-            "exec ${config.programs.noctalia.package}/bin/noctalia msg panel-toggle control-center";
+          "${modifier}+m" = "exec ${noctalia} panel-toggle control-center";
           "${modifier}+v" = "floating toggle";
           "${modifier}+f" = "fullscreen toggle";
           "${modifier}+h" = "focus left";
@@ -76,8 +74,7 @@ in
           "${modifier}+Shift+j" = "move down";
           "${modifier}+Shift+k" = "move up";
           "${modifier}+Shift+p" = "move right";
-          "${modifier}+g" =
-            "exec ${config.programs.noctalia.package}/bin/noctalia msg session lock";
+          "${modifier}+g" = "exec ${noctalia} session lock";
           "Print" = "exec ${print}";
         }
         // (builtins.listToAttrs (
@@ -111,17 +108,16 @@ in
     };
 
     extraConfig = ''
-      bindsym XF86MonBrightnessUp exec ${increase-backlight}
-      bindsym XF86MonBrightnessDown exec ${decrease-backlight}
+      bindsym --locked XF86MonBrightnessUp exec ${noctalia} brightness-up
+      bindsym --locked XF86MonBrightnessDown exec ${noctalia} brightness-down
+      bindsym --locked XF86AudioRaiseVolume exec ${noctalia} volume-up
+      bindsym --locked XF86AudioLowerVolume exec ${noctalia} volume-down
+      bindsym --locked XF86AudioMute exec ${noctalia} volume-mute
     '';
   };
 
   home.packages = with pkgs; [
-    wl-clip-persist
     nerd-fonts.noto
-    wayfreeze
-    grim
-    slurp
     wl-clipboard
     thunar
   ];
