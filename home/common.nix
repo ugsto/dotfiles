@@ -51,6 +51,9 @@
       trivy
       crane
 
+      yubikey-manager
+      btop
+
       pkgs-unstable.devenv
       pkgs-unstable.kind
       pkgs-unstable.freetube
