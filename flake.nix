@@ -95,8 +95,6 @@
         ];
       };
       theme = import ./home/theme.nix;
-      # Shared by the NixOS and home-manager sides so a package installed into the
-      # user profile and a system module referencing it resolve to one store path.
       pkgs-custom = {
         nvim = inputs.nvim.packages.${system}.default;
         ai-usagebar = pkgs.callPackage ./pkgs/by-name/ai/ai-usagebar/package.nix { };
@@ -130,6 +128,7 @@
                 inherit
                   username
                   name
+                  pkgs-unstable
                   pkgs-custom
                   hardwareModule
                   diskModule
@@ -236,7 +235,6 @@
         rec {
           personal = mkHomeConfiguration ./home/profiles/personal.nix;
           professional = mkHomeConfiguration ./home/profiles/professional.nix;
-          # Backwards-compatible alias for the old standalone activation command.
           ${username} = personal;
         };
 
