@@ -11,11 +11,6 @@
     accent = "blue";
   };
 
-  services.cliphist = {
-    enable = true;
-    allowImages = true;
-  };
-
   home = {
     stateVersion = "26.05";
     packages = with pkgs; [
@@ -175,6 +170,5 @@
     ./starship.nix
     ./syncthing.nix
     ./tmux.nix
-    ./wofi.nix
   ];
 }
