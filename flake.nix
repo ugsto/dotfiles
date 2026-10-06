@@ -122,6 +122,7 @@
               storageModule ? null,
               videoDrivers ? [ ],
               netbirdClients ? [ ],
+              extraModules ? [ ],
             }:
             lib.nixosSystem {
               specialArgs = {
@@ -151,6 +152,7 @@
                     ];
                 }
               ]
+              ++ extraModules
               ++ lib.optional (diskModule != null) disko.nixosModules.disko;
             };
         in
@@ -161,6 +163,7 @@
             diskModule = ./system/disko-steins-gate.nix;
             storageModule = ./system/storage-btrfs.nix;
             videoDrivers = [ "amdgpu" ];
+            extraModules = [ ./system/ollama.nix ];
             netbirdClients = [
               {
                 name = "wt0";
