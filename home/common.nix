@@ -40,6 +40,7 @@
       drawio
       hcloud
       terragrunt
+      affine
 
       slack
       glab
@@ -60,7 +61,9 @@
       pkgs-unstable.openscad-unstable
       pkgs-unstable.claude-code
       pkgs-unstable.nodejs
+      pkgs-unstable.bubblewrap
       pkgs-unstable.antigravity-cli
+      pkgs-unstable.opencode
       pkgs-unstable.codex
       pkgs-unstable.yq-go
       pkgs-unstable.openutau
