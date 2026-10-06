@@ -90,6 +90,7 @@
       pkgs-custom.helium
       pkgs-custom.deepseek-harness
       pkgs-custom.orca
+      pkgs-custom.omnigent
 
       nerd-fonts.fira-code
       font-awesome

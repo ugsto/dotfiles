@@ -107,6 +107,7 @@
         openlogi = pkgs.callPackage ./pkgs/by-name/op/openlogi/package.nix { };
         deepseek-harness = pkgs.callPackage ./pkgs/by-name/de/deepseek-harness/package.nix { };
         orca = pkgs.callPackage ./pkgs/by-name/or/orca/package.nix { };
+        omnigent = pkgs.callPackage ./pkgs/by-name/om/omnigent/package.nix { };
       };
     in
     {
