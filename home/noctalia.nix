@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  pkgs,
   pkgs-custom,
   ...
 }:
@@ -127,11 +128,19 @@
       };
 
       idle = {
-        enabled = true;
-        screen_off_timeout = 600;
-        fade_duration = 5;
-        screen_off_command = "swaymsg \"output * power off\"";
-        resume_screen_off_command = "swaymsg \"output * power on\"";
+        pre_action_fade_seconds = 0;
+        behavior = {
+          dim = {
+            timeout = 300;
+            action = "command";
+            command = "${pkgs.brightnessctl}/bin/brightnessctl -s set 10%";
+            resume_command = "${pkgs.brightnessctl}/bin/brightnessctl -r";
+          };
+          screen-off = {
+            timeout = 600;
+            action = "screen_off";
+          };
+        };
       };
 
       dock = {
