@@ -108,6 +108,7 @@
         deepseek-harness = pkgs.callPackage ./pkgs/by-name/de/deepseek-harness/package.nix { };
         orca = pkgs.callPackage ./pkgs/by-name/or/orca/package.nix { };
         omnigent = pkgs.callPackage ./pkgs/by-name/om/omnigent/package.nix { };
+        argocd-agentctl = pkgs.callPackage ./pkgs/by-name/ar/argocd-agentctl/package.nix { };
       };
     in
     {
