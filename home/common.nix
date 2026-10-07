@@ -81,6 +81,7 @@
       (pkgs-unstable.google-cloud-sdk.withExtraComponents [
         pkgs-unstable.google-cloud-sdk.components.gke-gcloud-auth-plugin
       ])
+      pkgs-unstable.t3code
 
       pkgs-custom.nvim
       pkgs-custom.betterbird
