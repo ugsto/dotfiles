@@ -95,6 +95,7 @@
       pkgs-custom.deepseek-harness
       pkgs-custom.orca
       pkgs-custom.omnigent
+      pkgs-custom.argocd-agentctl
 
       nerd-fonts.fira-code
       font-awesome
