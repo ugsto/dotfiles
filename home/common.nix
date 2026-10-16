@@ -59,7 +59,6 @@
       pkgs-unstable.blender
       pkgs-unstable.doctl
       pkgs-unstable.openscad-unstable
-      pkgs-unstable.claude-code
       pkgs-unstable.nodejs
       pkgs-unstable.bubblewrap
       pkgs-unstable.antigravity-cli
@@ -166,6 +165,7 @@
   imports = [
     ./activitywatch.nix
     ./bash.nix
+    ./claude-code.nix
     ./chromium.nix
     ./gammastep.nix
     ./keepassxc.nix
