@@ -4,9 +4,6 @@
     lsp-lines = {
       enable = true;
     };
-    lsp-format = {
-      enable = true;
-    };
     helm = {
       enable = true;
     };
@@ -21,7 +18,6 @@
         ts_ls.enable = true;
         marksman.enable = true;
         ruff.enable = true;
-        rust_analyzer.enable = false;
         ty.enable = true;
         gopls.enable = true;
         terraformls = {
@@ -68,13 +64,13 @@
             settings = {
               yaml = {
                 schemas = {
-                  kubernetes = "'*.yaml";
-                  "http://json.schemastore.org/github-workflow" = ".github/workflows/*";
-                  "http://json.schemastore.org/github-action" = ".github/action.{yml,yaml}";
-                  "http://json.schemastore.org/ansible-stable-2.9" = "roles/tasks/*.{yml,yaml}";
-                  "http://json.schemastore.org/kustomization" = "kustomization.{yml,yaml}";
-                  "http://json.schemastore.org/ansible-playbook" = "*play*.{yml,yaml}";
-                  "http://json.schemastore.org/chart" = "Chart.{yml,yaml}";
+                  kubernetes = "*.yaml";
+                  "https://json.schemastore.org/github-workflow" = ".github/workflows/*";
+                  "https://json.schemastore.org/github-action" = ".github/action.{yml,yaml}";
+                  "https://json.schemastore.org/ansible-stable-2.9" = "roles/tasks/*.{yml,yaml}";
+                  "https://json.schemastore.org/kustomization" = "kustomization.{yml,yaml}";
+                  "https://json.schemastore.org/ansible-playbook" = "*play*.{yml,yaml}";
+                  "https://json.schemastore.org/chart" = "Chart.{yml,yaml}";
                   "https://json.schemastore.org/dependabot-v2" = ".github/dependabot.{yml,yaml}";
                   "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json" =
                     "*docker-compose*.{yml,yaml}";
@@ -92,26 +88,6 @@
       keymaps = {
         silent = true;
         lspBuf = {
-          gd = {
-            action = "definition";
-            desc = "Goto Definition";
-          };
-          gr = {
-            action = "references";
-            desc = "Goto References";
-          };
-          gD = {
-            action = "declaration";
-            desc = "Goto Declaration";
-          };
-          gI = {
-            action = "implementation";
-            desc = "Goto Implementation";
-          };
-          gT = {
-            action = "type_definition";
-            desc = "Type Definition";
-          };
           K = {
             action = "hover";
             desc = "Hover";
@@ -155,32 +131,6 @@
       },
     })
 
-    local _border = "rounded"
-
-    vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, config)
-      return vim.lsp.handlers.hover(
-        err,
-        result,
-        ctx,
-        vim.tbl_extend("force", config or {}, { border = _border })
-      )
-    end
-
-    vim.lsp.handlers["textDocument/signatureHelp"] = function(err, result, ctx, config)
-      return vim.lsp.handlers.signature_help(
-        err,
-        result,
-        ctx,
-        vim.tbl_extend("force", config or {}, { border = _border })
-      )
-    end
-
-    vim.diagnostic.config{
-      float={border=_border}
-    };
-
-    require('lspconfig.ui.windows').default_options = {
-      border = _border
-    }
+    vim.o.winborder = "rounded"
   '';
 }

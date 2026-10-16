@@ -49,10 +49,6 @@
       key = "<leader><leader>";
     }
     {
-      action = "<cmd>lua Snacks.picker.buffers()<cr>";
-      key = "<leader>,";
-    }
-    {
       action = "<cmd>lua Snacks.picker.grep()<cr>";
       key = "<leader>/";
     }
@@ -63,10 +59,6 @@
     {
       action = "<cmd>lua Snacks.picker.buffers()<cr>";
       key = "<leader>fb";
-    }
-    {
-      action = "<cmd>lua Snacks.picker.files({ cwd = vim.fn.stdpath(\"config\") })<cr>";
-      key = "<leader>fc";
     }
     {
       action = "<cmd>lua Snacks.picker.files()<cr>";
@@ -113,31 +105,31 @@
       key = "<leader>gg";
     }
     {
-      action = "<cmd>Snacks.picker.lsp_definitions()<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_definitions()<cr>";
       key = "gd";
     }
     {
-      action = "<cmd>Snacks.picker.lsp_declarations()<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_declarations()<cr>";
       key = "gD";
     }
     {
-      action = "<cmd>Snacks.picker.lsp_references()<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_references()<cr>";
       key = "gr";
     }
     {
-      action = "<cmd>Snacks.picker.lsp_implementations()<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_implementations()<cr>";
       key = "gI";
     }
     {
-      action = "<cmd>Snacks.picker.lsp_type_definitions()<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_type_definitions()<cr>";
       key = "gy";
     }
     {
-      action = "<cmd>Snacks.picker.lsp_symbols()<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_symbols()<cr>";
       key = "<leader>ss";
     }
     {
-      action = "<cmd>Snacks.picker.lsp_workspace_symbols()<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_workspace_symbols()<cr>";
       key = "<leader>sS";
     }
     {

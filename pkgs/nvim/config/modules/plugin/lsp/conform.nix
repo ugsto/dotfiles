@@ -55,7 +55,7 @@
               end
             end
 
-            return { timeout_ms = 200, lsp_fallback = true }, on_format
+            return { timeout_ms = 200, lsp_format = "fallback" }, on_format
            end
         '';
 
@@ -69,7 +69,7 @@
               return
             end
 
-            return { lsp_fallback = true }
+            return { lsp_format = "fallback" }
           end
         '';
         notify_on_error = true;
@@ -89,28 +89,28 @@
 
         formatters = {
           ruff = {
-            command = "${lib.getExe pkgs.ruff}";
+            command = lib.getExe pkgs.ruff;
           };
           nixfmt = {
-            command = "${lib.getExe pkgs.nixfmt}";
+            command = lib.getExe pkgs.nixfmt;
           };
           jq = {
-            command = "${lib.getExe pkgs.jq}";
+            command = lib.getExe pkgs.jq;
           };
           stylua = {
-            command = "${lib.getExe pkgs.stylua}";
+            command = lib.getExe pkgs.stylua;
           };
           shellcheck = {
-            command = "${lib.getExe pkgs.shellcheck}";
+            command = lib.getExe pkgs.shellcheck;
           };
           shfmt = {
-            command = "${lib.getExe pkgs.shfmt}";
+            command = lib.getExe pkgs.shfmt;
           };
           shellharden = {
-            command = "${lib.getExe pkgs.shellharden}";
+            command = lib.getExe pkgs.shellharden;
           };
           bicep = {
-            command = "${lib.getExe pkgs.bicep}";
+            command = lib.getExe pkgs.bicep;
           };
         };
       };
