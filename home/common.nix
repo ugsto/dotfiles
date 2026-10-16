@@ -96,6 +96,7 @@
       pkgs-custom.orca
       pkgs-custom.omnigent
       pkgs-custom.argocd-agentctl
+      pkgs-custom.affine-mcp-server
 
       nerd-fonts.fira-code
       font-awesome

@@ -109,6 +109,7 @@
         orca = pkgs.callPackage ./pkgs/by-name/or/orca/package.nix { };
         omnigent = pkgs.callPackage ./pkgs/by-name/om/omnigent/package.nix { };
         argocd-agentctl = pkgs.callPackage ./pkgs/by-name/ar/argocd-agentctl/package.nix { };
+        affine-mcp-server = pkgs.callPackage ./pkgs/by-name/af/affine-mcp-server/package.nix { };
       };
     in
     {
