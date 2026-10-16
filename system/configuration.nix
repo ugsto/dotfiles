@@ -93,7 +93,6 @@
   services = {
     upower.enable = true;
     power-profiles-daemon.enable = false;
-    system76-scheduler.settings.cfsProfiles.enable = true;
     tlp = {
       enable = true;
       settings = {
