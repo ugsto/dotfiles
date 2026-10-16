@@ -73,7 +73,7 @@ in
           "${modifier}+Shift+h" = "move left";
           "${modifier}+Shift+j" = "move down";
           "${modifier}+Shift+k" = "move up";
-          "${modifier}+Shift+p" = "move right";
+          "${modifier}+Shift+l" = "move right";
           "${modifier}+g" = "exec ${noctalia} session lock";
           "Print" = "exec ${print}";
         }
