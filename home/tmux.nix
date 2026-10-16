@@ -25,7 +25,7 @@
       set -g default-terminal "tmux-256color"
       set -ag terminal-overrides ",xterm-256color:RGB"
 
-      set -g @catppuccin_flavor 'macchiato'
+      set -g @catppuccin_flavor 'mocha'
       set -g @catppuccin_window_status_file "rounded"
 
       set -g @catppuccin_window_fill "number"
