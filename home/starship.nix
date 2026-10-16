@@ -23,13 +23,9 @@
         added_style = "fg:${theme.colors.green} bg:${theme.colors.surface0}";
         deleted_style = "fg:${theme.colors.red} bg:${theme.colors.surface0}";
       };
-      hg_branch = {
-        format = "[ $symbol$branch ]($style)";
-        symbol = " ";
-      };
       character = {
-        success_symbol = "[ ➜](bold green) ";
-        error_symbol = "[ ✗](#E84D44) ";
+        success_symbol = "[ ➜](bold fg:${theme.colors.green}) ";
+        error_symbol = "[ ✗](bold fg:${theme.colors.red}) ";
       };
     };
   };
