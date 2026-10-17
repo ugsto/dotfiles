@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   programs.bash = {
     enable = true;
@@ -14,6 +15,9 @@
     ];
     historySize = 10000;
     initExtra = ''
+      unset __HM_SESS_VARS_SOURCED
+      . "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh"
+
       set -o vi
 
       case ":$PATH:" in
