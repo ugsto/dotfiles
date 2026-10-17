@@ -21,6 +21,10 @@
 
   home.sessionVariables = {
     DEEPSEEK_API_KEY = "$(<${config.sops.secrets.deepseek_api_key.path})";
+    OPENROUTER_API_KEY = "$(<${config.sops.secrets.openrouter_api_key.path})";
+    ZAI_API_KEY = "$(<${config.sops.secrets.zai_api_key.path})";
+    MINIMAX_API_KEY = "$(<${config.sops.secrets.minimax_api_key.path})";
+    OPENAI_CODEX_API_KEY = "$(jq -r .tokens.access_token ~/.codex/auth.json 2>/dev/null)";
     OPENROUTER_NVIM_API_KEY = "$(<${config.sops.secrets.openrouter_nvim_api_key.path})";
   };
 }
