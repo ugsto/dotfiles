@@ -166,6 +166,7 @@
     ./activitywatch.nix
     ./bash.nix
     ./claude-code.nix
+    ./deepseek-harness.nix
     ./chromium.nix
     ./gammastep.nix
     ./keepassxc.nix
