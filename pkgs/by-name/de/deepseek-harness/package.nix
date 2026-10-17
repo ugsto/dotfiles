@@ -3,11 +3,25 @@
   buildNpmPackage,
   fetchurl,
   makeWrapper,
-  nodejs,
+  stdenv,
+  autoPatchelfHook,
 }:
 
 let
-  version = "0.1.5-rc.1";
+  nodejs = stdenv.mkDerivation {
+    pname = "nodejs-official";
+    version = "24.21.0";
+    src = fetchurl {
+      url = "https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz";
+      hash = "sha256-/Y5Z1aURUQ9qKYr7VI8Yx9KxvkBNi0on2U++SfVsstY=";
+    };
+    nativeBuildInputs = [ autoPatchelfHook ];
+    buildInputs = [ stdenv.cc.cc.lib ];
+    dontBuild = true;
+    installPhase = "install -Dm755 bin/node $out/bin/node";
+    meta.platforms = [ "x86_64-linux" ];
+  };
+  version = "0.2.0-rc.2";
   lockfile = ./package-lock.json;
 in
 buildNpmPackage {
@@ -16,22 +30,23 @@ buildNpmPackage {
 
   src = fetchurl {
     url = "https://registry.npmjs.org/@deepseek-ai/dsh/-/dsh-${version}.tgz";
-    hash = "sha512-rmNmzQCg3oIc1z8xH7izRSOuy1TNzq+/NILyfM+7e8DKOyV+yBtg47WEsqR2SiIe1ATec3L/rUa1YhIcfQ2XEg==";
+    hash = "sha512-EAJ3gPNcVt/uv8X19PMm9NkVhWgT7xXNMk0UKCVm+IQ5rpSQOcsMUa0HWlnYYVybKMsccjcRB21vVVsaXQ6IdA==";
   };
 
   dontNpmBuild = true;
   postPatch = ''
     cp ${lockfile} package-lock.json
     substituteInPlace package.json \
-      --replace-fail '"@deepseek-ai/dsh-experimental-code-runtime-python": "^0.1.5-rc.1",' ""
+      --replace-fail '"@deepseek-ai/dsh-experimental-ptc-runtime-python": "0.2.0-rc.2",' ""
   '';
 
-  npmDepsHash = "sha256-Ffmv+tV3QQ2UexvKswd0HFxLarSkMzOPOSZ00Dmf7UI=";
+  npmDepsHash = "sha256-mnIiv/5YT6Ol6GTgJRCWn0hjMOurTCTZGTNydmSDznM=";
 
   nativeBuildInputs = [ makeWrapper ];
   postFixup = ''
     bin=$out/lib/node_modules/@deepseek-ai/dsh/lib/bin.js
     makeShellWrapper "${lib.getExe' nodejs "node"}" "$out/bin/dsh" \
+      --prefix PATH : ${lib.makeBinPath [ nodejs ]} \
       --add-flag "--expose-internals" \
       --add-flag "$bin"
   '';
