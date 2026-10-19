@@ -128,6 +128,42 @@ in
     fi
   '';
 
+  # Community plugins from the awesome-dsh-plugins editor's picks. The web profile is also the
+  # kernel dsh-tui runs sessions on. Needs dsh >=0.2.1-rc.2 (sidebar 0.28, web-all 0.4.7).
+  home.activation.dshPlugins = lib.hm.dag.entryAfter [ "dshTui" ] ''
+    PATH=${
+      lib.makeBinPath [
+        pkgs.pnpm
+        pkgs.nodejs
+        pkgs-custom.deepseek-harness
+      ]
+    }:$PATH
+    plug() { # profile package dir
+      [ -d "$HOME/.dsh/profiles/$1/node_modules/$3" ] || run dsh plugin --profile "$1" add "$2" \
+        || echo "dsh plugin $2 ($1) failed; retry on next switch" >&2
+    }
+    web="$HOME/.dsh/profiles/web"
+    # pnpm >=11 blocks dependency install scripts; the sidebar's native extras are not needed at runtime.
+    if [ -d "$web" ] && ! grep -q allowBuilds "$web/pnpm-workspace.yaml"; then
+      printf "\nallowBuilds:\n  cloudflared: false\n  cpu-features: false\n  ssh2: false\n" >> "$web/pnpm-workspace.yaml"
+    fi
+    # 0.2.1 ships the hook bridges only as devDependencies, so the home patch needs them per profile
+    for p in web dsh-tui; do
+      plug $p @deepseek-ai/dsh-hook-protocol@0.2.1-rc.2 @deepseek-ai/dsh-hook-protocol
+      plug $p @deepseek-ai/dsh-hooks-claude-code@0.2.1-rc.2 @deepseek-ai/dsh-hooks-claude-code
+    done
+    # bundles: native subagents, session search, git worktree, Agent Teams (the team bundle disables the plain subagent tools)
+    for p in web dsh-tui; do
+      for b in dsh-subagent-claude-code dsh-subagent-codex dsh-experimental-session-search dsh-experimental-tool-worktree dsh-experimental-agent-team-profile; do
+        plug $p @deepseek-ai/$b@0.2.1-rc.2 @deepseek-ai/$b
+      done
+    done
+    plug web dsh-mnemon dsh-mnemon
+    plug web dsh-better-sidebar@0.28.0 dsh-better-sidebar
+    plug web @linxin666/dsh-web-all@0.4.7 @linxin666/dsh-web-all
+    plug dsh-tui dsh-mnemon dsh-mnemon
+  '';
+
   home.file = {
     ".dsh/AGENTS.md".text = ''
       # Command output
@@ -156,6 +192,24 @@ in
     '';
 
     ".dsh/cordis.patch.yml".text = builtins.toJSON [
+      # web-all extras not wanted: the pet, and the usage tab with its CNY-only spend card (no currency option)
+      {
+        id = "web-ui-pet";
+        disabled = true;
+      }
+      {
+        id = "web-ui-usage";
+        disabled = true;
+      }
+      # LiangShen mode (PTC persona preset) and the skin center, whose built-in blue-fantasy skin paints a full-screen wallpaper
+      {
+        id = "web-ui-liangshen";
+        disabled = true;
+      }
+      {
+        id = "web-ui-skin-center";
+        disabled = true;
+      }
       {
         insert = [
           (mcpServer "codegraph" {
