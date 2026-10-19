@@ -4,7 +4,7 @@
   ...
 }:
 let
-  inherit (import ./agent-sources.nix pkgs) caveman ponytail;
+  inherit (import ./agent-sources.nix pkgs) caveman ponytail mattpocock-skills;
   claude-pro-kit = pkgs.fetchFromGitHub {
     owner = "VedantAndhale";
     repo = "claude-pro-kit";
@@ -82,6 +82,7 @@ in
     plugins = [
       caveman
       ponytail
+      mattpocock-skills
       "${claude-pro-kit}/plugins/output-diet"
       "${claude-pro-kit}/plugins/tool-diet"
       "${claude-pro-kit}/plugins/reread-guard"
