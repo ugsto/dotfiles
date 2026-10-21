@@ -40,7 +40,6 @@
       drawio
       hcloud
       terragrunt
-      affine
 
       slack
       glab
@@ -81,6 +80,7 @@
         pkgs-unstable.google-cloud-sdk.components.gke-gcloud-auth-plugin
       ])
       pkgs-unstable.t3code
+      pkgs-unstable.affine
 
       pkgs-custom.nvim
       pkgs-custom.betterbird
