@@ -110,6 +110,7 @@
         omnigent = pkgs.callPackage ./pkgs/by-name/om/omnigent/package.nix { };
         argocd-agentctl = pkgs.callPackage ./pkgs/by-name/ar/argocd-agentctl/package.nix { };
         affine-mcp-server = pkgs.callPackage ./pkgs/by-name/af/affine-mcp-server/package.nix { };
+        mcp-remote = pkgs.callPackage ./pkgs/by-name/mc/mcp-remote/package.nix { };
       };
     in
     {
