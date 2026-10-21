@@ -64,8 +64,19 @@ in
     enable = true;
     package = pkgs-unstable.claude-code;
 
+    skills = ./skills;
+
     context = ''
       @RTK.md
+
+      ## Long-term memory
+
+      Long-term memory is the AFFiNE workspace "AGENTS", reached through the `affine` MCP tools. Use the skills; do not improvise.
+
+      - `memory-read`: use it at the start of almost every session and task, before answering anything that past decisions, user preferences or project gotchas could change. Skip it only for questions that need no context at all.
+      - `memory-write`: use it when you learn something durable that is not derivable from code or git: a user correction or preference, a decision and its reason, a gotcha, a runbook, an external pointer. Write it as soon as it happens, not at the end. Never write secrets.
+      - `memory-daydream` is the user's background job. Never run it yourself.
+      - Memory is a claim from a past date. Verify files, flags and commands it names before relying on them. If the `affine` tools are unavailable, say so and go on without memory; do not invent it.
 
       <!-- CODEGRAPH_START -->
       ## CodeGraph
@@ -106,9 +117,10 @@ in
     };
 
     mcpServers.affine = {
-      type = "stdio";
-      command = "affine-mcp";
-      env.AFFINE_TOOL_PROFILE = "core";
+      type = "http";
+      url = "https://affine-mcp.bortoli.phd/mcp";
+      # Public Kanidm client with PKCE; it accepts http://localhost on any port.
+      oauth.clientId = "affine-mcp";
     };
 
     lspServers.nix = {
