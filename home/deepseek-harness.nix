@@ -158,10 +158,13 @@ in
         plug $p @deepseek-ai/$b@0.2.1-rc.2 @deepseek-ai/$b
       done
     done
-    plug web dsh-mnemon dsh-mnemon
     plug web dsh-better-sidebar@0.28.0 dsh-better-sidebar
     plug web @linxin666/dsh-web-all@0.4.7 @linxin666/dsh-web-all
-    plug dsh-tui dsh-mnemon dsh-mnemon
+    # Memory is the AFFiNE "AGENTS" workspace (memory-* skills), not mnemon.
+    for p in web dsh-tui; do
+      [ ! -d "$HOME/.dsh/profiles/$p/node_modules/dsh-mnemon" ] || run dsh plugin --profile "$p" remove dsh-mnemon \
+        || echo "removing dsh-mnemon ($p) failed; retry on next switch" >&2
+    done
   '';
 
   home.file = {
@@ -182,6 +185,15 @@ in
       - **Shell** (always works): `codegraph explore "<symbol names or question>"` prints the same output.
 
       If there is no `.codegraph/` directory, skip CodeGraph entirely — indexing is the user's decision.
+
+      ## Long-term memory
+
+      Long-term memory is the AFFiNE workspace "AGENTS", reached through the `mcp__affine__*` tools. Use the skills; do not improvise.
+
+      - `memory-read`: use it at the start of almost every session and task, before answering anything that past decisions, user preferences or project gotchas could change. Skip it only for questions that need no context at all.
+      - `memory-write`: use it when you learn something durable that is not derivable from code or git: a user correction or preference, a decision and its reason, a gotcha, a runbook, an external pointer. Write it as soon as it happens, not at the end. Never write secrets.
+      - `memory-daydream` is the user's background job. Never run it yourself.
+      - Memory is a claim from a past date. Verify files, flags and commands it names before relying on them. If the `mcp__affine__*` tools are unavailable, say so and go on without memory; do not invent it.
 
       ## Working rules
 
@@ -220,9 +232,19 @@ in
               "--mcp"
             ];
           })
+          # dsh's MCP client has no OAuth, so mcp-remote does the Kanidm login and token refresh.
           (mcpServer "affine" {
-            command = "affine-mcp";
-            env.AFFINE_TOOL_PROFILE = "core";
+            command = lib.getExe pkgs-custom.mcp-remote;
+            args = [
+              "https://affine-mcp.bortoli.phd/mcp"
+              "--static-oauth-client-info"
+              (builtins.toJSON {
+                client_id = "affine-mcp";
+                token_endpoint_auth_method = "none";
+              })
+              "--callback-path"
+              "/callback"
+            ];
           })
           (hooksBridge "hooks-home" homeHooks null)
           (hooksBridge "hooks-caveman" "${caveman}/.claude-plugin/plugin.json" caveman)
@@ -232,5 +254,18 @@ in
     ];
   }
   // skillsOf caveman
-  // skillsOf ponytail;
+  // skillsOf ponytail
+  // lib.listToAttrs (
+    map
+      (name: {
+        name = ".dsh/skills/${name}";
+        value.source = ./skills + "/${name}";
+      })
+      [
+        "memory-read"
+        "memory-write"
+        "memory-daydream"
+        "code-wiki"
+      ]
+  );
 }
