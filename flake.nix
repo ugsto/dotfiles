@@ -77,6 +77,7 @@
             "antigravity-cli"
             "claude-code"
             "grayjay"
+            "rtk"
           ];
         overlays = [
           nur.overlays.default
