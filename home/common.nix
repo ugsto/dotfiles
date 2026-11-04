@@ -49,6 +49,8 @@
       yubikey-manager
       btop
 
+      pkgs-unstable.inkscape
+      pkgs-unstable.orca-slicer
       pkgs-unstable.devenv
       pkgs-unstable.kind
       pkgs-unstable.freetube
