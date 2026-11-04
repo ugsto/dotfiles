@@ -38,6 +38,15 @@ in
         };
       };
 
+      output = {
+        "HDMI-A-1" = {
+          position = "0 0";
+        };
+        "eDP-1" = {
+          position = "1366 0";
+        };
+      };
+
       gaps = {
         inner = 5;
         outer = 10;
