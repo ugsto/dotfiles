@@ -6,18 +6,29 @@
   ...
 }:
 let
-  inherit (import ./agent-sources.nix pkgs) caveman ponytail;
+  inherit (import ./agent-sources.nix pkgs) caveman mattpocock-skills ponytail;
 
-  skillsOf =
-    src:
-    let
-      dir = "${src}/skills";
-    in
+  skillsIn =
+    dir:
     lib.mapAttrs' (name: _: lib.nameValuePair ".dsh/skills/${name}" { source = "${dir}/${name}"; }) (
       lib.filterAttrs (name: type: type == "directory" && builtins.pathExists "${dir}/${name}/SKILL.md") (
         builtins.readDir dir
       )
     );
+
+  skillsOf = src: skillsIn "${src}/skills";
+
+  # The Claude Code plugin manifest is the source of truth for the promoted
+  # Matt Pocock skills, so dsh gets exactly the same set.
+  mattpocockSkills =
+    (builtins.fromJSON (builtins.readFile "${mattpocock-skills}/.claude-plugin/plugin.json")).skills;
+
+  mattpocockSkillFiles = lib.listToAttrs (
+    map (rel: {
+      name = ".dsh/skills/${builtins.baseNameOf rel}";
+      value.source = "${mattpocock-skills}/${rel}";
+    }) mattpocockSkills
+  );
 
   mcpServer = serverName: cfg: {
     id = "mcp-${serverName}";
@@ -255,6 +266,7 @@ in
   }
   // skillsOf caveman
   // skillsOf ponytail
+  // mattpocockSkillFiles
   // lib.listToAttrs (
     map
       (name: {
@@ -266,6 +278,13 @@ in
         "memory-write"
         "memory-daydream"
         "code-wiki"
+        # Uncle Bob skills, vendored from github.com/unclebob/*
+        "ub-mode"
+        "crap4clj"
+        "crap4go"
+        "using-clj-mutate"
+        "using-mutate4go"
+        "speclj-structure-check"
       ]
   );
 }
