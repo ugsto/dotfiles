@@ -1,5 +1,9 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
+  nixpkgs.config.allowUnfreePredicate = pkg: lib.getName pkg == "terraform";
+
+  extraPackages = [ pkgs.terraform ];
+
   plugins = {
     lsp-lines = {
       enable = true;
@@ -30,7 +34,12 @@
         };
         ansiblels = {
           enable = true;
-          package = null;
+          package = pkgs.ansible-language-server;
+          extraOptions.settings.ansible = {
+            python.interpreterPath = lib.getExe pkgs.python3;
+            ansible.path = "${pkgs.ansible}/bin/ansible";
+            validation.lint.path = lib.getExe pkgs.ansible-lint;
+          };
         };
         jsonls.enable = true;
         dockerls.enable = true;
@@ -64,10 +73,13 @@
             settings = {
               yaml = {
                 schemas = {
-                  kubernetes = "*.yaml";
+                  kubernetes = [
+                    "**/k8s/**/*.{yml,yaml}"
+                    "**/kubernetes/**/*.{yml,yaml}"
+                  ];
                   "https://json.schemastore.org/github-workflow" = ".github/workflows/*";
-                  "https://json.schemastore.org/github-action" = ".github/action.{yml,yaml}";
-                  "https://json.schemastore.org/ansible-stable-2.9" = "roles/tasks/*.{yml,yaml}";
+                  "https://json.schemastore.org/github-action" = "**/action.{yml,yaml}";
+                  "https://json.schemastore.org/ansible-stable-2.9" = "**/roles/*/tasks/*.{yml,yaml}";
                   "https://json.schemastore.org/kustomization" = "kustomization.{yml,yaml}";
                   "https://json.schemastore.org/ansible-playbook" = "*play*.{yml,yaml}";
                   "https://json.schemastore.org/chart" = "Chart.{yml,yaml}";
@@ -75,7 +87,7 @@
                   "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json" =
                     "*docker-compose*.{yml,yaml}";
                   "https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json" =
-                    "*flow*.{yml,yaml}";
+                    "**/argo-workflows/**/*.{yml,yaml}";
                 };
               };
             };
