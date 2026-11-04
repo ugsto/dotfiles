@@ -74,6 +74,7 @@
         '';
         notify_on_error = true;
         formatters_by_ft = {
+          rust = [ "rustfmt" ];
           python = [ "ruff" ];
           lua = [ "stylua" ];
           nix = [ "nixfmt" ];
@@ -88,6 +89,9 @@
         };
 
         formatters = {
+          rustfmt = {
+            command = lib.getExe pkgs.rustfmt;
+          };
           ruff = {
             command = lib.getExe pkgs.ruff;
           };

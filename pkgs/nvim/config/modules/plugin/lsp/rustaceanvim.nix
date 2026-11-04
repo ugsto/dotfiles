@@ -1,14 +1,10 @@
+{ pkgs, ... }:
 {
   plugins.rustaceanvim = {
     enable = true;
     settings = {
       server = {
-        cmd = [
-          "nix"
-          "develop"
-          "--command"
-          "rust-analyzer"
-        ];
+        cmd = [ "${pkgs.rust-analyzer}/bin/rust-analyzer" ];
         default_settings = {
           rust-analyzer = {
             check = {
