@@ -22,6 +22,10 @@
     [antigravity]
     enabled = true
 
+    [kimi]
+    enabled = true
+    api_key = "${config.sops.placeholder.kimi_api_key}"
+
     [zai]
     enabled = true
     api_key = "${config.sops.placeholder.zai_api_key}"
@@ -37,6 +41,10 @@
     [openrouter]
     enabled = true
     api_key = "${config.sops.placeholder.openrouter_api_key}"
+
+    [opencode-go]
+    enabled = true
+    api_key = "${config.sops.placeholder.opencode_api_key}"
   '';
 
   xdg.configFile."ai-usagebar/config.toml".source =
