@@ -5,18 +5,6 @@
 }:
 let
   inherit (import ./agent-sources.nix pkgs) caveman ponytail mattpocock-skills;
-  claude-pro-kit = pkgs.fetchFromGitHub {
-    owner = "VedantAndhale";
-    repo = "claude-pro-kit";
-    rev = "e4763cff1a62a9dae9fcd8f143bd71a8d6371c05";
-    hash = "sha256-Ugwl3Vc8LeheMszPVTJ5sWC0OMTcV3iWFppuY7RXw4E=";
-  };
-  claude-code-mods = pkgs.fetchFromGitHub {
-    owner = "hamzafer";
-    repo = "claude-code-mods";
-    rev = "11abba8c305b0d7563e1c89254c6d5e708746b47";
-    hash = "sha256-wpxe+KIAZdhlhXFfllcXIR8Fle9AvWEP1M2Ny5pUW8I=";
-  };
   claude-plugins-official = pkgs.fetchFromGitHub {
     owner = "anthropics";
     repo = "claude-plugins-official";
@@ -94,13 +82,6 @@ in
       caveman
       ponytail
       mattpocock-skills
-      "${claude-pro-kit}/plugins/output-diet"
-      "${claude-pro-kit}/plugins/tool-diet"
-      "${claude-pro-kit}/plugins/reread-guard"
-      "${claude-code-mods}/mods/context-bar"
-      "${claude-code-mods}/mods/md-preview"
-      "${claude-code-mods}/mods/blast-radius"
-      "${claude-code-mods}/mods/replay-theater"
       "${claude-plugins-official}/plugins/rust-analyzer-lsp"
       "${claude-plugins-official}/plugins/typescript-lsp"
       "${claude-plugins-official}/plugins/pyright-lsp"
