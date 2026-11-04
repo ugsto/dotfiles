@@ -1,4 +1,9 @@
-{ pkgs, username, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  username,
+  ...
+}:
 {
   security = {
     sudo = {
@@ -11,9 +16,9 @@
         control = "sufficient";
         settings = {
           authfile = pkgs.writeText "u2f_keys" ''
-            kurisu:TPLAEAnPt3p81XsM/UxM4XG6jwzm9VSP6NwaqHELSbPfa70YIrxzXCgBsosFnR4JRMo1SAUWCnwMJXV5g4bD5A==,+KeDRXLjolTjrxVEYetJ5nTrloBQkfARhn1x/4dFQBPecirdVLLptZLESA+xRir26TkCuepXH/lT1D+sgtCO6A==,es256,+presence
-            kurisu:ginc9qZ6kuXwcxD8wJ7fcRJKLtFUff/6iKuhufcl1ZxPW2+cc1OiOF/EaxSOS92NMwZQqcKt9flc+7bHOoRrfw==,jf00sLTWah3ICUKvDaC3fV5mg6A2ikF62OVFTDj15c1p/nLtvjDXOS9vMYLeg05iIleQvMPquGeXrse0e87hsw==,es256,+presence
+            kurisu:TPLAEAnPt3p81XsM/UxM4XG6jwzm9VSP6NwaqHELSbPfa70YIrxzXCgBsosFnR4JRMo1SAUWCnwMJXV5g4bD5A==,+KeDRXLjolTjrxVEYetJ5nTrloBQkfARhn1x/4dFQBPecirdVLLptZLESA+xRir26TkCuepXH/lT1D+sgtCO6A==,es256,+presence:ginc9qZ6kuXwcxD8wJ7fcRJKLtFUff/6iKuhufcl1ZxPW2+cc1OiOF/EaxSOS92NMwZQqcKt9flc+7bHOoRrfw==,jf00sLTWah3ICUKvDaC3fV5mg6A2ikF62OVFTDj15c1p/nLtvjDXOS9vMYLeg05iIleQvMPquGeXrse0e87hsw==,es256,+presence
           '';
+          cue = true;
         };
       };
       services = {
@@ -26,6 +31,9 @@
   };
 
   programs.dconf.enable = true;
+
+  environment.etc."polkit-1/actions/org.keepassxc.KeePassXC.policy".source =
+    "${pkgs-unstable.keepassxc}/share/polkit-1/actions/org.keepassxc.KeePassXC.policy";
 
   environment.systemPackages = [
     pkgs.pam_u2f
