@@ -85,10 +85,10 @@
           (final: prev: {
             claude-code = prev.claude-code.override {
               manifest = {
-                version = "2.1.302";
+                version = "2.1.321";
                 platforms.linux-x64 = {
                   binary = "claude.zst";
-                  checksum = "sha256-L9UyRalmmuD4JvHEzuLoLgf2KxgbE/Y7jybEvnzypOw=";
+                  checksum = "sha256-3tMxwfv4vdAFGFmayAqIih0a/zx5nzoVk0rblmYglP8=";
                 };
               };
             };
