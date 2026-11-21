@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
   programs.retroarch = {
     enable = true;
     cores = {
@@ -6,4 +6,11 @@
       desmume.enable = true;
     };
   };
+
+  home = {
+    packages = with pkgs; [
+      steam
+    ];
+  };
+
 }

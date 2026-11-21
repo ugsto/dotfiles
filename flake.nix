@@ -237,6 +237,8 @@
                       "drawio"
                       "slack"
                       "grayjay"
+                      "steam"
+                      "steam-unwrapped"
                     ];
                 }
               ];
