@@ -64,7 +64,6 @@
       pkgs-unstable.bubblewrap
       pkgs-unstable.antigravity-cli
       pkgs-unstable.opencode
-      pkgs-unstable.codex
       pkgs-unstable.yq-go
       pkgs-unstable.openutau
       pkgs-unstable.k0sctl
@@ -168,6 +167,7 @@
     ./activitywatch.nix
     ./bash.nix
     ./claude-code.nix
+    ./codex.nix
     ./deepseek-harness.nix
     ./chromium.nix
     ./gammastep.nix
