@@ -49,6 +49,16 @@
       yubikey-manager
       btop
 
+      pkgs-unstable.aseprite
+
+      pkgs-unstable.gimp
+      pkgs-unstable.freecad
+      pkgs-unstable.calculix-ccx
+      pkgs-unstable.gmsh
+      (pkgs-unstable.python3.withPackages (ps: [
+        ps.mujoco
+        ps.numpy
+      ]))
       pkgs-unstable.inkscape
       pkgs-unstable.orca-slicer
       pkgs-unstable.devenv

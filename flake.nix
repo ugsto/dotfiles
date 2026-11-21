@@ -75,6 +75,7 @@
           pkg:
           builtins.elem (lib.getName pkg) [
             "antigravity-cli"
+            "aseprite"
             "claude-code"
             "grayjay"
             "rtk"
