@@ -17,6 +17,13 @@ let
     hash = "sha256-f5mnVFXVkaMoahQv5pu5fS0gGV1uaowi/mpJM0gm/I8=";
   };
 
+  aseprite-mcp = pkgs.fetchFromGitHub {
+    owner = "diivi";
+    repo = "aseprite-mcp";
+    rev = "4bcdb6f5932116bbdbd1b7d3fcc1e8f965f7657a";
+    hash = "sha256-RzmKOVsSYcnTnuNn7qu/zu7FwrIV1lJ0Sv5JYisUVaE=";
+  };
+
   telemetryOff = {
     DO_NOT_TRACK = "1";
     DISABLE_TELEMETRY = "1";
@@ -91,6 +98,42 @@ in
         "--mcp"
       ];
       alwaysLoad = true;
+    };
+
+    # Needs the FreeCAD "MCP" addon (neka-nat/freecad-mcp, addon/FreeCADMCP) in ~/.local/share/FreeCAD/Mod with its RPC server started.
+    mcpServers.freecad = {
+      type = "stdio";
+      command = "${pkgs.uv}/bin/uvx";
+      # NixOS can't run uv's downloaded generic Pythons; use the nix one.
+      args = [ "--python" "${pkgs.python3}/bin/python3" "freecad-mcp" ];
+      env.UV_PYTHON_DOWNLOADS = "never";
+    };
+
+    # Needs the Blender addon (ahujasid/blender-mcp, addon.py) installed and "Connect to Claude" started in the N-panel.
+    mcpServers.blender = {
+      type = "stdio";
+      command = "${pkgs.uv}/bin/uvx";
+      args = [ "--python" "${pkgs.python3}/bin/python3" "blender-mcp" ];
+      env = {
+        UV_PYTHON_DOWNLOADS = "never";
+        DISABLE_TELEMETRY = "true";
+      };
+    };
+
+    # No console script upstream: run the module from the store with its deps injected by uvx.
+    mcpServers.aseprite = {
+      type = "stdio";
+      command = "${pkgs.uv}/bin/uvx";
+      args = [
+        "--python" "${pkgs.python3}/bin/python3"
+        "--with" "httpx" "--with" "mcp[cli]<2" "--with" "pillow"
+        "python" "-m" "aseprite_mcp"
+      ];
+      env = {
+        UV_PYTHON_DOWNLOADS = "never";
+        PYTHONPATH = "${aseprite-mcp}";
+        ASEPRITE_PATH = "${pkgs-unstable.aseprite}/bin/aseprite";
+      };
     };
 
     mcpServers.affine = {
