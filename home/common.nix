@@ -41,6 +41,8 @@
       hcloud
       terragrunt
 
+      unzip
+
       slack
       glab
       trivy
